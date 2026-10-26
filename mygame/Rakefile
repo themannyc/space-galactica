@@ -1,0 +1,39 @@
+require "rbconfig"
+require "rubocop/rake_task"
+
+ENGINE_DIR = File.expand_path("..", __dir__)
+GAME_DIR = File.basename(__dir__)
+HEADLESS = { "SDL_VIDEODRIVER" => "dummy", "SDL_AUDIODRIVER" => "dummy" }.freeze
+
+# The DragonRuby binary for this platform, relative to ENGINE_DIR.
+def dragonruby
+  case RbConfig::CONFIG["host_os"]
+  when /darwin/ then "./dragonruby.macos"
+  when /linux/ then "./dragonruby.linux"
+  when /mswin|mingw|cygwin/ then "dragonruby.exe"
+  else abort "Unsupported OS: #{RbConfig::CONFIG["host_os"]}"
+  end
+end
+
+RuboCop::RakeTask.new(:rubocop) do |t|
+  t.patterns = ["app/**/*.rb", "Rakefile"]
+end
+
+desc "Run DragonRuby tests (app/test_*.rb) headlessly"
+task :test do
+  Dir.glob("app/test_*.rb").each do |test_file|
+    command = [dragonruby, GAME_DIR, "--test", test_file, "--no-tick"]
+    output = Dir.chdir(ENGINE_DIR) { IO.popen(HEADLESS, command, err: %i[child out], &:read) }
+    # Skip the engine's start-up banner.
+    puts output[(output.index(/^.*--test switch found/) || 0)..]
+    $stdout.flush
+
+    # DragonRuby exits with 0 even when tests fail, so read its summary instead.
+    passed = output[/(\d+) test\(s\) passed/, 1]
+    failed = output[/(\d+) test\(s\) failed/, 1].to_i
+    abort "#{test_file}: no tests ran" if passed.nil?
+    abort "#{test_file}: #{failed} test(s) failed" if failed.positive?
+  end
+end
+
+task default: %i[rubocop test]

@@ -1,0 +1,48 @@
+require:
+  - ./.rubocop/todo_comment.rb
+
+AllCops:
+  TargetRubyVersion: 3.0
+  NewCops: enable
+  Exclude:
+    - "builds/**/*"
+    - "tmp/**/*"
+    # DragonRuby's stock Ruby tutorial; not part of the game.
+    - "app/repl.rb"
+
+Style/GlobalVars:
+  AllowedVariables:
+    - $game
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Style/StringLiteralsInInterpolation:
+  EnforcedStyle: double_quotes
+
+#Style/HashSyntax:
+#  EnforcedShorthandSyntax: never   # avoids { x:, y: } shorthand
+
+Custom/TodoComment:
+  Enabled: <%= ENV["SKIP_TODO_COP"].to_s.empty? %>
+  Severity: warning
+
+#Style/Documentation:
+#  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+#Metrics/MethodLength:
+#  Max: 25
+
+# Sprite and label helpers are mostly multi-line hash literals; count each
+# literal as one line so data doesn't trip the length limits.
+Metrics/MethodLength:
+  CountAsOne: ["array", "hash"]
+
+Metrics/ModuleLength:
+  CountAsOne: ["array", "hash"]
+
+Metrics/ClassLength:
+  CountAsOne: ["array", "hash"]
