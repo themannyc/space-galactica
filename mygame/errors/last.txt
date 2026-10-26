@@ -1,0 +1,17 @@
+* EXCEPTION:
+* ERROR: :blendmode_enum method missing on ~Player~.
+
+#+begin_src ~Player#inspect~
+#<Player:0x17d10896710 @flip_vertically=false, @x=600, @source_h=1, @g=255, @angle_anchor_x=0.5, @r=255, @speed=10, @tile_x=0, @angle_anchor_y=0.5, @b=255, @source_y=0, @path="sprites/misc/dragon-0.png", @source_w=1, @h=80, @angle=0, @tile_y=0, @a=255, @tile_w=1, @tile_h=1, @source_x=0, @w=100, @flip_horizontally=false, @y=280>
+#+end_src ~Player#inspect~
+
+** Did you mean?
+Here's a list of methods that kind of look like :blendmode_enum.
+*** :enum_for
+
+The method named
+  :blendmode_enum
+doesn't exist on [Player, #<Class:#<Player:0x17d10896710>>].
+
+(suggestions above)
+** Backtrace:

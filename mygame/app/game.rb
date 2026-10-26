@@ -13,9 +13,11 @@ class Game
 
   def defaults
     # TODO: set up the game defaults
+    args.state.player ||= Player.new
   end
 
   def input
+
     # TODO: handle the game's input
   end
 
@@ -24,6 +26,7 @@ class Game
   end
 
   def render
+    args.outputs.sprites << args.state.player
     # TODO: render the game's scene
   end
 
