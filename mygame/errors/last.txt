@@ -1,17 +1,36 @@
-* EXCEPTION:
-* ERROR: :blendmode_enum method missing on ~Player~.
+* EXCEPTION POSSIBLY CAUSED BY CALLING ~gtk.reset~: maybe use ~$gtk.reset_next_tick~ instead.
+An exception occurred soon after ~$gtk.reset~ was invoked.
 
-#+begin_src ~Player#inspect~
-#<Player:0x17d10896710 @flip_vertically=false, @x=600, @source_h=1, @g=255, @angle_anchor_x=0.5, @r=255, @speed=10, @tile_x=0, @angle_anchor_y=0.5, @b=255, @source_y=0, @path="sprites/misc/dragon-0.png", @source_w=1, @h=80, @angle=0, @tile_y=0, @a=255, @tile_w=1, @tile_h=1, @source_x=0, @w=100, @flip_horizontally=false, @y=280>
-#+end_src ~Player#inspect~
+Keep in mind that ~$gtk.reset~ doesn't stop the rest of your ~tick~ method from being invoked.
 
-** Did you mean?
-Here's a list of methods that kind of look like :blendmode_enum.
-*** :enum_for
+You may have attempted to interact with properties on ~args.state~ that no longer have a value.
 
-The method named
-  :blendmode_enum
-doesn't exist on [Player, #<Class:#<Player:0x17d10896710>>].
+There are a few ways to fix exceptions that fall into this category:
 
-(suggestions above)
+1. Wherever you are using ~$gtk.reset~ within ~tick~, replace
+   with ~$gtk.reset_next_tick~ (this function will tell DragonRuby to
+   reset on the next frame before invoking your ~tick~ method).
+2. Anywhere you are using ~$gtk.reset~, immediately set default values for
+   properties on ~args.state~ that are needed to complete the execution
+   of the rest of your ~tick~ function successfully.
+3. Do not use ~$gtk.reset~ and instead create a function that reinitializes your game
+   and ensures it has a consistent/valid state.
+
+   Take a look at the following sample apps for insights on how to do this:
+   - =./samples/99_genre_boss_battle/boss_battle_game_jam/app/main.rb=
+   - =./samples/99_genre_platformer/shadows/app/main.rb=
+
+** NOTE:
+The options above are ordered by quickest to implement (but probably not
+bulletproof), to more work to implement (but a better design long term).
+
+* EXCEPTION THROWN:
+** Failed to load/reload app/game.rb.
+line 40:3: syntax error, unexpected keyword_end, expecting end of file
+
+
+
 ** Backtrace:
+
+* Backtrace ~$gtk.reset~ last invocation:
+
