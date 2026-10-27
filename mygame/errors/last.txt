@@ -1,18 +1,7 @@
 * EXCEPTION:
-* ERROR: :player_w method missing on ~Game~.
-
-#+begin_src ~Game#inspect~
-#<Game:0x29fd7321fc0 @args=#<GTK::Args:0x29f8dbd9860>>
-#+end_src ~Game#inspect~
+** Failed to load/reload app/game.rb.
+line 56:3: syntax error, unexpected keyword_end, expecting end of file
 
 
 
-The method named
-  :player_w
-doesn't exist on [Game, #<Class:#<Game:0x29fd7321fc0>>, AttrDR].
-
-(suggestions above)
 ** Backtrace:
-*** app/game.rb:28:in input
-*** app/game.rb:9:in tick
-*** app/main.rb:6:in tick
