@@ -1,21 +1,19 @@
 * EXCEPTION:
-* ERROR: :- method missing on ~Class~.
+* ERROR: :sound method missing on ~Game~.
 
-#+begin_src ~Class#inspect~
-NIL
-#+end_src ~Class#inspect~
+#+begin_src ~Game#inspect~
+#<Game:0x29fd683d5d0 @args=#<GTK::Args:0x29f8dbd9860>>
+#+end_src ~Game#inspect~
 
 
 
 The method named
-  :-
-with args
-  [10]
-doesn't exist on [NilClass].
+  :sound
+doesn't exist on [Game, #<Class:#<Game:0x29fd683d5d0>>, AttrDR].
 
 (suggestions above)
 ** Backtrace:
-*** app/game.rb:46:in calc
-*** app/game.rb:45:in calc
+*** app/game.rb:59:in calc
+*** app/game.rb:57:in calc
 *** app/game.rb:10:in tick
 *** app/main.rb:6:in tick

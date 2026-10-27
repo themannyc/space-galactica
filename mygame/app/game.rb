@@ -14,6 +14,12 @@ class Game
   def defaults
     # TODO: set up the game defaults
     args.state.player ||= Player.new
+    args.state.timer ||= 30
+    args.state.timer -= 1
+    if args.state.timer <= 0
+      labels = []
+      labels << { x: args.grid.w / 2, y: args.grid.h / 2, text: "Game Over", size: 50, color: [255, 0, 0] }
+    end
 
     args.state.clouds ||= [
       { x: 0, y: 0, w: 100, h: 100, path: 'sprites/nuvem.png', speed: 10}
@@ -52,6 +58,10 @@ class Game
       if cloud.x + cloud.w < 0
         cloud.x = args.grid.w
         cloud.y = rand(args.grid.h - cloud.h)
+      end
+    end
+    args.state.red.each do |red|
+      if args.geometry.intersect_rect?(args.state.player, red)
       end
     end
     # TODO: calculate the game's state
