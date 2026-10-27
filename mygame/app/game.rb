@@ -25,6 +25,15 @@ class Game
   def input
     args.state.player.x += args.inputs.left_right * args.state.player.speed
     args.state.player.y += args.inputs.up_down * args.state.player.speed
+    if args.state.player.x + args.state.player.w > args.grid.w
+      args.state.player.x = args.grid.w - args.state.player.w
+    elsif args.state.player.y + args.state.player.h > args.grid.h
+      args.state.player.y = args.grid.h - args.state.player.h
+    elsif args.state.player.x < 0
+      args.state.player.x = 0
+    elsif args.state.player.y < 0
+      args.state.player.y = 0
+    end
     # TODO: handle the game's input
   end
 
