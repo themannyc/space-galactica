@@ -16,8 +16,18 @@ class Game
     args.state.player ||= Player.new
 
     args.state.clouds ||= [
-      { x: 700, y: 400, w: 100, h: 100, path: 'sprites/nuvem.png', speed: 10}
-  ]
+      { x: 0, y: 0, w: 100, h: 100, path: 'sprites/nuvem.png', speed: 10}
+    ]
+
+    args.state.red ||= [
+      { x: 900, y: 100, w: 100, h: 100, path: 'sprites/square/red.png' }
+    ]
+    args.state.green ||= [
+      { x: 1000, y: 500, w: 100, h: 100, path: 'sprites/square/green.png' }
+    ]
+    args.state.blue ||= [
+      { x: 400, y: 400, w: 100, h: 100, path: 'sprites/square/blue.png' }
+    ]
 
   end
 
@@ -50,6 +60,9 @@ class Game
   def render
     args.outputs.sprites << args.state.player
     args.outputs.sprites << args.state.clouds
+    args.outputs.sprites << args.state.red
+    args.outputs.sprites << args.state.green
+    args.outputs.sprites << args.state.blue
     args.outputs.background_color = [70, 130, 180]
     # TODO: render the game's scene
   end

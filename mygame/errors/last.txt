@@ -1,7 +1,21 @@
 * EXCEPTION:
-** Failed to load/reload app/game.rb.
-line 56:3: syntax error, unexpected keyword_end, expecting end of file
+* ERROR: :- method missing on ~Class~.
+
+#+begin_src ~Class#inspect~
+NIL
+#+end_src ~Class#inspect~
 
 
 
+The method named
+  :-
+with args
+  [10]
+doesn't exist on [NilClass].
+
+(suggestions above)
 ** Backtrace:
+*** app/game.rb:46:in calc
+*** app/game.rb:45:in calc
+*** app/game.rb:10:in tick
+*** app/main.rb:6:in tick
