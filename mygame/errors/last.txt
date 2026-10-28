@@ -1,19 +1,13 @@
 * EXCEPTION:
-* ERROR: :sound method missing on ~Game~.
-
-#+begin_src ~Game#inspect~
-#<Game:0x29fd683d5d0 @args=#<GTK::Args:0x29f8dbd9860>>
-#+end_src ~Game#inspect~
-
+* ERROR: Exception while requiring app/main.rb.
+* ERROR: Exception while requiring app/game.
+** Failed to load app/game.rb.
+line 76:3: syntax error, unexpected keyword_end, expecting end of file
 
 
-The method named
-  :sound
-doesn't exist on [Game, #<Class:#<Game:0x29fd683d5d0>>, AttrDR].
 
-(suggestions above)
 ** Backtrace:
-*** app/game.rb:59:in calc
-*** app/game.rb:57:in calc
-*** app/game.rb:10:in tick
-*** app/main.rb:6:in tick
+*** app/main.rb:1
+** Backtrace:
+*** app/main.rb:1
+** Backtrace:

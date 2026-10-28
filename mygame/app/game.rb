@@ -3,6 +3,7 @@ require "app/player"
 # Hello Dragon: fly the dragon around for 15 seconds while clouds drift by.
 class Game
   attr_dr
+  BACKGROUND_COLOR = [70, 130, 180].freeze 
 
   def tick
     defaults
@@ -14,12 +15,6 @@ class Game
   def defaults
     # TODO: set up the game defaults
     args.state.player ||= Player.new
-    args.state.timer ||= 30
-    args.state.timer -= 1
-    if args.state.timer <= 0
-      labels = []
-      labels << { x: args.grid.w / 2, y: args.grid.h / 2, text: "Game Over", size: 50, color: [255, 0, 0] }
-    end
 
     args.state.clouds ||= [
       { x: 0, y: 0, w: 100, h: 100, path: 'sprites/nuvem.png', speed: 10}
@@ -63,7 +58,8 @@ class Game
     args.state.red.each do |red|
       if args.geometry.intersect_rect?(args.state.player, red)
       end
-    end
+      args.audio[:my_sound] = { input: 'sounds/419698__14fvaltrovat__short-horn.wav' }
+      end
     # TODO: calculate the game's state
   end
 
@@ -73,7 +69,7 @@ class Game
     args.outputs.sprites << args.state.red
     args.outputs.sprites << args.state.green
     args.outputs.sprites << args.state.blue
-    args.outputs.background_color = [70, 130, 180]
+    args.outputs.background_color = BACKGROUND_COLOR
     # TODO: render the game's scene
   end
 

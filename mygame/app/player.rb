@@ -1,6 +1,7 @@
 # The dragon/player
 class Player
-  attr_accessor :x, :y, :w, :h, :speed, :path
+  attr_sprite
+  attr_accessor :speed
 
   def initialize
     @x = 600
