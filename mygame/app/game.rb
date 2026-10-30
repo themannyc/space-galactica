@@ -72,6 +72,22 @@ class Game
     args.state.red.each do |red|
       if args.geometry.intersect_rect?(args.state.player, red)
       args.audio[:my_sound] = { input: 'sounds/419698__14fvaltrovat__short-horn.wav' }
+      args.state.player.x -= args.inputs.left_right * args.state.player.speed
+      args.state.player.y -= args.inputs.up_down * args.state.player.speed
+      end
+    end
+    args.state.green.each do |green|
+      if args.geometry.intersect_rect?(args.state.player, green)
+      args.audio[:my_sound] = { input: 'sounds/419698__14fvaltrovat__short-horn.wav' }
+      args.state.player.x -= args.inputs.left_right * args.state.player.speed
+      args.state.player.y -= args.inputs.up_down * args.state.player.speed
+      end
+    end
+    args.state.blue.each do |blue|
+      if args.geometry.intersect_rect?(args.state.player, blue)
+      args.audio[:my_sound] = { input: 'sounds/419698__14fvaltrovat__short-horn.wav' }
+      args.state.player.x -= args.inputs.left_right * args.state.player.speed
+      args.state.player.y -= args.inputs.up_down * args.state.player.speed
       end
     end
     return
