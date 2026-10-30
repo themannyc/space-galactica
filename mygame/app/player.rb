@@ -10,5 +10,7 @@ class Player
     @h = 80
     @speed = 10
     @path = 'sprites/misc/dragon-0.png'
+    @angle_anchor_x = 0.5
+    @angle_anchor_y = 0.5
   end
 end

@@ -38,18 +38,34 @@ class Game
   def input
     args.state.player.x += args.inputs.left_right * args.state.player.speed
     args.state.player.y += args.inputs.up_down * args.state.player.speed
+    if args.inputs.left_right < 0
+      args.state.player.flip_horizontally = true
+    elsif args.inputs.left_right > 0
+      args.state.player.flip_horizontally = false
+    end
+
+    if args.inputs.up_down > 0
+      args.state.player.angle = args.state.player.flip_horizontally ? -90 : 90
+    elsif args.inputs.up_down < 0
+      args.state.player.angle = args.state.player.flip_horizontally ? 90 : -90
+    else
+      args.state.player.angle = 0
+    end
+
     if args.state.player.x + args.state.player.w > args.grid.w
       args.state.player.x = args.grid.w - args.state.player.w
-    elsif args.state.player.y + args.state.player.h > args.grid.h
-      args.state.player.y = args.grid.h - args.state.player.h
-    elsif args.state.player.x < 0
+      elsif args.state.player.x < 0
       args.state.player.x = 0
-    elsif args.state.player.y < 0
+    end
+
+    if args.state.player.y + args.state.player.h > args.grid.h
+      args.state.player.y = args.grid.h - args.state.player.h
+      elsif args.state.player.y < 0
       args.state.player.y = 0
     end
 
     if args.inputs.keyboard.key_down.space && args.state.timer <= 0
-      DR.reset
+      args.gtk.reset_next_tick
     end
     # TODO: handle the game's input
   end
@@ -61,6 +77,10 @@ class Game
     args.state.timer -= 1
     elsif args.state.game_over = true
     end
+
+  player_sprite_index = 0.frame_index(count: 6, hold_for: 8, repeat: true)
+    args.state.player.path = "sprites/misc/dragon-#{player_sprite_index}.png"
+
 
     args.state.clouds.each do |cloud|
       cloud.x -= cloud.speed
