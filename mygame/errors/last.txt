@@ -1,13 +1,18 @@
 * EXCEPTION:
-* ERROR: Exception while requiring app/main.rb.
-* ERROR: Exception while requiring app/game.
-** Failed to load app/game.rb.
-line 76:3: syntax error, unexpected keyword_end, expecting end of file
+* ERROR: :labels method missing on ~Game~.
+
+#+begin_src ~Game#inspect~
+#<Game:0x1fef870df70 @args=#<GTK::Args:0x1feef9abb60>>
+#+end_src ~Game#inspect~
 
 
 
+The method named
+  :labels
+doesn't exist on [Game, #<Class:#<Game:0x1fef870df70>>, AttrDR].
+
+(suggestions above)
 ** Backtrace:
-*** app/main.rb:1
-** Backtrace:
-*** app/main.rb:1
-** Backtrace:
+*** app/game.rb:88:in render
+*** app/game.rb:12:in tick
+*** app/main.rb:6:in tick

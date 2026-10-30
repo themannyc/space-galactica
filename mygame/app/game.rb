@@ -3,7 +3,7 @@ require "app/player"
 # Hello Dragon: fly the dragon around for 15 seconds while clouds drift by.
 class Game
   attr_dr
-  BACKGROUND_COLOR = [70, 130, 180].freeze 
+  BACKGROUND_COLOR = [70, 130, 180].freeze
 
   def tick
     defaults
@@ -14,6 +14,9 @@ class Game
 
   def defaults
     # TODO: set up the game defaults
+    if Kernel.tick_count == 1
+      args.audio[:music] = { input: "sounds/Factor6_-_03_-_Axel_Funk.ogg", looping: true }
+  end
     args.state.player ||= Player.new
 
     args.state.clouds ||= [
@@ -44,10 +47,21 @@ class Game
     elsif args.state.player.y < 0
       args.state.player.y = 0
     end
+
+    if args.inputs.keyboard.key_down.space && args.state.timer <= 0
+      DR.reset
+    end
     # TODO: handle the game's input
   end
 
   def calc
+    return if args.state.game_over
+    args.state.timer ||= 15 * 60
+    if args.state.timer > 0
+    args.state.timer -= 1
+    elsif args.state.game_over = true
+    end
+
     args.state.clouds.each do |cloud|
       cloud.x -= cloud.speed
       if cloud.x + cloud.w < 0
@@ -57,19 +71,32 @@ class Game
     end
     args.state.red.each do |red|
       if args.geometry.intersect_rect?(args.state.player, red)
-      end
       args.audio[:my_sound] = { input: 'sounds/419698__14fvaltrovat__short-horn.wav' }
       end
+    end
+    return
     # TODO: calculate the game's state
   end
 
   def render
+    if args.state.timer && args.state.timer <= 0
+      labels = []
+      labels << [
+      x: args.grid.w / 2, y: args.grid.h / 2, text: "Press spacebar to restart", size_px: 48, anchor_x: 0.5, anchor_y: 0.5
+    ]
+      args.outputs.labels << labels
+      return
+  end
     args.outputs.sprites << args.state.player
     args.outputs.sprites << args.state.clouds
     args.outputs.sprites << args.state.red
     args.outputs.sprites << args.state.green
     args.outputs.sprites << args.state.blue
     args.outputs.background_color = BACKGROUND_COLOR
+    args.outputs.labels << [
+       x: args.grid.w - 40, y: args.grid.h - 40, text: "Time left: #{(args.state.timer / 60).round}", size_px: 26, anchor_x: 1
+    ]
+
     # TODO: render the game's scene
   end
 
