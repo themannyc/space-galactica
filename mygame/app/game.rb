@@ -44,6 +44,8 @@ class Game
       args.state.player.flip_horizontally = false
     end
 
+    
+
     if args.inputs.up_down > 0
       args.state.player.angle = args.state.player.flip_horizontally ? -90 : 90
     elsif args.inputs.up_down < 0
@@ -62,6 +64,16 @@ class Game
       args.state.player.y = args.grid.h - args.state.player.h
       elsif args.state.player.y < 0
       args.state.player.y = 0
+    end
+
+    if args.inputs.keyboard.key_down.m
+      args.state.music_paused = !args.state.music_paused
+
+    if args.state.music_paused
+      args.audio[:music][:gain] = 0.0
+    else
+      args.audio[:music][:gain] = 1.0
+    end
     end
 
     if args.inputs.keyboard.key_down.space && args.state.timer <= 0
