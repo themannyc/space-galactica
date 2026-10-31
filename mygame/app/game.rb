@@ -13,11 +13,12 @@ class Game
   end
 
   def defaults
-    # TODO: set up the game defaults
     if Kernel.tick_count == 1
       args.audio[:music] = { input: "sounds/Factor6_-_03_-_Axel_Funk.ogg", looping: true }
   end
+    args.state.music_volume ||= 1.0
     args.state.player ||= Player.new
+  
 
     args.state.clouds ||= [
       { x: 0, y: 0, w: 100, h: 100, path: 'sprites/nuvem.png', speed: 10}
@@ -38,13 +39,12 @@ class Game
   def input
     args.state.player.x += args.inputs.left_right * args.state.player.speed
     args.state.player.y += args.inputs.up_down * args.state.player.speed
+
     if args.inputs.left_right < 0
       args.state.player.flip_horizontally = true
     elsif args.inputs.left_right > 0
       args.state.player.flip_horizontally = false
     end
-
-    
 
     if args.inputs.up_down > 0
       args.state.player.angle = args.state.player.flip_horizontally ? -90 : 90
@@ -76,10 +76,20 @@ class Game
     end
     end
 
+    if args.inputs.keyboard.key_down.hyphen
+      args.state.music_volume = [args.state.music_volume - 0.1, 0.0].max
+      args.audio[:music][:gain] = args.state.music_volume
+    end
+
+    if args.inputs.keyboard.key_down.equal || args.inputs.keyboard.key_down.equal
+      args.state.music_volume = [args.state.music_volume + 0.1, 1.0].min
+      args.audio[:music][:gain] = args.state.music_volume
+    end
+
     if args.inputs.keyboard.key_down.space && args.state.timer <= 0
       args.gtk.reset_next_tick
     end
-    # TODO: handle the game's input
+
   end
 
   def calc
@@ -92,7 +102,6 @@ class Game
 
   player_sprite_index = 0.frame_index(count: 6, hold_for: 8, repeat: true)
     args.state.player.path = "sprites/misc/dragon-#{player_sprite_index}.png"
-
 
     args.state.clouds.each do |cloud|
       cloud.x -= cloud.speed
@@ -123,10 +132,10 @@ class Game
       end
     end
     return
-    # TODO: calculate the game's state
   end
 
   def render
+    args.outputs.background_color = BACKGROUND_COLOR
     if args.state.timer && args.state.timer <= 0
       labels = []
       labels << [
@@ -135,17 +144,15 @@ class Game
       args.outputs.labels << labels
       return
   end
-    args.outputs.sprites << args.state.player
-    args.outputs.sprites << args.state.clouds
     args.outputs.sprites << args.state.red
     args.outputs.sprites << args.state.green
     args.outputs.sprites << args.state.blue
-    args.outputs.background_color = BACKGROUND_COLOR
+    args.outputs.sprites << args.state.clouds
+    args.outputs.sprites << args.state.player
+
     args.outputs.labels << [
-       x: args.grid.w - 40, y: args.grid.h - 40, text: "Time left: #{(args.state.timer / 60).round}", size_px: 26, anchor_x: 1
+       x: 40, y: args.grid.h - 40, text: "Time left: #{(args.state.timer / 60).round}", size_px: 26, anchor_x: 0, r: 255, g: 255, b: 255
     ]
 
-    # TODO: render the game's scene
   end
-
 end
