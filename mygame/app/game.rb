@@ -21,7 +21,7 @@ class Game
   
 
     args.state.clouds ||= [
-      { x: 0, y: 0, w: 100, h: 100, path: 'sprites/nuvem.png', speed: 10}
+      { x: 0, y: 0, w: 100, h: 100, path: 'sprites/space_assets/Meteors/meteorBrown_big1.png', speed: 10}
     ]
 
     args.state.red ||= [
@@ -135,7 +135,14 @@ class Game
   end
 
   def render
-    args.outputs.background_color = BACKGROUND_COLOR
+args.outputs.sprites << {
+    x: 0,
+    y: 0,
+    w: 1280,
+    h: 720,
+    path: "sprites/space.png"
+  }
+
     if args.state.timer && args.state.timer <= 0
       labels = []
       labels << [
