@@ -5,6 +5,7 @@ class Game
   attr_dr
   BACKGROUND_COLOR = [70, 130, 180].freeze
   PLANET_ASSETS = (0..9).map { |i| "sprites/Planets/planet0#{i}.png" }
+  METEOR_ASSETS = (1..4).map { |i| "sprites/space_assets/Meteors/meteorBrown_big#{i}.png" }
 
   def tick
     defaults
@@ -22,19 +23,10 @@ class Game
   
 
     args.state.clouds ||= [
-      { x: 0, y: 0, w: 100, h: 100, path: 'sprites/space_assets/Meteors/meteorBrown_big1.png', speed: 10}
+      { x: 0, y: 0, w: 100, h: 100, path: METEOR_ASSETS.sample, speed: 10}
     ]
     args.state.planets ||= [
-      { x: 0, y: Numeric.rand(-200..200), w: 700, h: 700, path: PLANET_ASSETS.sample, speed: 1 }
-    ]
-    args.state.red ||= [
-      { x: 900, y: 100, w: 100, h: 100, path: 'sprites/square/red.png' }
-    ]
-    args.state.green ||= [
-      { x: 1000, y: 500, w: 100, h: 100, path: 'sprites/square/green.png' }
-    ]
-    args.state.blue ||= [
-      { x: 400, y: 400, w: 100, h: 100, path: 'sprites/square/blue.png' }
+      { x: 0, y: Numeric.rand(-500..500), w: 1000, h: 1000, path: PLANET_ASSETS.sample, speed: 1 }
     ]
 
   end
@@ -108,6 +100,7 @@ class Game
       if cloud.x + cloud.w < 0
         cloud.x = args.grid.w
         cloud.y = rand(args.grid.h - cloud.h)
+        cloud.path = METEOR_ASSETS.sample
       end
     end
 
@@ -117,15 +110,6 @@ class Game
         planet.x = args.grid.w
         planet.y = Numeric.rand(-200..200)
         planet.path = PLANET_ASSETS.sample
-      end
-    end
-
-
-    args.state.red.each do |red|
-      if args.geometry.intersect_rect?(args.state.player, red)
-      args.audio[:my_sound] = { input: 'sounds/419698__14fvaltrovat__short-horn.wav' }
-      args.state.player.x -= args.inputs.left_right * args.state.player.speed
-      args.state.player.y -= args.inputs.up_down * args.state.player.speed
       end
     end
     return

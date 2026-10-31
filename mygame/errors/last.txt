@@ -1,29 +1,22 @@
-* EXCEPTION POSSIBLY CAUSED BY CALLING ~rand~ with ~Range~ parameter: Use ~Numeric.rand~ instead.
-The exception message hints at a common error of invoking ~rand~ with a ~Range~ parameter.
-DragonRuby's ~Kernel.rand~ function does NOT support arguments of type ~Range~ (DragonRuby
-leverages mRuby's ~rand~ implementation which doesn't support ~Range~).
+* EXCEPTION:
+* ERROR:
+The method ~each~ was invoked on ~red~ within args.state, but ~red~ has
+a value of nil. The temporary coersion of this nil value, has reached it's
+invocation limit (you've called this function a lot and should probably
+set a default value for ~red~).
 
-In lieu of overriding ~Kernel.rand~, DragonRuby provides ~Numeric.rand~ which supports ranges.
+Here is the details:
 
-Instead of:
+object:
+{:entity_id=>1, :tick_count=>5, :__thrash_count__=>{:each=>6}, :music_volume=>1.0, :player=>{:x=>600, :y=>350, :w=>100, :h=>80, :path=>"sprites/space_assets/playerShip1_orange.png", :angle=>0, :a=>nil, :r=>nil, :g=>nil, :b=>nil, :tile_x=>nil, :tile_y=>nil, :tile_w=>nil, :tile_h=>nil, :flip_horizontally=>nil, :flip_vertically=>nil, :angle_anchor_x=>0.5, :angle_anchor_y=>0.5, :id=>nil, :angle_x=>nil, :angle_y=>nil, :z=>nil, :source_x=>nil, :source_y=>nil, :source_w=>nil, :source_h=>nil, :blendmode_enum=>nil, :source_x2=>nil, :source_y2=>nil, :source_x3=>nil, :source_y3=>nil, :x2=>nil, :y2=>nil, :x3=>nil, :y3=>nil, :anchor_x=>nil, :anchor_y=>nil, :r2=>nil, :g2=>nil, :b2=>nil, :a2=>nil, :r3=>nil, :g3=>nil, :b3=>nil, :a3=>nil, :scale_quality_enum=>nil, :blendmode=>nil}, :clouds=>[{:x=>-60, :y=>0, :w=>100, :h=>100, :path=>"sprites/space_assets/Meteors/meteorBrown_big2.png", :speed=>10}], :planets=>[{:x=>-6, :y=>153, :w=>700, :h=>700, :path=>"sprites/Planets/planet06.png", :speed=>1}], :timer=>3594}
 
-#+begin_src
-  # Kernel.rand function used
-  #   Ranges not supported/possible reason for exception
-  rand(-10..10)
-#+end_src
+member: [each]
+attribute: [red].
 
-Do this:
+Set a default value for this property.
 
-#+begin_src
-  # Numeric.rand function used
-  #   Ranges supported
-  Numeric.rand(-10..10)
-#+end_src
 
-* EXCEPTION THROWN:
-can't convert Range to Integer
 ** Backtrace:
-*** app/game.rb:28:in defaults
-*** app/game.rb:10:in tick
+*** app/game.rb:117:in calc
+*** app/game.rb:13:in tick
 *** app/main.rb:6:in tick
