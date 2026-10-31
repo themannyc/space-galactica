@@ -4,6 +4,7 @@ require "app/player"
 class Game
   attr_dr
   BACKGROUND_COLOR = [70, 130, 180].freeze
+  PLANET_ASSETS = (0..9).map { |i| "sprites/Planets/planet0#{i}.png" }
 
   def tick
     defaults
@@ -23,7 +24,9 @@ class Game
     args.state.clouds ||= [
       { x: 0, y: 0, w: 100, h: 100, path: 'sprites/space_assets/Meteors/meteorBrown_big1.png', speed: 10}
     ]
-
+    args.state.planets ||= [
+      { x: 0, y: Numeric.rand(-200..200), w: 700, h: 700, path: PLANET_ASSETS.sample, speed: 1 }
+    ]
     args.state.red ||= [
       { x: 900, y: 100, w: 100, h: 100, path: 'sprites/square/red.png' }
     ]
@@ -94,14 +97,11 @@ class Game
 
   def calc
     return if args.state.game_over
-    args.state.timer ||= 15 * 60
+    args.state.timer ||= 60 * 60
     if args.state.timer > 0
     args.state.timer -= 1
     elsif args.state.game_over = true
     end
-
-  player_sprite_index = 0.frame_index(count: 6, hold_for: 8, repeat: true)
-    args.state.player.path = "sprites/misc/dragon-#{player_sprite_index}.png"
 
     args.state.clouds.each do |cloud|
       cloud.x -= cloud.speed
@@ -110,22 +110,19 @@ class Game
         cloud.y = rand(args.grid.h - cloud.h)
       end
     end
+
+    args.state.planets.each do |planet|
+      planet.x -= planet.speed
+      if planet.x + planet.w < 0
+        planet.x = args.grid.w
+        planet.y = Numeric.rand(-200..200)
+        planet.path = PLANET_ASSETS.sample
+      end
+    end
+
+
     args.state.red.each do |red|
       if args.geometry.intersect_rect?(args.state.player, red)
-      args.audio[:my_sound] = { input: 'sounds/419698__14fvaltrovat__short-horn.wav' }
-      args.state.player.x -= args.inputs.left_right * args.state.player.speed
-      args.state.player.y -= args.inputs.up_down * args.state.player.speed
-      end
-    end
-    args.state.green.each do |green|
-      if args.geometry.intersect_rect?(args.state.player, green)
-      args.audio[:my_sound] = { input: 'sounds/419698__14fvaltrovat__short-horn.wav' }
-      args.state.player.x -= args.inputs.left_right * args.state.player.speed
-      args.state.player.y -= args.inputs.up_down * args.state.player.speed
-      end
-    end
-    args.state.blue.each do |blue|
-      if args.geometry.intersect_rect?(args.state.player, blue)
       args.audio[:my_sound] = { input: 'sounds/419698__14fvaltrovat__short-horn.wav' }
       args.state.player.x -= args.inputs.left_right * args.state.player.speed
       args.state.player.y -= args.inputs.up_down * args.state.player.speed
@@ -151,11 +148,11 @@ args.outputs.sprites << {
       args.outputs.labels << labels
       return
   end
-    args.outputs.sprites << args.state.red
-    args.outputs.sprites << args.state.green
-    args.outputs.sprites << args.state.blue
+
+    args.outputs.sprites << args.state.planets
     args.outputs.sprites << args.state.clouds
     args.outputs.sprites << args.state.player
+
 
     args.outputs.labels << [
        x: 40, y: args.grid.h - 40, text: "Time left: #{(args.state.timer / 60).round}", size_px: 26, anchor_x: 0, r: 255, g: 255, b: 255

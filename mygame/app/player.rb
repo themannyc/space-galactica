@@ -9,7 +9,7 @@ class Player
     @w = 100
     @h = 80
     @speed = 10
-    @path = 'sprites/misc/dragon-0.png'
+    @path = 'sprites/space_assets/playerShip1_orange.png'
     @angle_anchor_x = 0.5
     @angle_anchor_y = 0.5
   end
