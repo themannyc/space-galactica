@@ -20,7 +20,7 @@ class Game
   end
     args.state.music_volume ||= 1.0
     args.state.player ||= Player.new
-  
+    args.state.plasma_balls ||= []
 
     args.state.clouds ||= [
       { x: 0, y: 0, w: 100, h: 100, path: METEOR_ASSETS.sample, speed: 10}
@@ -28,6 +28,13 @@ class Game
     args.state.planets ||= [
       { x: 0, y: Numeric.rand(-500..500), w: 1000, h: 1000, path: PLANET_ASSETS.sample, speed: 1 }
     ]
+    args.state.plasma_balls ||= [ x: args.state.player.x + args.state.player.w - 12, y: args.state.player.y + 10, w: 100, h: 100, path: 'sprites/space_assets/Lasers/laserBlue01.png', speed: 15, angle: 0 ]
+
+    args.state.ufos ||= [
+      { x: 1000, y: 300, w: 100, h: 100, path: 'sprites/space_assets/ufoBlue.png', speed: 5, angle: 0 },
+            { x: 1000, y: 300, w: 100, h: 100, path: 'sprites/space_assets/ufoGreen.png', speed: 5, angle: 0 },
+                  { x: 1000, y: 300, w: 100, h: 100, path: 'sprites/space_assets/ufoYellow.png', speed: 5, angle: 0 },
+  ]
 
   end
 
@@ -35,19 +42,11 @@ class Game
     args.state.player.x += args.inputs.left_right * args.state.player.speed
     args.state.player.y += args.inputs.up_down * args.state.player.speed
 
-    if args.inputs.left_right < 0
-      args.state.player.flip_horizontally = true
-    elsif args.inputs.left_right > 0
+    if args.inputs.left_right > 0
       args.state.player.flip_horizontally = false
     end
 
-    if args.inputs.up_down > 0
-      args.state.player.angle = args.state.player.flip_horizontally ? -90 : 90
-    elsif args.inputs.up_down < 0
-      args.state.player.angle = args.state.player.flip_horizontally ? 90 : -90
-    else
-      args.state.player.angle = 0
-    end
+   
 
     if args.state.player.x + args.state.player.w > args.grid.w
       args.state.player.x = args.grid.w - args.state.player.w
@@ -81,8 +80,12 @@ class Game
       args.audio[:music][:gain] = args.state.music_volume
     end
 
-    if args.inputs.keyboard.key_down.space && args.state.timer <= 0
-      args.gtk.reset_next_tick
+    if args.inputs.keyboard.key_down.z
+        args.state.plasma_balls << { x: args.state.player.x + args.state.player.w - 12, y: args.state.player.y + 5, w: 40, h: 70, path: 'sprites/space_assets/Lasers/laserBlue01.png', angle: -90}
+      end
+
+      if args.inputs.keyboard.key_down.space && args.state.timer <= 0
+        args.gtk.reset_next_tick
     end
 
   end
@@ -112,8 +115,16 @@ class Game
         planet.path = PLANET_ASSETS.sample
       end
     end
-    return
+
+
+    args.state.plasma_balls.each do |plasma|
+      plasma.x += args.state.player.speed + 2
+    end
+    args.state.plasma_balls.reject! { |plasma| plasma.x > args.grid.w }
   end
+
+
+
 
   def render
 args.outputs.sprites << {
@@ -134,9 +145,11 @@ args.outputs.sprites << {
   end
 
     args.outputs.sprites << args.state.planets
+    args.outputs.sprites << [args.state.player, args.state.player, args.state.plasma_balls]
     args.outputs.sprites << args.state.clouds
     args.outputs.sprites << args.state.player
-
+    args.outputs.sprites << args.state.plasma_balls
+    args.outputs.sprites << args.state.ufos
 
     args.outputs.labels << [
        x: 40, y: args.grid.h - 40, text: "Time left: #{(args.state.timer / 60).round}", size_px: 26, anchor_x: 0, r: 255, g: 255, b: 255
