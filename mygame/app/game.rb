@@ -21,10 +21,13 @@ class Game
     args.state.music_volume ||= 1.0
     args.state.player ||= Player.new
     args.state.plasma_balls ||= []
-
-    args.state.clouds ||= [
-      { x: 0, y: 0, w: 100, h: 100, path: METEOR_ASSETS.sample, speed: 10}
+    args.state.meteors ||= [
+      spawn_meteor(1000,300),
+      spawn_meteor(300,200),
+      spawn_meteor(500,100),
     ]
+
+
     args.state.planets ||= [
       { x: 0, y: Numeric.rand(-500..500), w: 1000, h: 1000, path: PLANET_ASSETS.sample, speed: 1 }
     ]
@@ -36,6 +39,18 @@ class Game
                   { x: 1000, y: 300, w: 100, h: 100, path: 'sprites/space_assets/ufoYellow.png', speed: 5, angle: 0 },
   ]
 
+  end
+
+  def spawn_meteor x, y
+    {
+      x: x,
+      y: y,
+      w: 100,
+      h: 100,
+      path: METEOR_ASSETS.sample,
+      speed: 5,
+      angle: 0
+    }
   end
 
   def input
@@ -98,13 +113,13 @@ class Game
     elsif args.state.game_over = true
     end
 
-    args.state.clouds.each do |cloud|
-      cloud.x -= cloud.speed
-      if cloud.x + cloud.w < 0
-        cloud.x = args.grid.w
-        cloud.y = rand(args.grid.h - cloud.h)
-        cloud.path = METEOR_ASSETS.sample
-      end
+    args.state.meteors.each do |meteor|
+      meteor.x -= meteor.speed
+      if meteor.x + meteor.w < 0
+        meteor.x = args.grid.w
+        meteor.y = rand(args.grid.h - meteor.h)
+        meteor.path = METEOR_ASSETS.sample
+      end 
     end
 
     args.state.planets.each do |planet|
@@ -146,7 +161,7 @@ args.outputs.sprites << {
 
     args.outputs.sprites << args.state.planets
     args.outputs.sprites << [args.state.player, args.state.player, args.state.plasma_balls]
-    args.outputs.sprites << args.state.clouds
+    args.outputs.sprites << args.state.meteors
     args.outputs.sprites << args.state.player
     args.outputs.sprites << args.state.plasma_balls
     args.outputs.sprites << args.state.ufos
