@@ -113,6 +113,18 @@ class Game
     elsif args.state.game_over = true
     end
 
+    args.state.ufos.each do |ufo|
+      ufo.y -= ufo.speed
+      if ufo.y + ufo.h >= args.grid.h
+        ufo.y = args.grid.h - ufo.h
+        ufo.speed *= -1
+      end
+      if ufo.y <= 0
+        ufo.y = 0
+        ufo.speed *= -1
+      end
+    end
+
     args.state.meteors.each do |meteor|
       meteor.x -= meteor.speed
       if meteor.x + meteor.w < 0
