@@ -1,19 +1,7 @@
-* EXCEPTION:
-* ERROR: :ufo method missing on ~Game~.
-
-#+begin_src ~Game#inspect~
-#<Game:0x250518f73d0 @args=#<GTK::Args:0x25048bebb20>>
-#+end_src ~Game#inspect~
-
-
-
-The method named
-  :ufo
-doesn't exist on [Game, #<Class:#<Game:0x250518f73d0>>, AttrDR].
-
-(suggestions above)
+* EXCEPTION: can't convert Integer to Hash
 ** Backtrace:
-*** app/game.rb:143:in calc
-*** app/game.rb:136:in calc
+*** app/game.rb:184:in calc
+*** app/game.rb:179:in calc
+*** app/game.rb:160:in calc
 *** app/game.rb:13:in tick
 *** app/main.rb:6:in tick

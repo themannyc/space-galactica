@@ -21,7 +21,11 @@ class Game
     args.state.music_volume ||= 1.0
     args.state.player ||= Player.new
     args.state.meteors ||= [
-      spawn_meteor(1000, 300),
+      spawn_meteor(args),
+      spawn_meteor(args),
+      spawn_meteor(args),
+      spawn_meteor(args),
+      spawn_meteor(args)
     ]
     args.state.plasma_balls ||= []
     args.state.ufos ||= [
@@ -61,12 +65,13 @@ class Game
     }
   end
 
-  def spawn_meteor x, y
+  def spawn_meteor(args)
+    size = Numeric.rand(50..150)
     {
-      x: x,
-      y: y,
-      w: 100,
-      h: 100,
+      x: rand(args.grid.w * 2.0) + args.grid.w * 3.0,
+      y: rand(args.grid.h - size * 2) + size,
+      w: size,
+      h: size,
       path: METEOR_ASSETS.sample,
       speed: 5,
       angle: 0
@@ -161,6 +166,7 @@ args.state.meteors.each do |meteor|
     if args.geometry.intersect_rect?(meteor, plasma)
       meteor.dead = true
       plasma.dead = true
+      args.state.meteors << spawn_meteor(args)
     end
   end
 end
@@ -186,10 +192,16 @@ end
     # --- 2. Move UFOs (Up/Down oscillating + moving left) ---
     args.state.ufos.each do |ufo|
       ufo.y -= ufo.speed
-      if ufo.y + ufo.h < 0
-        ufo.y = args.grid.h
+      if ufo.y + ufo.h >= args.grid.h
+        ufo.y = args.grid.h - ufo.h
+        ufo.speed *=-1
       end
       
+      if ufo.y <= 0
+        ufo.y = 0
+        ufo.speed *=-1
+      end
+    
       # Give them an up-and-down floating motion using sine wave or simple tracking
       # (Using tick_count to oscillate y)
       ufo.y_offset ||= rand(100)
