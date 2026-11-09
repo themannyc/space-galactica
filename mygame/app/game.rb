@@ -20,22 +20,45 @@ class Game
   end
     args.state.music_volume ||= 1.0
     args.state.player ||= Player.new
-    args.state.plasma_balls ||= []
-
-    args.state.clouds ||= [
-      { x: 0, y: 0, w: 100, h: 100, path: METEOR_ASSETS.sample, speed: 10}
+    args.state.meteors ||= [
+      spawn_meteor(1000, 300),
     ]
+    args.state.plasma_balls ||= []
+    args.state.ufos ||= [
+      spawn_ufo(1000, 600),
+      spawn_ufo(800, 300),
+      spawn_ufo(1000, 100)
+    ]
+    
     args.state.planets ||= [
       { x: 0, y: Numeric.rand(-500..500), w: 1000, h: 1000, path: PLANET_ASSETS.sample, speed: 1 }
     ]
     args.state.plasma_balls ||= [ x: args.state.player.x + args.state.player.w - 12, y: args.state.player.y + 10, w: 100, h: 100, path: 'sprites/space_assets/Lasers/laserBlue01.png', speed: 15, angle: 0 ]
 
-    args.state.ufos ||= [
-      { x: 1000, y: 300, w: 100, h: 100, path: 'sprites/space_assets/ufoBlue.png', speed: 5, angle: 0 },
-            { x: 1000, y: 300, w: 100, h: 100, path: 'sprites/space_assets/ufoGreen.png', speed: 5, angle: 0 },
-                  { x: 1000, y: 300, w: 100, h: 100, path: 'sprites/space_assets/ufoYellow.png', speed: 5, angle: 0 },
-  ]
+  end
 
+  def spawn_meteor x, y
+    {
+      x: x,
+      y: y,
+      w: 100,
+      h: 100,
+      path: METEOR_ASSETS.sample,
+      speed: 5,
+      angle: 0
+    }
+  end
+
+  def spawn_ufo x, y 
+    {
+      x: x,
+      y: y,
+      w: 100,
+      h: 100,
+      path: 'sprites/space_assets/ufoBlue.png',
+      speed: 5,
+      angle: 0
+    }
   end
 
   def input
@@ -98,12 +121,12 @@ class Game
     elsif args.state.game_over = true
     end
 
-    args.state.clouds.each do |cloud|
-      cloud.x -= cloud.speed
-      if cloud.x + cloud.w < 0
-        cloud.x = args.grid.w
-        cloud.y = rand(args.grid.h - cloud.h)
-        cloud.path = METEOR_ASSETS.sample
+    args.state.meteors.each do |meteor|
+      meteor.x -= meteor.speed
+      if meteor.x + meteor.w < 0
+        meteor.x = args.grid.w
+        meteor.y = rand(args.grid.h - meteor.h)
+        meteor.path = METEOR_ASSETS.sample
       end
     end
 
@@ -119,11 +142,48 @@ class Game
 
     args.state.plasma_balls.each do |plasma|
       plasma.x += args.state.player.speed + 2
+      # Check collisions with Meteors
+args.state.meteors.each do |meteor|
+  # Check collisions with plasma
+  args.state.plasma_balls.each do |plasma|
+    if args.geometry.intersect_rect?(meteor, plasma)
+      meteor.dead = true
+      plasma.dead = true
     end
-    args.state.plasma_balls.reject! { |plasma| plasma.x > args.grid.w }
   end
+end
 
 
+
+
+
+      # Check collisions with UFOs
+      args.state.ufos.each do |ufo|
+        if args.geometry.intersect_rect?(ufo, plasma)
+          ufo.dead = true
+          plasma.dead = true
+        end
+      end
+    end
+
+    # Clean up dead plasma balls, meteors, and ufos
+    args.state.plasma_balls.reject! { |p| p.dead || p.x > args.grid.w }
+    args.state.meteors.reject! { |m| m.dead } # Add your existing meteor off-screen logic here too
+    args.state.ufos.reject! { |u| u.dead || u.x + u.w < 0 }
+
+    # --- 2. Move UFOs (Up/Down oscillating + moving left) ---
+    args.state.ufos.each do |ufo|
+      ufo.y -= ufo.speed
+      if ufo.y + ufo.h < 0
+        ufo.y = args.grid.h
+      end
+      
+      # Give them an up-and-down floating motion using sine wave or simple tracking
+      # (Using tick_count to oscillate y)
+      ufo.y_offset ||= rand(100)
+      ufo.y += Math.sin((args.state.tick_count + ufo.y_offset) * 0.05) * 2
+    end
+  end
 
 
   def render
@@ -146,7 +206,7 @@ args.outputs.sprites << {
 
     args.outputs.sprites << args.state.planets
     args.outputs.sprites << [args.state.player, args.state.player, args.state.plasma_balls]
-    args.outputs.sprites << args.state.clouds
+    args.outputs.sprites << args.state.meteors
     args.outputs.sprites << args.state.player
     args.outputs.sprites << args.state.plasma_balls
     args.outputs.sprites << args.state.ufos
