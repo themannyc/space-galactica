@@ -1,48 +1,8 @@
 * EXCEPTION:
-* ERROR: Access using ~[] (array indexor)~ on uninitialized Entities is disallowed.
-An ~Entity's~ property was accessed via ~[] (array indexor)~, but the
-parent object of ~animations~ is ~nil~. Please initialize the parent of
-~animations~ with a default value.
-
-The indexor function
-  :[]
-with argument(s)
-  animations
-was used without first initializing ~animations~'s parent.
-
-You are getting this exception because:
-1. The parent object of ~animations~ is ~nil~.
-2. The parent object is being accessed via ~[] (array indexor)~.
-
-#+begin_src
-  # The following is not allowed if ~args.state[:some_parent]~ is ~nil~.
-  args.state[:some_parent][:animations]
-#+end_src
-
-There are a number of ways to fix this issue:
-
-*** Option 1: Remove the usage of array indexors for the parent object.
-#+begin_src
-  args.state.some_parent[:animations]
-#+end_src
-
-*** Option 2: Initialize the parent object of animations before using array indexors.
-If you want to continue using ~[] (array indexor)~, first initialize the parent object.
-#+begin_src
-  args.state[:some_parent] ||= {} # initialize parent first
-  args.state[:some_parent][:animations] # now array indexors are allowed
-#+end_src
-
-** Additional Help
-To help track down the issue, add $gtk.trace_nil_punning! at the top of =main.rb=. If
-you still can't find the root cause, instead add $gtk.disable_nil_punning! at the top of
-=main.rb= and make sure all null references have have a default value.
+* ERROR: Exception while requiring app/main.rb.
+* ERROR: Exception while requiring app/game.
+codegen error
 
 ** Backtrace:
-*** app/game.rb:557:in boss_animation_frames
-*** app/game.rb:571:in boss_animation_finished?
-*** app/game.rb:985:in update_boss_animation
-*** app/game.rb:907:in update_boss
-*** app/game.rb:1734:in update_game
-*** app/game.rb:467:in tick
-*** app/game.rb:2596:in tick
+*** app/main.rb:1
+** Backtrace:

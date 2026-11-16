@@ -4,26 +4,9 @@ require "app/player"
 class Game
   attr_gtk
 
-  # ============================================================
+  # ==========================================================
   # SPACE GALACTICA - ASSETS
-  # ============================================================
-
-# ============================================================
-# HUD ASSETS
-# ============================================================
-
-BOSS_HEALTH_BG =
-  "sprites/space_assets/UI/buttonRed.png"
-
-PLAYER_LIFE_SPRITES = {
-  blue: "sprites/space_assets/UI/playerLife1_blue.png",
-  green: "sprites/space_assets/UI/playerLife1_green.png",
-  orange: "sprites/space_assets/UI/playerLife1_orange.png",
-  red: "sprites/space_assets/UI/playerLife1_red.png"
-}
-
-LIFE_ICON_SIZE = 34
-LIFE_ICON_SPACING = 42
+  # ==========================================================
 
   SPACE_BG = "sprites/space.png"
 
@@ -42,16 +25,16 @@ LIFE_ICON_SPACING = 42
     "sprites/PNG_Parts&Spriter_Animation/Ship6/Ship6.png"
 
   SHIP_COLORS = {
-    blue:   "sprites/space_assets/playerShip1_blue.png",
-    green:  "sprites/space_assets/playerShip1_green.png",
+    blue: "sprites/space_assets/playerShip1_blue.png",
+    green: "sprites/space_assets/playerShip1_green.png",
     orange: "sprites/space_assets/playerShip1_orange.png",
-    red:    "sprites/space_assets/playerShip1_red.png"
+    red: "sprites/space_assets/playerShip1_red.png"
   }
 
   SHIP_NAMES = [:blue, :green, :orange, :red]
 
   SHIP_ANGLE = -90
-  ORANGE_ANGLE = 0
+  ORANGE_ANGLE = -90
 
   ENGINE_FRAMES = (1..7).map do |i|
     "sprites/space_assets/Effects/fire#{i.to_s.rjust(2, '0')}.png"
@@ -59,9 +42,6 @@ LIFE_ICON_SPACING = 42
 
   ENGINE_SPEED = 4
   ENGINE_ANGLE = -90
-  ENGINE_IDLE_LENGTH = 0.85
-  ENGINE_MOVING_LENGTH = 1.15
-  ENGINE_THICKNESS = 0.25
 
   NORMAL_SHOT =
     "sprites/space_assets/Lasers/laserBlue01.png"
@@ -71,14 +51,28 @@ LIFE_ICON_SPACING = 42
 
   SHOTS_DIR = "sprites/PNG_Animations/Shots"
 
-  # ============================================================
-  # ORIGINAL POWER-UP COLLECTIBLES
-  # ============================================================
+  # ==========================================================
+  # HUD ASSETS
+  # ==========================================================
+
+  BOSS_HEALTH_BG =
+    "sprites/space_assets/UI/buttonRed.png"
+
+  PLAYER_LIFE_SPRITES = {
+    blue: "sprites/space_assets/UI/playerLife1_blue.png",
+    green: "sprites/space_assets/UI/playerLife1_green.png",
+    orange: "sprites/space_assets/UI/playerLife1_orange.png",
+    red: "sprites/space_assets/UI/playerLife1_red.png"
+  }
+
+  # ==========================================================
+  # ORIGINAL POWER-UP SPRITES
+  # ==========================================================
 
   POWERUP_PATHS = {
     shield: "sprites/space_assets/Power-ups/powerupBlue_shield.png",
     repair: "sprites/space_assets/Power-ups/powerupBlue_star.png",
-    speed:  "sprites/space_assets/Power-ups/powerupBlue_bolt.png"
+    speed: "sprites/space_assets/Power-ups/powerupBlue_bolt.png"
   }
 
   POWERUP_FALLBACK =
@@ -92,14 +86,11 @@ LIFE_ICON_SPACING = 42
     "sprites/space_assets/Effects/star#{i}.png"
   end
 
-  SPEED_EFFECT =
-    "sprites/space_assets/Effects/speed.png"
+  SPEED_EFFECT = "sprites/space_assets/Effects/speed.png"
 
-  POWERUP_ANIMATION_SPEED = 8
-
-  # ============================================================
-  # PLANET MAPS
-  # ============================================================
+  # ==========================================================
+  # PLANET BACKGROUNDS
+  # ==========================================================
 
   PLANET_MAP_1 =
     "sprites/planet-game-backgrounds/_PNG/1/1_game_background.png"
@@ -113,9 +104,89 @@ LIFE_ICON_SPACING = 42
   PLANET_MAP_4 =
     "sprites/planet-game-backgrounds/_PNG/4/4_game_background.png"
 
-  # ============================================================
-  # MONSTER BOSS ANIMATIONS
-  # ============================================================
+  # ==========================================================
+  # CUSTOM WORLD HAZARDS
+  #
+  # ADD YOUR NEW SPRITE PATHS HERE.
+  #
+  # Empty sprites arrays use original meteors.
+  #
+  # Each world can have its own:
+  #   sprites
+  #   speed_multiplier
+  #   size_multiplier
+  #
+  # These are static sprites for now.
+  # ==========================================================
+
+  WORLD_HAZARDS = {
+    "Deep Space" => {
+      sprites: [],
+      speed_multiplier: 1.0,
+      size_multiplier: 1.0
+    },
+
+    "Ember Planet" => {
+      sprites: [
+        # "sprites/hazards/ember/fire_arrow.png",
+        # "sprites/hazards/ember/lava_rock.png"
+      ],
+      speed_multiplier: 1.1,
+      size_multiplier: 0.8
+    },
+
+    "Nebula Sector" => {
+      sprites: [],
+      speed_multiplier: 1.0,
+      size_multiplier: 1.0
+    },
+
+    "Frozen Planet" => {
+      sprites: [
+        # "sprites/hazards/frozen/ice_shard.png"
+      ],
+      speed_multiplier: 1.0,
+      size_multiplier: 0.9
+    },
+
+    "Crystal Expanse" => {
+      sprites: [],
+      speed_multiplier: 1.0,
+      size_multiplier: 1.0
+    },
+
+    "Shadow Planet" => {
+      sprites: [
+        # "sprites/hazards/shadow/cursed_orb.png"
+      ],
+      speed_multiplier: 1.2,
+      size_multiplier: 0.85
+    },
+
+    "Dark Orbit" => {
+      sprites: [],
+      speed_multiplier: 1.0,
+      size_multiplier: 1.0
+    },
+
+    "Dragon Planet" => {
+      sprites: [
+        # "sprites/hazards/dragon/poison_orb.png"
+      ],
+      speed_multiplier: 1.3,
+      size_multiplier: 0.9
+    }
+  }
+
+  DEFAULT_WORLD_HAZARD = {
+    sprites: [],
+    speed_multiplier: 1.0,
+    size_multiplier: 1.0
+  }
+
+  # ==========================================================
+  # PLANET BOSS ANIMATIONS
+  # ==========================================================
 
   BOSS_FOLDER = "sprites/planet_bosses"
 
@@ -125,12 +196,12 @@ LIFE_ICON_SPACING = 42
     end
   end
 
-  DEMON_ANIMATIONS = {
-    idle: boss_frames("demon", "Idle", 3),
-    move: boss_frames("demon", "Walk", 6),
-    attack: boss_frames("demon", "Attack", 4),
-    hurt: boss_frames("demon", "Hurt", 2),
-    death: boss_frames("demon", "Death", 6)
+  DRAGON_ANIMATIONS = {
+    idle: boss_frames("dragon", "Idle", 3),
+    move: boss_frames("dragon", "Walk", 6),
+    attack: boss_frames("dragon", "Attack", 5),
+    hurt: boss_frames("dragon", "Hurt", 2),
+    death: boss_frames("dragon", "Death", 6)
   }
 
   JINN_ANIMATIONS = {
@@ -151,108 +222,105 @@ LIFE_ICON_SPACING = 42
     death: boss_frames("medusa", "Death", 6)
   }
 
-  DRAGON_ANIMATIONS = {
-    idle: boss_frames("dragon", "Idle", 3),
-    move: boss_frames("dragon", "Walk", 6),
-    attack: boss_frames("dragon", "Attack", 5),
-    hurt: boss_frames("dragon", "Hurt", 2),
-    death: boss_frames("dragon", "Death", 6)
+  DEMON_ANIMATIONS = {
+    idle: boss_frames("demon", "Idle", 3),
+    move: boss_frames("demon", "Walk", 6),
+    attack: boss_frames("demon", "Attack", 4),
+    hurt: boss_frames("demon", "Hurt", 2),
+    death: boss_frames("demon", "Death", 6)
   }
 
-  # ============================================================
-  # SPACESHIP BOSS ANIMATIONS
-  # ============================================================
+  # ==========================================================
+  # SPACESHIP BOSS EFFECTS
+  # ==========================================================
 
-  SHIP_ANIMATION_DIR = "sprites/PNG_Animations"
+  SHIP_ANIM_DIR = "sprites/PNG_Animations"
 
-  def self.spaceship_engine_frames(number, turbo = false)
+  def self.ship_engine_frames(number, turbo = false)
     mode = turbo ? "Turbo_flight" : "Normal_flight"
-    prefix = turbo ?
-      "Ship#{number}_turbo_flight" :
-      "Ship#{number}_normal_flight"
+    prefix = "Ship#{number}_#{turbo ? 'turbo' : 'normal'}_flight"
 
     (1..30).map do |i|
-      "#{SHIP_ANIMATION_DIR}/Exhaust/Ship#{number}/#{mode}/#{prefix}_#{i.to_s.rjust(3, '0')}.png"
+      "#{SHIP_ANIM_DIR}/Exhaust/Ship#{number}/#{mode}/#{prefix}_#{i.to_s.rjust(3, '0')}.png"
     end
   end
 
-  def self.spaceship_explosion_frames(number)
+  def self.ship_explosion_frames(number)
     (1..30).map do |i|
-      "#{SHIP_ANIMATION_DIR}/Explosions/Ship#{number}_Explosion/Ship#{number}_Explosion_#{i.to_s.rjust(3, '0')}.png"
+      "#{SHIP_ANIM_DIR}/Explosions/Ship#{number}_Explosion/Ship#{number}_Explosion_#{i.to_s.rjust(3, '0')}.png"
     end
   end
 
-  SPACESHIP_ANIMATIONS = {}
+  # ==========================================================
+  # DIFFICULTY SETTINGS
+  # ==========================================================
 
-  (1..6).each do |i|
-    SPACESHIP_ANIMATIONS[i] = {
-      normal: spaceship_engine_frames(i),
-      turbo: spaceship_engine_frames(i, true),
-      explosion: spaceship_explosion_frames(i)
+  DIFFICULTIES = [:easy, :normal, :hard]
+
+  DIFFICULTY_SETTINGS = {
+    easy: {
+      hp: 5,
+      enemy_speed: 0.8,
+      enemy_bullet_speed: 0.75,
+      enemy_fire_rate: 1.3,
+      boss_hp: 0.8,
+      boss_speed: 0.8,
+      powerup_frequency: 0.7
+    },
+
+    normal: {
+      hp: 3,
+      enemy_speed: 1.0,
+      enemy_bullet_speed: 1.0,
+      enemy_fire_rate: 1.0,
+      boss_hp: 1.0,
+      boss_speed: 1.0,
+      powerup_frequency: 1.0
+    },
+
+    hard: {
+      hp: 2,
+      enemy_speed: 1.25,
+      enemy_bullet_speed: 1.25,
+      enemy_fire_rate: 0.8,
+      boss_hp: 1.3,
+      boss_speed: 1.2,
+      powerup_frequency: 1.4
     }
-  end
+  }
 
-  SPACESHIP_ENGINE_SPEED = 4
-  SPACESHIP_EXPLOSION_SPEED = 5
-
-  # ============================================================
+  # ==========================================================
   # GAME SETTINGS
-  # ============================================================
+  # ==========================================================
 
-  PLAYER_MAX_HP = 3
   PLAYER_INVULN = 90
   PLAYER_SHOT_SPEED = 16
   PLAYER_FIRE_RATE = 12
-
-  WAVE_CLEAR_DELAY = 90
-  PROMPT_DELAY = 45
-  FADE_TICKS = 70
 
   SHIELD_DURATION = 300
   SPEED_DURATION = 360
   SPEED_MULTIPLIER = 1.5
 
-  POWERUP_SPAWN_MIN = 500
-  POWERUP_SPAWN_MAX = 850
-
   COMBO_TIMEOUT = 240
   POWER_DAMAGE = 3
   SUPER_DAMAGE = 6
 
-  BOSS_SPEED_MULT = 0.8
-  BOSS_BULLET_MULT = 0.65
-  BOSS_FIRE_MULT = 1.5
+  UFO_ENTRY_SPEED = 3
+  UFO_SINE_SPEED = 0.05
+  UFO_SINE_AMPLITUDE = 160
+  UFO_CIRCLE_SPEED = 0.035
 
-  BOSS_IDLE_SPEED = 8
-  BOSS_ATTACK_SPEED = 6
-  BOSS_HURT_SPEED = 5
-  BOSS_DEATH_SPEED = 8
+  BOSS_FIRE_MULT = 1.5
+  BOSS_BULLET_MULT = 0.65
 
   TRANSITION_TICKS = 240
-  TRANSITION_FLASH_START = 190
-  DESCENT_PLANET_SIZE = 640
+  FADE_TICKS = 70
 
   END_AFTER_FOURTH_PLANET = true
 
-  TOUCH_JOYSTICK_X = 135
-  TOUCH_JOYSTICK_Y = 130
-  TOUCH_FIRE_X = 1130
-  TOUCH_FIRE_Y = 130
-  SHOW_TOUCH_ON_DESKTOP = false
-
-  # ============================================================
-  # ORIGINAL UFO MOVEMENT SETTINGS
-  # ============================================================
-
-  UFO_ENTRY_SPEED = 3
-  UFO_SINE_AMPLITUDE = 160
-  UFO_SINE_SPEED = 0.05
-  UFO_CIRCLE_RADIUS = 90
-  UFO_CIRCLE_SPEED = 0.035
-
-  # ============================================================
-  # WAVE GENERATOR
-  # ============================================================
+  # ==========================================================
+  # WORLD WAVE GENERATOR
+  # ==========================================================
 
   def self.make_waves(level, shot = nil)
     {
@@ -266,7 +334,7 @@ LIFE_ICON_SPACING = 42
             sprite: UFO_BLUE,
             move: :sine,
             shoot: :aimed,
-            fire_rate: [160 - level * 5, 95].max,
+            fire_rate: 150,
             bullet_speed: 5 + level * 0.3,
             shot: shot
           }
@@ -283,7 +351,7 @@ LIFE_ICON_SPACING = 42
             sprite: UFO_RED,
             move: level.even? ? :zigzag : :circle,
             shoot: :spread3,
-            fire_rate: [150 - level * 4, 90].max,
+            fire_rate: 135,
             bullet_speed: 6 + level * 0.3,
             shot: shot
           }
@@ -299,23 +367,23 @@ LIFE_ICON_SPACING = 42
     }
   end
 
-  # ============================================================
+  # ==========================================================
   # WORLDS
-  # ============================================================
+  # ==========================================================
 
   WORLDS = [
     {
       name: "Deep Space",
       type: :space,
       background: SPACE_BG,
-      tint: [255, 255, 255],
-      landing_planet: PLANETS[0],
       waves: make_waves(1, 2),
       boss: {
         type: :spaceship,
         ship_number: 1,
         sprite: SPACE_BOSS,
-        hp: 60, w: 400, h: 400,
+        hp: 60,
+        w: 400,
+        h: 400,
         speed: [3, 4.5, 6],
         fire_rate: [110, 95, 80],
         bullet_speed: [6, 7, 8],
@@ -327,23 +395,22 @@ LIFE_ICON_SPACING = 42
       name: "Ember Planet",
       type: :planet,
       background: PLANET_MAP_1,
-      tint: [255, 180, 130],
-      scroll_speed: 3,
       landing_planet: PLANETS[2],
+      scroll_speed: 3,
       waves: make_waves(1, 4),
       boss: {
         type: :creature,
-        creature: :demon,
-        animations: DEMON_ANIMATIONS,
+        creature: :dragon,
+        animations: DRAGON_ANIMATIONS,
+        flying: true,
         flip_horizontally: true,
-        flying: false,
-        hp: 80,
-        w: 900,
-        h: 900,
-        speed: [2, 3, 4],
-        fire_rate: [135, 115, 95],
+        hp: 100,
+        w: 850,
+        h: 780,
+        speed: [2.5, 3.5, 4.5],
+        fire_rate: [120, 105, 90],
         bullet_speed: [5, 6, 7],
-        shot: 4
+        shot: 3
       }
     },
 
@@ -351,15 +418,14 @@ LIFE_ICON_SPACING = 42
       name: "Nebula Sector",
       type: :space,
       background: "sprites/space_world3.png",
-      tint: [160, 120, 255],
-      landing_planet: PLANETS[3],
       waves: make_waves(2, 5),
       boss: {
         type: :spaceship,
         ship_number: 2,
         sprite: SPACE_BOSS,
-        tint: [170, 120, 255],
-        hp: 85, w: 420, h: 420,
+        hp: 85,
+        w: 420,
+        h: 420,
         speed: [3, 4.5, 6],
         fire_rate: [105, 90, 75],
         bullet_speed: [6, 7, 8],
@@ -371,16 +437,15 @@ LIFE_ICON_SPACING = 42
       name: "Frozen Planet",
       type: :planet,
       background: PLANET_MAP_2,
-      tint: [150, 210, 255],
-      scroll_speed: 3,
       landing_planet: PLANETS[4],
+      scroll_speed: 3,
       waves: make_waves(2, 6),
       boss: {
         type: :creature,
         creature: :jinn,
         animations: JINN_ANIMATIONS,
-        flip_horizontally: true,
         flying: true,
+        flip_horizontally: true,
         hp: 100,
         w: 750,
         h: 750,
@@ -395,15 +460,14 @@ LIFE_ICON_SPACING = 42
       name: "Crystal Expanse",
       type: :space,
       background: "sprites/space_world5.png",
-      tint: [140, 210, 255],
-      landing_planet: PLANETS[5],
       waves: make_waves(3, 5),
       boss: {
         type: :spaceship,
         ship_number: 3,
         sprite: SPACE_BOSS,
-        tint: [130, 220, 255],
-        hp: 100, w: 420, h: 420,
+        hp: 100,
+        w: 420,
+        h: 420,
         speed: [3, 4.5, 6],
         fire_rate: [100, 85, 70],
         bullet_speed: [6, 7, 8],
@@ -415,16 +479,15 @@ LIFE_ICON_SPACING = 42
       name: "Shadow Planet",
       type: :planet,
       background: PLANET_MAP_3,
-      tint: [190, 140, 210],
-      scroll_speed: 4,
       landing_planet: PLANETS[6],
+      scroll_speed: 4,
       waves: make_waves(3, 5),
       boss: {
         type: :creature,
         creature: :medusa,
         animations: MEDUSA_ANIMATIONS,
-        flip_horizontally: true,
         flying: false,
+        flip_horizontally: true,
         hp: 115,
         w: 850,
         h: 850,
@@ -439,15 +502,14 @@ LIFE_ICON_SPACING = 42
       name: "Dark Orbit",
       type: :space,
       background: "sprites/space_world7.png",
-      tint: [180, 120, 220],
-      landing_planet: PLANETS[7],
       waves: make_waves(4, 2),
       boss: {
         type: :spaceship,
         ship_number: 4,
         sprite: SPACE_BOSS,
-        tint: [200, 130, 230],
-        hp: 115, w: 420, h: 420,
+        hp: 115,
+        w: 420,
+        h: 420,
         speed: [3, 4.5, 6],
         fire_rate: [100, 85, 70],
         bullet_speed: [6, 7, 8],
@@ -459,30 +521,29 @@ LIFE_ICON_SPACING = 42
       name: "Dragon Planet",
       type: :planet,
       background: PLANET_MAP_4,
-      tint: [140, 255, 160],
-      scroll_speed: 4,
       landing_planet: PLANETS[8],
+      scroll_speed: 4,
       waves: make_waves(4, 3),
       boss: {
         type: :creature,
-        creature: :dragon,
-        animations: DRAGON_ANIMATIONS,
+        creature: :demon,
+        animations: DEMON_ANIMATIONS,
+        flying: false,
         flip_horizontally: true,
-        flying: true,
         hp: 125,
-        w: 850,
-        h: 780,
-        speed: [2.5, 3.5, 4.5],
-        fire_rate: [125, 105, 90],
+        w: 900,
+        h: 900,
+        speed: [2, 3, 4],
+        fire_rate: [135, 115, 95],
         bullet_speed: [5, 6, 7],
-        shot: 3
+        shot: 4
       }
     }
   ]
 
-  # ============================================================
+  # ==========================================================
   # SHORTCUTS
-  # ============================================================
+  # ==========================================================
 
   def state; args.state; end
   def inputs; args.inputs; end
@@ -499,22 +560,25 @@ LIFE_ICON_SPACING = 42
     world[:type] == :planet
   end
 
-  def next_world_index
-    (state.world_index + 1) % WORLDS.length
+  def difficulty
+    DIFFICULTY_SETTINGS[state.difficulty || :normal]
+  end
+
+  def player_max_hp
+    difficulty[:hp]
   end
 
   def selected_ship_color
     SHIP_NAMES[state.ship_index]
   end
 
-  def selected_ship_angle
-    selected_ship_color == :orange ?
-      ORANGE_ANGLE : SHIP_ANGLE
+  def next_world_index
+    (state.world_index + 1) % WORLDS.length
   end
 
-  # ============================================================
+  # ==========================================================
   # MAIN LOOP
-  # ============================================================
+  # ==========================================================
 
   def tick
     defaults
@@ -527,13 +591,15 @@ LIFE_ICON_SPACING = 42
     state.player ||= Player.new
     state.game_state ||= :ship_select
     state.ship_index ||= 0
+    state.difficulty_index ||= 1
+    state.difficulty ||= :normal
+
     state.score ||= 0
-    state.hp ||= PLAYER_MAX_HP
+    state.hp = player_max_hp if state.hp.nil?
     state.invuln ||= 0
     state.prompt_timer ||= 0
     state.fade ||= 0
     state.fire_cooldown ||= 0
-    state.engine_boost ||= false
 
     state.shots ||= []
     state.enemy_shots ||= []
@@ -560,6 +626,7 @@ LIFE_ICON_SPACING = 42
     state.mobile_firing ||= false
     state.touch_detected ||= false
     state.previous_touches ||= {}
+    state.touch_presses ||= []
 
     unless state.initialized
       state.player_start = {
@@ -583,9 +650,9 @@ LIFE_ICON_SPACING = 42
     end
   end
 
-  # ============================================================
+  # ==========================================================
   # ASSET HELPERS
-  # ============================================================
+  # ==========================================================
 
   def valid_frames(paths)
     @frame_cache ||= {}
@@ -611,61 +678,31 @@ LIFE_ICON_SPACING = 42
     valid_frames(paths)
   end
 
-  def boss_animation_frames(cfg, action)
-    return [] unless cfg
-    return [] unless cfg[:type] == :creature
+  def boss_frames_for(cfg, action)
     return [] unless cfg[:animations]
-    return [] unless action
-
-    paths = cfg[:animations][action]
-    return [] unless paths && !paths.empty?
-
-    valid_frames(paths)
+    valid_frames(cfg[:animations][action] || [])
   end
 
-  def boss_animation_speed(action)
-    case action
-    when :attack, :magic, :stone
-      BOSS_ATTACK_SPEED
-    when :hurt
-      BOSS_HURT_SPEED
-    when :death
-      BOSS_DEATH_SPEED
-    else
-      BOSS_IDLE_SPEED
+  # ==========================================================
+  # CUSTOM HAZARD HELPERS
+  # ==========================================================
+
+  def current_hazard_config
+    WORLD_HAZARDS[world[:name]] ||
+      DEFAULT_WORLD_HAZARD
+  end
+
+  def current_hazard_sprites
+    custom = current_hazard_config[:sprites].select do |path|
+      gtk.stat_file(path)
     end
+
+    custom.empty? ? METEORS : custom
   end
 
-  def boss_animation_finished?(boss)
-    return true unless boss
-
-    cfg = world[:boss]
-    return true unless cfg[:type] == :creature
-
-    frames = boss_animation_frames(
-      cfg, boss[:animation]
-    )
-
-    return true if frames.empty?
-
-    elapsed = Kernel.tick_count -
-      boss[:animation_start]
-
-    elapsed >= frames.length *
-      boss_animation_speed(boss[:animation])
-  end
-
-  def play_boss_animation(boss, action)
-    return unless boss
-    return if boss[:dying] && action != :death
-
-    boss[:animation] = action
-    boss[:animation_start] = Kernel.tick_count
-  end
-
-  # ============================================================
+  # ==========================================================
   # WORLD MANAGEMENT
-  # ============================================================
+  # ==========================================================
 
   def start_world(index)
     state.world_index = index
@@ -675,11 +712,9 @@ LIFE_ICON_SPACING = 42
 
     if gtk.stat_file(requested)
       state.bg = requested
-      state.bg_tint = [255, 255, 255]
     else
-      puts "MISSING WORLD BACKGROUND: #{requested}"
+      puts "MISSING BACKGROUND: #{requested}"
       state.bg = SPACE_BG
-      state.bg_tint = world[:tint]
     end
 
     state.planets = []
@@ -688,8 +723,8 @@ LIFE_ICON_SPACING = 42
       state.planets << {
         x: 0,
         y: -150,
-        w: 1000,
-        h: 1000,
+        w: 700,
+        h: 700,
         path: PLANETS.sample,
         speed: 1
       }
@@ -702,15 +737,12 @@ LIFE_ICON_SPACING = 42
     cfg = world[:waves][number]
 
     state.wave = number
-    state.wave_clear_timer = WAVE_CLEAR_DELAY
+    state.wave_clear_timer = 90
     state.banner_timer = 150
 
     state.banner_text =
       number == 3 ? "WARNING! BOSS INCOMING" :
       "WAVE #{number}"
-
-    state.banner_sub =
-      number == 1 ? world[:name].upcase : nil
 
     state.enemy_shots = []
 
@@ -732,40 +764,21 @@ LIFE_ICON_SPACING = 42
     spawn_boss(world[:boss]) if cfg[:boss]
   end
 
-  def check_wave_progress
-    return if state.wave >= 3
-    return unless state.ufos.empty?
-
-    state.wave_clear_timer -= 1
-
-    start_wave(state.wave + 1) if
-      state.wave_clear_timer <= 0
-  end
-
-  def update_background
-    if planet_world?
-      speed = world[:scroll_speed] || 3
-      state.bg_scroll =
-        (state.bg_scroll + speed) % grid.w
-    end
-
-    state.planets.each do |p|
-      p[:x] -= p[:speed]
-
-      if p[:x] + p[:w] < 0
-        p[:x] = grid.w
-        p[:y] = Numeric.rand(-200..200)
-        p[:path] = PLANETS.sample
-      end
-    end
-  end
-
-  # ============================================================
-  # ENEMIES
-  # ============================================================
+  # ==========================================================
+  # HAZARD SPAWNING
+  # ==========================================================
 
   def spawn_meteor(cfg, initial = false)
-    size = Numeric.rand(50..150)
+    hazard = current_hazard_config
+
+    size = (
+      Numeric.rand(50..150) *
+      hazard[:size_multiplier]
+    ).to_i
+
+    size = [size, 20].max
+
+    assets = current_hazard_sprites
 
     {
       x: grid.w + Numeric.rand(
@@ -774,249 +787,15 @@ LIFE_ICON_SPACING = 42
       y: Numeric.rand(0..(grid.h - size)),
       w: size,
       h: size,
-      path: METEORS.sample,
-      speed: Numeric.rand(cfg[:speed]),
+      path: assets.sample,
+      speed: Numeric.rand(cfg[:speed]) *
+        hazard[:speed_multiplier] *
+        difficulty[:enemy_speed],
       vy: Numeric.rand(-2..2),
       spin: Numeric.rand(-3..3),
       angle: 0,
       dead: false
     }
-  end
-
-  def spawn_ufo(group, index)
-    tint = group[:tint] || [255, 255, 255]
-    y = Numeric.rand(120..550)
-
-    hover_x = 600 + (index % 3) * 180
-    radius = UFO_CIRCLE_RADIUS
-
-    # Circle UFOs enter at the rightmost orbit point.
-    # This avoids a teleport when orbiting begins.
-    entry_x =
-      group[:move] == :circle ?
-      hover_x + radius :
-      hover_x
-
-    {
-      x: grid.w + 100 + index * 220,
-      y: y,
-      base_y: y,
-      w: 100,
-      h: 100,
-      path: group[:sprite],
-      r: tint[0],
-      g: tint[1],
-      b: tint[2],
-      hp: group[:hp],
-      move: group[:move],
-      shoot: group[:shoot],
-      hover_x: hover_x,
-      entry_x: entry_x,
-      fire_rate: group[:fire_rate],
-
-      # Short delay after entering the screen.
-      fire_timer: 15 + index * 8,
-
-      bullet_speed: group[:bullet_speed],
-      shot: group[:shot],
-      phase: Numeric.rand(0..360),
-      orbit: 0.0,
-      radius: radius,
-      vy: index.even? ? 3.5 : -3.5,
-      burst_left: 0,
-      burst_timer: 0,
-      spin: 0.0,
-      dead: false
-    }
-  end
-
-  def update_enemies
-    state.meteors.each do |m|
-      m[:x] -= m[:speed]
-      m[:y] += m[:vy]
-      m[:angle] += m[:spin]
-
-      if m[:y] < 0 || m[:y] + m[:h] > grid.h
-        m[:vy] *= -1
-        m[:y] = clamp(m[:y], 0, grid.h - m[:h])
-      end
-    end
-
-    state.ufos.each do |u|
-      move_ufo(u)
-      shoot_ufo(u)
-    end
-  end
-
-  # ============================================================
-  # RESTORED ORIGINAL UFO MOVEMENT
-  # ============================================================
-
-  def move_ufo(u)
-    case u[:move]
-
-    when :zigzag
-      if u[:x] > u[:hover_x]
-        u[:x] = [
-          u[:x] - UFO_ENTRY_SPEED,
-          u[:hover_x]
-        ].max
-      else
-        u[:y] += u[:vy]
-
-        if u[:y] <= 20
-          u[:y] = 20
-          u[:vy] = u[:vy].abs
-
-        elsif u[:y] + u[:h] >= grid.h - 20
-          u[:y] = grid.h - 20 - u[:h]
-          u[:vy] = -u[:vy].abs
-        end
-      end
-
-    when :circle
-      if u[:x] > u[:entry_x]
-        u[:x] = [
-          u[:x] - UFO_ENTRY_SPEED,
-          u[:entry_x]
-        ].max
-      else
-        u[:orbit] += UFO_CIRCLE_SPEED
-
-        u[:x] = u[:hover_x] +
-          Math.cos(u[:orbit]) * u[:radius]
-
-        u[:y] = u[:base_y] +
-          Math.sin(u[:orbit]) * u[:radius]
-      end
-
-    when :strafe
-      if u[:x] > u[:hover_x]
-        u[:x] -= UFO_ENTRY_SPEED
-      else
-        target = (
-          state.player.y +
-          state.player.h / 2
-        ) - u[:h] / 2
-
-        u[:y] += clamp(
-          target - u[:y], -3, 3
-        )
-
-        u[:y] = clamp(
-          u[:y], 0, grid.h - u[:h]
-        )
-      end
-
-    else
-      # Original fast sine movement.
-      if u[:x] > u[:hover_x]
-        u[:x] -= UFO_ENTRY_SPEED
-      end
-
-      t = (
-        Kernel.tick_count + u[:phase]
-      ) * UFO_SINE_SPEED
-
-      u[:y] = clamp(
-        u[:base_y] +
-        Math.sin(t) * UFO_SINE_AMPLITUDE,
-        0, grid.h - u[:h]
-      )
-    end
-  end
-
-  # ============================================================
-  # ORIGINAL UFO ATTACK PATTERNS
-  # ============================================================
-
-  def shoot_ufo(u)
-    return if u[:x] > grid.w - u[:w]
-
-    cx = u[:x] + 10
-    cy = u[:y] + u[:h] / 2
-
-    if u[:burst_left] > 0
-      u[:burst_timer] -= 1
-
-      if u[:burst_timer] <= 0
-        fire_enemy_shot(
-          cx, cy,
-          angle_to_player(cx, cy),
-          u[:bullet_speed], u[:shot]
-        )
-
-        u[:burst_left] -= 1
-        u[:burst_timer] = 8
-      end
-    end
-
-    u[:fire_timer] -= 1
-    return if u[:fire_timer] > 0
-
-    base = angle_to_player(cx, cy)
-
-    case u[:shoot]
-    when :aimed
-      fire_enemy_shot(
-        cx, cy, base,
-        u[:bullet_speed], u[:shot]
-      )
-
-    when :spread3
-      [-12, 0, 12].each do |off|
-        fire_enemy_shot(
-          cx, cy, base + off,
-          u[:bullet_speed], u[:shot]
-        )
-      end
-
-    when :fan
-      [-40, -20, 0, 20, 40].each do |off|
-        fire_enemy_shot(
-          cx, cy, 180 + off,
-          u[:bullet_speed], u[:shot]
-        )
-      end
-
-    when :burst
-      fire_enemy_shot(
-        cx, cy, base,
-        u[:bullet_speed], u[:shot]
-      )
-
-      u[:burst_left] = 2
-      u[:burst_timer] = 8
-
-    when :ring
-      12.times do |i|
-        fire_enemy_shot(
-          cx, cy,
-          u[:spin] + i * 30,
-          u[:bullet_speed], u[:shot]
-        )
-      end
-
-      u[:spin] += 15
-
-    when :sweep
-      fire_enemy_shot(
-        cx, cy,
-        180 + Math.sin(u[:spin]) * 60,
-        u[:bullet_speed], u[:shot]
-      )
-
-      u[:spin] += 0.3
-
-    else
-      fire_enemy_shot(
-        cx, cy, 180,
-        u[:bullet_speed], u[:shot]
-      )
-    end
-
-    u[:fire_timer] =
-      u[:fire_rate] + Numeric.rand(0..40)
   end
 
   def refill_meteors
@@ -1027,75 +806,169 @@ LIFE_ICON_SPACING = 42
     end
   end
 
-  # ============================================================
+  # ==========================================================
+  # UFO SPAWNING
+  # ==========================================================
+
+  def spawn_ufo(group, index)
+    y = Numeric.rand(120..550)
+    hover_x = 600 + (index % 3) * 180
+
+    {
+      x: grid.w + 100 + index * 220,
+      y: y,
+      base_y: y,
+      w: 100,
+      h: 100,
+      path: group[:sprite],
+      hp: group[:hp],
+      move: group[:move],
+      shoot: group[:shoot],
+      hover_x: hover_x,
+      fire_rate: group[:fire_rate],
+      fire_timer: 15 + index * 8,
+      bullet_speed: group[:bullet_speed],
+      shot: group[:shot],
+      phase: Numeric.rand(0..360),
+      orbit: 0.0,
+      vy: index.even? ? 3.5 : -3.5,
+      dead: false
+    }
+  end
+
+  # ==========================================================
+  # ORIGINAL UFO MOVEMENT
+  # ==========================================================
+
+  def move_ufo(u)
+    mult = difficulty[:enemy_speed]
+    entry = UFO_ENTRY_SPEED * mult
+
+    case u[:move]
+    when :zigzag
+      if u[:x] > u[:hover_x]
+        u[:x] = [u[:x] - entry, u[:hover_x]].max
+      else
+        u[:y] += u[:vy] * mult
+
+        if u[:y] <= 20
+          u[:y] = 20
+          u[:vy] = u[:vy].abs
+        elsif u[:y] + u[:h] >= grid.h - 20
+          u[:y] = grid.h - 20 - u[:h]
+          u[:vy] = -u[:vy].abs
+        end
+      end
+
+    when :circle
+      radius = 90
+
+      if u[:x] > u[:hover_x] + radius
+        u[:x] = [
+          u[:x] - entry,
+          u[:hover_x] + radius
+        ].max
+      else
+        u[:orbit] += UFO_CIRCLE_SPEED * mult
+
+        u[:x] = u[:hover_x] +
+          Math.cos(u[:orbit]) * radius
+
+        u[:y] = u[:base_y] +
+          Math.sin(u[:orbit]) * radius
+      end
+
+    else
+      u[:x] -= entry if u[:x] > u[:hover_x]
+
+      t = (Kernel.tick_count + u[:phase]) *
+        UFO_SINE_SPEED * mult
+
+      u[:y] = clamp(
+        u[:base_y] + Math.sin(t) * 160,
+        0,
+        grid.h - u[:h]
+      )
+    end
+  end
+
+  def shoot_ufo(u)
+    return if u[:x] > grid.w - u[:w]
+
+    u[:fire_timer] -= 1
+    return if u[:fire_timer] > 0
+
+    cx = u[:x] + 10
+    cy = u[:y] + u[:h] / 2
+
+    base = angle_to_player(cx, cy)
+
+    offsets =
+      u[:shoot] == :spread3 ? [-12, 0, 12] : [0]
+
+    offsets.each do |off|
+      fire_enemy_shot(
+        cx, cy, base + off,
+        u[:bullet_speed], u[:shot]
+      )
+    end
+
+    u[:fire_timer] = [
+      (u[:fire_rate] *
+       difficulty[:enemy_fire_rate]).to_i +
+       Numeric.rand(0..40),
+      1
+    ].max
+  end
+
+  # ==========================================================
   # BOSS SPAWNING
-  # ============================================================
+  # ==========================================================
 
   def spawn_boss(cfg)
     sprite =
       if cfg[:type] == :creature
-        boss_animation_frames(cfg, :idle)[0]
+        boss_frames_for(cfg, :idle)[0]
       else
         cfg[:sprite]
       end
 
-    sprite = nil if sprite && !gtk.stat_file(sprite)
-
-    if !sprite && cfg[:type] != :creature
-      sprite = SPACE_BOSS if gtk.stat_file(SPACE_BOSS)
-    end
-
-    tint = cfg[:tint] || [255, 255, 255]
-
-    flying = cfg[:type] == :spaceship ||
-      cfg[:flying] == true
-
-    ground_y = -cfg[:h] * 0.12
-
-    spawn_y = flying ?
-      (grid.h - cfg[:h]) / 2.0 :
-      ground_y
+    hp = (cfg[:hp] * difficulty[:boss_hp]).ceil
+    flying = cfg[:type] == :spaceship || cfg[:flying]
 
     state.boss = {
       x: grid.w + 50,
-      y: spawn_y,
+      y: flying ?
+        (grid.h - cfg[:h]) / 2.0 :
+        -cfg[:h] * 0.12,
       w: cfg[:w],
       h: cfg[:h],
-      hp: cfg[:hp],
-      max_hp: cfg[:hp],
+      hp: hp,
+      max_hp: hp,
       path: sprite,
-      r: tint[0],
-      g: tint[1],
-      b: tint[2],
-
-      # Original spaceship boss starts moving upward.
       dir: cfg[:type] == :spaceship ? 1 : -1,
-
       flying: flying,
-      ground_y: ground_y,
       fire_timer: 100,
       special_timer: 240,
       animation: :idle,
       animation_start: Kernel.tick_count,
       flash: 0,
       dying: false,
-      explosion_frames: nil,
-      explosion_start: nil
+      explosion_frames: [],
+      explosion_start: 0
     }
   end
 
   def boss_phase(b)
     ratio = b[:hp].to_f / b[:max_hp]
-
     return 1 if ratio > 0.66
     return 2 if ratio > 0.33
-
     3
   end
 
-  # ============================================================
+  # ==========================================================
   # BOSS MOVEMENT
-  # ============================================================
+  # ==========================================================
 
   def update_boss
     b = state.boss
@@ -1103,25 +976,8 @@ LIFE_ICON_SPACING = 42
 
     cfg = world[:boss]
 
-    update_boss_animation(b, cfg)
-
-    # Handle boss death.
     if b[:dying]
-      if cfg[:type] == :spaceship
-        frames = b[:explosion_frames] || []
-
-        elapsed = Kernel.tick_count -
-          (b[:explosion_start] || Kernel.tick_count)
-
-        if frames.empty? ||
-           elapsed >= frames.length *
-             SPACESHIP_EXPLOSION_SPEED
-          finish_boss_death
-        end
-      else
-        finish_boss_death if boss_animation_finished?(b)
-      end
-
+      update_boss_death(b, cfg)
       return
     end
 
@@ -1130,13 +986,10 @@ LIFE_ICON_SPACING = 42
     phase = boss_phase(b)
     i = phase - 1
 
+    speed = cfg[:speed][i] *
+      difficulty[:boss_speed]
+
     if cfg[:type] == :spaceship
-
-      # ======================================================
-      # ORIGINAL SPACESHIP BOSS MOVEMENT
-      # ======================================================
-
-      # Enter from right, stop close to right edge.
       target_x = grid.w - b[:w] - 30
 
       if b[:x] > target_x
@@ -1144,165 +997,93 @@ LIFE_ICON_SPACING = 42
         return
       end
 
-      # Move up and down across full available height.
-      b[:y] += b[:dir] * cfg[:speed][i]
+      b[:y] += b[:dir] * speed
 
       if b[:y] <= 0
         b[:y] = 0
         b[:dir] = 1
-
       elsif b[:y] + b[:h] >= grid.h
         b[:y] = grid.h - b[:h]
         b[:dir] = -1
       end
 
-      cx = b[:x] + 60
-      cy = b[:y] + b[:h] / 2
-
     elsif b[:flying]
-
-      # ======================================================
-      # FLYING PLANET MONSTERS - JINN AND DRAGON
-      # ======================================================
-
       target_x = grid.w - b[:w] * 0.72
 
       if b[:x] > target_x
-        b[:x] -= 3
+        b[:x] = [b[:x] - 3, target_x].max
         return
       end
 
       center_y = (grid.h - b[:h]) / 2.0
-      range = 85
 
-      b[:y] += b[:dir] *
-        cfg[:speed][i] * BOSS_SPEED_MULT
+      b[:y] += b[:dir] * speed * 0.8
 
-      if b[:y] <= center_y - range
-        b[:y] = center_y - range
+      if b[:y] <= center_y - 85
+        b[:y] = center_y - 85
         b[:dir] = 1
-
-      elsif b[:y] >= center_y + range
-        b[:y] = center_y + range
+      elsif b[:y] >= center_y + 85
+        b[:y] = center_y + 85
         b[:dir] = -1
       end
 
-      cx = b[:x] + b[:w] * 0.25
-      cy = b[:y] + b[:h] * 0.55
-
     else
-
-      # ======================================================
-      # GROUND MONSTERS - DEMON AND MEDUSA
-      # ======================================================
-
       target_x = grid.w - b[:w] * 0.72
 
       if b[:x] > target_x
-        b[:x] -= 3
+        b[:x] = [b[:x] - 3, target_x].max
         return
       end
 
-      b[:y] = b[:ground_y]
+      b[:y] = -b[:h] * 0.12
 
       left_limit = grid.w * 0.55
       right_limit = grid.w - b[:w] * 0.60
 
-      # Ensure limits are ordered correctly.
-      if right_limit < left_limit
-        left_limit, right_limit =
-          right_limit, left_limit
-      end
+      left_limit, right_limit =
+        [left_limit, right_limit].minmax
 
-      b[:x] += b[:dir] *
-        cfg[:speed][i] * BOSS_SPEED_MULT
+      b[:x] += b[:dir] * speed * 0.8
 
       if b[:x] <= left_limit
         b[:x] = left_limit
         b[:dir] = 1
-
       elsif b[:x] >= right_limit
         b[:x] = right_limit
         b[:dir] = -1
       end
-
-      if b[:animation] == :idle
-        play_boss_animation(b, :move)
-      end
-
-      cx = b[:x] + b[:w] * 0.25
-      cy = b[:y] + b[:h] * 0.55
     end
-
-    # ======================================================
-    # BOSS ATTACK TIMERS
-    # ======================================================
 
     b[:fire_timer] -= 1
     b[:special_timer] -= 1
 
+    cx = b[:x] + b[:w] * 0.25
+    cy = b[:y] + b[:h] * 0.55
+
     if b[:fire_timer] <= 0
       boss_attack(b, cfg, cx, cy, phase, i)
 
-      b[:fire_timer] = (
-        cfg[:fire_rate][i] * BOSS_FIRE_MULT
-      ).to_i
+      b[:fire_timer] = [
+        (cfg[:fire_rate][i] *
+         BOSS_FIRE_MULT *
+         difficulty[:enemy_fire_rate]).to_i,
+        1
+      ].max
     end
 
     if phase >= 2 && b[:special_timer] <= 0
       boss_special_attack(b, cfg, cx, cy)
-
-      b[:special_timer] =
-        phase == 3 ? 210 : 300
+      b[:special_timer] = phase == 3 ? 210 : 300
     end
   end
 
-  # ============================================================
-  # MONSTER BOSS ANIMATIONS
-  # ============================================================
-
-  def update_boss_animation(b, cfg)
-    return unless cfg[:type] == :creature
-
-    action = b[:animation] || :idle
-    frames = boss_animation_frames(cfg, action)
-
-    if frames.empty?
-      frames = boss_animation_frames(cfg, :idle)
-    end
-
-    return if frames.empty?
-
-    speed = boss_animation_speed(action)
-    elapsed = Kernel.tick_count - b[:animation_start]
-
-    if action == :death
-      index = [elapsed / speed, frames.length - 1].min
-    else
-      index = (elapsed / speed) % frames.length
-    end
-
-    b[:path] = frames[index]
-
-    return if b[:dying]
-
-    if [:attack, :magic, :stone, :hurt].include?(action)
-      if boss_animation_finished?(b)
-        play_boss_animation(
-          b, b[:flying] ? :idle : :move
-        )
-      end
-    end
-  end
-
-  # ============================================================
+  # ==========================================================
   # BOSS ATTACKS
-  # ============================================================
+  # ==========================================================
 
   def boss_attack(b, cfg, cx, cy, phase, i)
-    if cfg[:type] == :creature
-      play_boss_animation(b, :attack)
-    end
+    play_boss_animation(b, :attack) if
+      cfg[:type] == :creature
 
     base = angle_to_player(cx, cy)
 
@@ -1313,74 +1094,84 @@ LIFE_ICON_SPACING = 42
       else [-25, 0, 25]
       end
 
-    speed = cfg[:bullet_speed][i] *
-      BOSS_BULLET_MULT
-
     offsets.each do |off|
       fire_enemy_shot(
         cx, cy, base + off,
-        speed, cfg[:shot]
+        cfg[:bullet_speed][i] * BOSS_BULLET_MULT,
+        cfg[:shot]
       )
     end
   end
 
   def boss_special_attack(b, cfg, cx, cy)
-    case cfg[:creature]
-    when :jinn
-      play_boss_animation(b, :magic)
+    play_boss_animation(b, :attack) if
+      cfg[:type] == :creature
 
-      8.times do |i|
-        fire_enemy_shot(
-          cx, cy, i * 45, 3.5, cfg[:shot]
-        )
-      end
-
-    when :medusa
-      play_boss_animation(b, :stone)
-
-      [-45, -30, -15, 0, 15, 30, 45].each do |off|
-        fire_enemy_shot(
-          cx, cy, 180 + off, 4, cfg[:shot]
-        )
-      end
-
-    when :dragon
-      play_boss_animation(b, :attack)
-
-      [-35, -20, 0, 20, 35].each do |off|
-        fire_enemy_shot(
-          cx, cy, 180 + off, 4.5, cfg[:shot]
-        )
-      end
-
-    when :demon
-      play_boss_animation(b, :attack)
-
-      [-30, -15, 0, 15, 30].each do |off|
-        fire_enemy_shot(
-          cx, cy, 180 + off, 4, cfg[:shot]
-        )
-      end
-
-    else
-      [-25, 0, 25].each do |off|
-        fire_enemy_shot(
-          cx, cy, 180 + off, 4, cfg[:shot]
-        )
-      end
+    [-30, -15, 0, 15, 30].each do |off|
+      fire_enemy_shot(
+        cx, cy, 180 + off, 4.5, cfg[:shot]
+      )
     end
   end
 
-  # ============================================================
-  # BOSS DAMAGE AND DEATH
-  # ============================================================
+  def play_boss_animation(b, action)
+    return if b[:dying] && action != :death
+    b[:animation] = action
+    b[:animation_start] = Kernel.tick_count
+  end
+
+  def update_boss_animation(b, cfg)
+    return unless cfg[:type] == :creature
+
+    action = b[:animation]
+    frames = boss_frames_for(cfg, action)
+
+    frames = boss_frames_for(cfg, :idle) if frames.empty?
+    return if frames.empty?
+
+    elapsed = Kernel.tick_count - b[:animation_start]
+    speed = action == :death ? 8 : 6
+
+    index =
+      if action == :death
+        [elapsed / speed, frames.length - 1].min
+      else
+        (elapsed / speed) % frames.length
+      end
+
+    b[:path] = frames[index]
+
+    if !b[:dying] &&
+       [:attack, :hurt, :magic, :stone].include?(action) &&
+       elapsed >= frames.length * speed
+      play_boss_animation(b, b[:flying] ? :idle : :move)
+    end
+  end
+
+  def update_boss_death(b, cfg)
+    elapsed = Kernel.tick_count - b[:animation_start]
+
+    if cfg[:type] == :creature
+      frames = boss_frames_for(cfg, :death)
+
+      if frames.empty? || elapsed >= frames.length * 8
+        finish_boss_death
+      else
+        b[:path] = frames[elapsed / 8]
+      end
+    else
+      frames = b[:explosion_frames]
+
+      if frames.empty? || elapsed >= frames.length * 5
+        finish_boss_death
+      end
+    end
+  end
 
   def damage_boss(amount)
     b = state.boss
     return unless b
     return if b[:dying]
-
-    cfg = world[:boss]
 
     b[:hp] -= amount
     b[:flash] = 5
@@ -1388,33 +1179,18 @@ LIFE_ICON_SPACING = 42
     if b[:hp] <= 0
       b[:hp] = 0
       b[:dying] = true
+      b[:animation_start] = Kernel.tick_count
+
       state.enemy_shots = []
 
-      if cfg[:type] == :creature
-        frames = boss_animation_frames(cfg, :death)
-
-        if frames.any?
-          play_boss_animation(b, :death)
-        else
-          finish_boss_death
-        end
+      if world[:boss][:type] == :creature
+        b[:animation] = :death
       else
-        number = cfg[:ship_number] || 1
-        animations = SPACESHIP_ANIMATIONS[number]
-
-        frames = animations ?
-          valid_frames(animations[:explosion]) : []
-
-        if frames.any?
-          b[:explosion_frames] = frames
-          b[:explosion_start] = Kernel.tick_count
-          b[:animation] = :exploding
-        else
-          finish_boss_death
-        end
+        number = world[:boss][:ship_number] || 1
+        b[:explosion_frames] =
+          valid_frames(self.class.ship_explosion_frames(number))
       end
-
-    elsif cfg[:type] == :creature
+    elsif world[:boss][:type] == :creature
       play_boss_animation(b, :hurt)
     end
   end
@@ -1426,7 +1202,7 @@ LIFE_ICON_SPACING = 42
     state.shots = []
     state.meteors = []
     state.ufos = []
-    state.prompt_timer = PROMPT_DELAY
+    state.prompt_timer = 45
 
     state.planets_cleared += 1 if planet_world?
 
@@ -1438,9 +1214,9 @@ LIFE_ICON_SPACING = 42
     end
   end
 
-  # ============================================================
-  # PLAYER WEAPONS
-  # ============================================================
+  # ==========================================================
+  # PROJECTILES
+  # ==========================================================
 
   def fire_player_shot
     p = state.player
@@ -1450,13 +1226,11 @@ LIFE_ICON_SPACING = 42
       damage = SUPER_DAMAGE
       number = 3
       reset_combo
-
     elsif state.combo >= 5 && !state.power_awarded
       type = :power
       damage = POWER_DAMAGE
       number = 1
       state.power_awarded = true
-
     else
       type = :normal
       damage = 1
@@ -1465,34 +1239,15 @@ LIFE_ICON_SPACING = 42
 
     frames = number ? shot_frames(number) : []
 
-    if type == :normal
-      width = 72
-      height = 10
-      path = NORMAL_SHOT
-      angle = -90
-
-    elsif type == :power
-      width = 95
-      height = 24
-      path = frames.empty? ? NORMAL_SHOT : frames[0]
-      angle = frames.empty? ? -90 : 0
-
-    else
-      width = 120
-      height = 34
-      path = frames.empty? ? NORMAL_SHOT : frames[0]
-      angle = frames.empty? ? -90 : 0
-    end
-
     state.shots << {
       x: p.x + p.w - 5,
-      y: p.y + p.h / 2 - height / 2,
-      w: width,
-      h: height,
-      path: path,
+      y: p.y + p.h / 2 - 5,
+      w: type == :normal ? 72 : 100,
+      h: type == :normal ? 10 : 30,
+      path: frames.empty? ? NORMAL_SHOT : frames[0],
       frames: frames,
       born: Kernel.tick_count,
-      angle: angle,
+      angle: frames.empty? ? -90 : 0,
       damage: damage,
       type: type,
       number: number,
@@ -1501,15 +1256,16 @@ LIFE_ICON_SPACING = 42
   end
 
   def fire_enemy_shot(cx, cy, deg, speed, number = nil)
+    speed *= difficulty[:enemy_bullet_speed]
     rad = deg * Math::PI / 180
+
     frames = number ? shot_frames(number) : []
-    size = frames.empty? ? 28 : 44
 
     state.enemy_shots << {
-      x: cx - size / 2,
-      y: cy - size / 2,
-      w: size,
-      h: size,
+      x: cx - 22,
+      y: cy - 22,
+      w: 44,
+      h: 44,
       vx: Math.cos(rad) * speed,
       vy: Math.sin(rad) * speed,
       path: frames.empty? ? ENEMY_SHOT : frames[0],
@@ -1517,7 +1273,7 @@ LIFE_ICON_SPACING = 42
       born: Kernel.tick_count,
       angle: frames.empty? ? deg - 90 : deg,
       number: number,
-      hit_r: 12,
+      damage: 1,
       dead: false
     }
   end
@@ -1560,9 +1316,9 @@ LIFE_ICON_SPACING = 42
     s[:path] = frames[index]
   end
 
-  # ============================================================
+  # ==========================================================
   # EXPLOSIONS
-  # ============================================================
+  # ==========================================================
 
   def spawn_explosion(cx, cy, number, size = 90)
     return unless number
@@ -1576,15 +1332,14 @@ LIFE_ICON_SPACING = 42
       w: size,
       h: size,
       frames: frames,
-      born: Kernel.tick_count,
-      speed: 4
+      born: Kernel.tick_count
     }
   end
 
   def update_effects
     state.effects.reject! do |fx|
-      elapsed = Kernel.tick_count - fx[:born]
-      elapsed / fx[:speed] >= fx[:frames].length
+      Kernel.tick_count - fx[:born] >=
+        fx[:frames].length * 4
     end
 
     state.player_effects.reject! do |fx|
@@ -1603,9 +1358,9 @@ LIFE_ICON_SPACING = 42
     )
   end
 
-  # ============================================================
+  # ==========================================================
   # COMBOS
-  # ============================================================
+  # ==========================================================
 
   def register_hit
     state.combo += 1
@@ -1625,9 +1380,9 @@ LIFE_ICON_SPACING = 42
     end
   end
 
-  # ============================================================
+  # ==========================================================
   # POWER-UPS
-  # ============================================================
+  # ==========================================================
 
   def spawn_powerup
     type = [:shield, :repair, :speed].sample
@@ -1641,7 +1396,6 @@ LIFE_ICON_SPACING = 42
       h: 58,
       type: type,
       phase: Numeric.rand(0..360),
-      born: Kernel.tick_count,
       dead: false
     }
   end
@@ -1654,15 +1408,15 @@ LIFE_ICON_SPACING = 42
 
     if state.powerup_timer <= 0
       spawn_powerup
-      state.powerup_timer =
-        Numeric.rand(
-          POWERUP_SPAWN_MIN..POWERUP_SPAWN_MAX
-        )
+
+      state.powerup_timer = (
+        Numeric.rand(500..850) *
+        difficulty[:powerup_frequency]
+      ).to_i
     end
 
     state.powerups.each do |p|
       p[:x] -= 2.5
-
       p[:y] = p[:base_y] +
         Math.sin(
           (Kernel.tick_count + p[:phase]) * 0.035
@@ -1680,7 +1434,7 @@ LIFE_ICON_SPACING = 42
       state.shield_timer = SHIELD_DURATION
 
     when :repair
-      state.hp = [state.hp + 1, PLAYER_MAX_HP].min
+      state.hp = [state.hp + 1, player_max_hp].min
 
       state.player_effects << {
         type: :repair,
@@ -1699,9 +1453,9 @@ LIFE_ICON_SPACING = 42
     end
   end
 
-  # ============================================================
+  # ==========================================================
   # COLLISIONS
-  # ============================================================
+  # ==========================================================
 
   def check_collisions
     state.shots.each do |s|
@@ -1773,16 +1527,9 @@ LIFE_ICON_SPACING = 42
     state.enemy_shots.each do |s|
       next if s[:dead]
 
-      if hit?(hurt, bullet_hitbox(s))
+      if hit?(hurt, shrink(s, 0.3))
         s[:dead] = true
-
-        spawn_explosion(
-          s[:x] + s[:w] / 2,
-          s[:y] + s[:h] / 2,
-          s[:number], 65
-        )
-
-        damage_player
+        damage_player(s[:damage] || 1)
       end
     end
 
@@ -1794,24 +1541,24 @@ LIFE_ICON_SPACING = 42
     end
   end
 
-  def damage_player
+  def damage_player(amount = 1)
     return if state.invuln > 0
     return if state.shield_timer > 0
     return unless state.game_state == :playing
 
-    state.hp -= 1
+    state.hp = [state.hp - amount, 0].max
     state.invuln = PLAYER_INVULN
     reset_combo
 
     if state.hp <= 0
       state.game_state = :game_over
-      state.prompt_timer = PROMPT_DELAY
+      state.prompt_timer = 45
     end
   end
 
-  # ============================================================
+  # ==========================================================
   # INPUT
-  # ============================================================
+  # ==========================================================
 
   def handle_input
     update_touch_controls
@@ -1837,6 +1584,9 @@ LIFE_ICON_SPACING = 42
     case state.game_state
     when :ship_select
       selection_input
+
+    when :difficulty_select
+      difficulty_selection_input
 
     when :world_clear
       return if state.prompt_timer > 0
@@ -1889,15 +1639,49 @@ LIFE_ICON_SPACING = 42
   end
 
   def start_playing
-    apply_selected_ship
-    state.game_state = :playing
-    state.invuln = PLAYER_INVULN
-    state.fade = FADE_TICKS
-  end
-
-  def apply_selected_ship
     path = SHIP_COLORS[selected_ship_color]
     state.player.path = path if gtk.stat_file(path)
+    state.game_state = :difficulty_select
+  end
+
+  def difficulty_selection_input
+    kb = inputs.keyboard
+
+    if kb.key_down.up || kb.key_down.left
+      state.difficulty_index =
+        (state.difficulty_index - 1) % 3
+
+    elsif kb.key_down.down || kb.key_down.right
+      state.difficulty_index =
+        (state.difficulty_index + 1) % 3
+    end
+
+    if kb.key_down.enter || kb.key_down.space
+      begin_actual_game
+      return
+    end
+
+    touch_press_points.each do |p|
+      3.times do |i|
+        y = 390 - i * 100
+
+        if inside?(p[:x], p[:y], 390, y, 500, 75)
+          state.difficulty_index = i
+          begin_actual_game
+          return
+        end
+      end
+    end
+  end
+
+  def begin_actual_game
+    state.difficulty = DIFFICULTIES[state.difficulty_index]
+    state.hp = player_max_hp
+    state.invuln = PLAYER_INVULN
+    state.fade = FADE_TICKS
+    state.game_state = :playing
+
+    start_wave(1)
   end
 
   def player_input
@@ -1916,8 +1700,6 @@ LIFE_ICON_SPACING = 42
 
     p.x = clamp(p.x + dx * speed, 0, grid.w - p.w)
     p.y = clamp(p.y + dy * speed, 0, grid.h - p.h)
-
-    state.engine_boost = dx.abs + dy.abs > 0.1
 
     state.fire_cooldown -= 1 if state.fire_cooldown > 0
 
@@ -1938,9 +1720,9 @@ LIFE_ICON_SPACING = 42
       state.music_paused ? 0 : state.music_volume
   end
 
-  # ============================================================
-  # MOBILE CONTROLS
-  # ============================================================
+  # ==========================================================
+  # MOBILE INPUT
+  # ==========================================================
 
   def touch_points
     points = []
@@ -1961,15 +1743,6 @@ LIFE_ICON_SPACING = 42
       end
     end
 
-    if SHOW_TOUCH_ON_DESKTOP &&
-       inputs.mouse.button_left
-      points << {
-        id: :mouse,
-        x: inputs.mouse.x,
-        y: inputs.mouse.y
-      }
-    end
-
     points
   end
 
@@ -1981,16 +1754,17 @@ LIFE_ICON_SPACING = 42
     points = touch_points
     state.touch_detected = true if points.any?
 
-    return unless state.touch_detected ||
-      SHOW_TOUCH_ON_DESKTOP
+    previous = state.previous_touches || {}
+    current = {}
+    presses = []
 
     points.each do |p|
-      x = p[:x]
-      y = p[:y]
+      current[p[:id]] = true
+      presses << p unless previous[p[:id]]
 
-      if x < grid.w * 0.45 && y < grid.h * 0.55
-        dx = x - TOUCH_JOYSTICK_X
-        dy = y - TOUCH_JOYSTICK_Y
+      if p[:x] < 550 && p[:y] < 400
+        dx = p[:x] - 135
+        dy = p[:y] - 130
         distance = Math.sqrt(dx * dx + dy * dy)
 
         if distance > 0
@@ -2000,36 +1774,27 @@ LIFE_ICON_SPACING = 42
         end
       end
 
-      dx = x - TOUCH_FIRE_X
-      dy = y - TOUCH_FIRE_Y
+      dx = p[:x] - 1130
+      dy = p[:y] - 130
 
-      if Math.sqrt(dx * dx + dy * dy) <= 105
+      if Math.sqrt(dx * dx + dy * dy) < 105
         state.mobile_firing = true
       end
     end
-  end
-
-  def touch_press_points
-    points = []
-    current = touch_points
-    previous = state.previous_touches || {}
-
-    current.each do |p|
-      points << p unless previous[p[:id]]
-    end
-
-    new_previous = {}
-    current.each { |p| new_previous[p[:id]] = true }
-    state.previous_touches = new_previous
 
     if inputs.mouse.click
-      points << {
+      presses << {
         x: inputs.mouse.x,
         y: inputs.mouse.y
       }
     end
 
-    points
+    state.previous_touches = current
+    state.touch_presses = presses
+  end
+
+  def touch_press_points
+    state.touch_presses || []
   end
 
   def touch_continue?
@@ -2044,9 +1809,9 @@ LIFE_ICON_SPACING = 42
     end
   end
 
-  # ============================================================
-  # MAIN UPDATE
-  # ============================================================
+  # ==========================================================
+  # GAME UPDATE
+  # ==========================================================
 
   def update_game
     update_effects
@@ -2064,9 +1829,37 @@ LIFE_ICON_SPACING = 42
     state.banner_timer -= 1 if state.banner_timer > 0
     state.invuln -= 1 if state.invuln > 0
 
-    update_background
-    update_enemies
+    if planet_world?
+      state.bg_scroll =
+        (state.bg_scroll + world[:scroll_speed]) % grid.w
+    end
+
+    state.planets.each do |p|
+      p[:x] -= p[:speed]
+
+      if p[:x] + p[:w] < 0
+        p[:x] = grid.w
+        p[:path] = PLANETS.sample
+      end
+    end
+
+    state.meteors.each do |m|
+      m[:x] -= m[:speed]
+      m[:y] += m[:vy]
+      m[:angle] += m[:spin]
+
+      if m[:y] < 0 || m[:y] + m[:h] > grid.h
+        m[:vy] *= -1
+      end
+    end
+
+    state.ufos.each do |u|
+      move_ufo(u)
+      shoot_ufo(u)
+    end
+
     update_boss
+    update_boss_animation(state.boss, world[:boss]) if state.boss
     update_shots
     update_combo
     update_powerups
@@ -2084,12 +1877,19 @@ LIFE_ICON_SPACING = 42
     state.ufos.reject! { |u| u[:dead] }
 
     refill_meteors
-    check_wave_progress
+
+    if state.wave < 3 && state.ufos.empty?
+      state.wave_clear_timer -= 1
+
+      if state.wave_clear_timer <= 0
+        start_wave(state.wave + 1)
+      end
+    end
   end
 
-  # ============================================================
-  # PLANET DESCENT / ASCENT
-  # ============================================================
+  # ==========================================================
+  # PLANET TRANSITIONS
+  # ==========================================================
 
   def begin_descent
     begin_transition(:descending)
@@ -2105,10 +1905,10 @@ LIFE_ICON_SPACING = 42
     state.transition = {
       type: type,
       t: 0,
-      start_x: p.x,
-      start_y: p.y,
-      start_w: p.w,
-      start_h: p.h,
+      x: p.x,
+      y: p.y,
+      w: p.w,
+      h: p.h,
       planet: WORLDS[next_world_index][:landing_planet],
       flash: 0.0
     }
@@ -2125,91 +1925,87 @@ LIFE_ICON_SPACING = 42
     tr = state.transition
     tr[:t] += 1
 
-    t = tr[:t]
-    progress = ease(t / 190.0)
+    progress = ease(tr[:t] / 190.0)
     p = state.player
 
     if tr[:type] == :descending
-      target_x = grid.w - 320
-      target_y = grid.h / 2
-
       cx = lerp(
-        tr[:start_x] + tr[:start_w] / 2,
-        target_x, progress
+        tr[:x] + tr[:w] / 2,
+        grid.w - 320,
+        progress
       )
 
       cy = lerp(
-        tr[:start_y] + tr[:start_h] / 2,
-        target_y, progress
+        tr[:y] + tr[:h] / 2,
+        grid.h / 2,
+        progress
       )
 
       scale = 1.0 - 0.93 * progress
     else
       cx = lerp(
-        tr[:start_x] + tr[:start_w] / 2,
-        grid.w + 150, progress
+        tr[:x] + tr[:w] / 2,
+        grid.w + 150,
+        progress
       )
 
       cy = lerp(
-        tr[:start_y] + tr[:start_h] / 2,
-        grid.h + 100, progress
+        tr[:y] + tr[:h] / 2,
+        grid.h + 100,
+        progress
       )
 
       scale = 1.0 - 0.65 * progress
     end
 
-    p.w = tr[:start_w] * scale
-    p.h = tr[:start_h] * scale
+    p.w = tr[:w] * scale
+    p.h = tr[:h] * scale
     p.x = cx - p.w / 2
     p.y = cy - p.h / 2
 
-    tr[:flash] = clamp01(
-      (t - TRANSITION_FLASH_START) /
-      (TRANSITION_TICKS - TRANSITION_FLASH_START).to_f
+    tr[:flash] = clamp(
+      (tr[:t] - 190) / 50.0,
+      0.0,
+      1.0
     )
 
-    finish_transition if t >= TRANSITION_TICKS
+    finish_transition if tr[:t] >= TRANSITION_TICKS
   end
 
   def finish_transition
     tr = state.transition
     p = state.player
 
-    p.w = tr[:start_w]
-    p.h = tr[:start_h]
+    p.w = tr[:w]
+    p.h = tr[:h]
     p.x = state.player_start[:x]
     p.y = state.player_start[:y]
 
     state.transition = nil
-    state.effects = []
-    state.player_effects = []
-    state.shots = []
-    state.enemy_shots = []
-    state.powerups = []
-    state.powerup_timer = 450
-
-    state.hp = PLAYER_MAX_HP
+    state.hp = player_max_hp
     state.invuln = PLAYER_INVULN
     state.shield_timer = 0
     state.speed_timer = 0
+    state.powerup_timer = 450
     state.fade = FADE_TICKS
+
+    state.shots = []
+    state.enemy_shots = []
+    state.effects = []
+    state.player_effects = []
+    state.powerups = []
 
     reset_combo
     start_world(next_world_index)
-    apply_selected_ship
     state.game_state = :playing
   end
 
-  # ============================================================
+  # ==========================================================
   # GEOMETRY
-  # ============================================================
+  # ==========================================================
 
   def clamp(v, lo, hi)
     [[v, lo].max, hi].min
-  end
-
-  def clamp01(v)
-    clamp(v, 0.0, 1.0)
   end
 
   def lerp(a, b, t)
@@ -2217,7 +2013,7 @@ LIFE_ICON_SPACING = 42
   end
 
   def ease(t)
-    t = clamp01(t)
+    t = clamp(t, 0.0, 1.0)
     t * t * (3 - 2 * t)
   end
 
@@ -2265,25 +2061,7 @@ LIFE_ICON_SPACING = 42
   end
 
   def shot_hitbox(s)
-    {
-      x: s[:x] + s[:w] * 0.1,
-      y: s[:y] + s[:h] * 0.15,
-      w: s[:w] * 0.8,
-      h: s[:h] * 0.7
-    }
-  end
-
-  def bullet_hitbox(s)
-    r = s[:hit_r] || 12
-    cx = s[:x] + s[:w] / 2
-    cy = s[:y] + s[:h] / 2
-
-    {
-      x: cx - r,
-      y: cy - r,
-      w: r * 2,
-      h: r * 2
-    }
+    shrink(s, 0.1)
   end
 
   def angle_to_player(cx, cy)
@@ -2295,9 +2073,9 @@ LIFE_ICON_SPACING = 42
     Math.atan2(dy, dx) * 180 / Math::PI
   end
 
-  # ============================================================
-  # RENDERING
-  # ============================================================
+  # ==========================================================
+  # RENDER
+  # ==========================================================
 
   def render_game
     if state.game_state == :ship_select
@@ -2305,14 +2083,20 @@ LIFE_ICON_SPACING = 42
       return
     end
 
+    if state.game_state == :difficulty_select
+      render_difficulty_selection
+      return
+    end
+
     render_background
     outputs.sprites << state.planets
+
     render_transition_planet
 
     outputs.sprites << state.meteors
     outputs.sprites << state.ufos
 
-    render_spaceship_boss_engine
+    render_boss_engine
     render_boss
     render_shots
     render_powerups
@@ -2336,13 +2120,7 @@ LIFE_ICON_SPACING = 42
     render_touch_buttons
   end
 
-  # ============================================================
-  # BACKGROUND
-  # ============================================================
-
   def render_background
-    tint = state.bg_tint || [255, 255, 255]
-
     if planet_world?
       offset = state.bg_scroll || 0
 
@@ -2352,28 +2130,23 @@ LIFE_ICON_SPACING = 42
           y: 0,
           w: grid.w,
           h: grid.h,
-          path: state.bg,
-          r: tint[0],
-          g: tint[1],
-          b: tint[2]
+          path: state.bg
         }
       end
     else
       outputs.sprites << {
-        x: 0, y: 0,
+        x: 0,
+        y: 0,
         w: grid.w,
         h: grid.h,
-        path: state.bg,
-        r: tint[0],
-        g: tint[1],
-        b: tint[2]
+        path: state.bg
       }
     end
   end
 
-  # ============================================================
-  # SHIP SELECTION
-  # ============================================================
+  # ==========================================================
+  # SHIP SELECTION SCREEN
+  # ==========================================================
 
   def render_ship_selection
     outputs.solids << {
@@ -2424,10 +2197,10 @@ LIFE_ICON_SPACING = 42
         outputs.sprites << {
           x: x + 30,
           y: 290,
-          w: 120, h: 120,
+          w: 120,
+          h: 120,
           path: path,
-          angle: color == :orange ?
-            ORANGE_ANGLE : SHIP_ANGLE
+          angle: -90
         }
       end
 
@@ -2449,7 +2222,7 @@ LIFE_ICON_SPACING = 42
 
     outputs.labels << {
       x: 640, y: 135,
-      text: "START GAME",
+      text: "CONTINUE",
       size_px: 32,
       anchor_x: 0.5,
       anchor_y: 0.5,
@@ -2457,9 +2230,74 @@ LIFE_ICON_SPACING = 42
     }
   end
 
-  # ============================================================
-  # PLAYER ENGINE
-  # ============================================================
+  # ==========================================================
+  # DIFFICULTY SELECTION SCREEN
+  # ==========================================================
+
+  def render_difficulty_selection
+    outputs.solids << {
+      x: 0, y: 0,
+      w: grid.w, h: grid.h,
+      r: 8, g: 14, b: 35
+    }
+
+    outputs.labels << {
+      x: 640, y: 610,
+      text: "SPACE GALACTICA",
+      size_px: 70,
+      anchor_x: 0.5,
+      r: 130, g: 210, b: 255
+    }
+
+    outputs.labels << {
+      x: 640, y: 530,
+      text: "SELECT DIFFICULTY",
+      size_px: 35,
+      anchor_x: 0.5,
+      r: 255, g: 255, b: 255
+    }
+
+    descriptions = [
+      "EASY - 5 LIVES",
+      "NORMAL - 3 LIVES",
+      "HARD - 2 LIVES"
+    ]
+
+    3.times do |i|
+      selected = state.difficulty_index == i
+      y = 390 - i * 100
+
+      outputs.solids << {
+        x: 390, y: y,
+        w: 500, h: 75,
+        r: selected ? 40 : 25,
+        g: selected ? 120 : 35,
+        b: selected ? 190 : 65
+      }
+
+      outputs.labels << {
+        x: 640,
+        y: y + 37,
+        text: descriptions[i],
+        size_px: 28,
+        anchor_x: 0.5,
+        anchor_y: 0.5,
+        r: 255, g: 255, b: 255
+      }
+    end
+
+    outputs.labels << {
+      x: 640, y: 65,
+      text: "ARROWS TO SELECT - ENTER TO START",
+      size_px: 23,
+      anchor_x: 0.5,
+      r: 180, g: 220, b: 255
+    }
+  end
+
+  # ==========================================================
+  # PLAYER RENDERING
+  # ==========================================================
 
   def render_engine
     frames = valid_frames(ENGINE_FRAMES)
@@ -2471,18 +2309,11 @@ LIFE_ICON_SPACING = 42
       Kernel.tick_count / ENGINE_SPEED
     ) % frames.length
 
-    length = p.w * (
-      state.engine_boost ?
-      ENGINE_MOVING_LENGTH : ENGINE_IDLE_LENGTH
-    )
-
-    thickness = p.h * ENGINE_THICKNESS
-
     outputs.sprites << {
-      x: p.x - length * 0.85,
-      y: p.y + p.h / 2 - thickness / 2,
-      w: length,
-      h: thickness,
+      x: p.x - p.w * 0.85,
+      y: p.y + p.h * 0.375,
+      w: p.w,
+      h: p.h * 0.25,
       path: frames[index],
       angle: ENGINE_ANGLE,
       a: 235
@@ -2498,46 +2329,30 @@ LIFE_ICON_SPACING = 42
       w: p.w,
       h: p.h,
       path: p.path,
-      angle: selected_ship_angle
+      angle: selected_ship_color == :orange ?
+        ORANGE_ANGLE : SHIP_ANGLE
     }
   end
 
-  # ============================================================
-  # PLAYER SHIELD - FRONT FACING
-  # ============================================================
-
   def render_player_shield
     return unless state.shield_timer > 0
-    return unless state.game_state == :playing
 
-    p = state.player
     frames = valid_frames(SHIELD_EFFECT_FRAMES)
     return if frames.empty?
 
-    frame = (
-      Kernel.tick_count / POWERUP_ANIMATION_SPEED
-    ) % frames.length
-
-    shield_w = p.w * 2.00
-    shield_h = p.h * 1.35
-
-    shield_x = p.x + p.w * 0.75
-    shield_y = p.y + p.h / 2 - shield_h / 2
+    p = state.player
+    frame = (Kernel.tick_count / 8) % frames.length
 
     outputs.sprites << {
-      x: shield_x,
-      y: shield_y,
-      w: shield_w,
-      h: shield_h,
+      x: p.x + p.w * 0.75,
+      y: p.y - p.h * 0.175,
+      w: p.w * 0.65,
+      h: p.h * 1.35,
       path: frames[frame],
       angle: -90,
       a: 185
     }
   end
-
-  # ============================================================
-  # PLAYER POWER-UP EFFECTS
-  # ============================================================
 
   def render_player_powerup_effects
     p = state.player
@@ -2549,9 +2364,7 @@ LIFE_ICON_SPACING = 42
         frames = valid_frames(STAR_EFFECT_FRAMES)
         next if frames.empty?
 
-        frame = (
-          elapsed / POWERUP_ANIMATION_SPEED
-        ) % frames.length
+        frame = (elapsed / 8) % frames.length
 
         outputs.sprites << {
           x: p.x - 20,
@@ -2578,62 +2391,51 @@ LIFE_ICON_SPACING = 42
     end
   end
 
-  # ============================================================
+  # ==========================================================
   # SPACESHIP BOSS ENGINE
-  # ============================================================
+  # ==========================================================
 
-def render_spaceship_boss_engine
-  b = state.boss
-  return unless b
-  return if b[:dying]
+  def render_boss_engine
+    b = state.boss
+    return unless b
+    return if b[:dying]
 
-  cfg = world[:boss]
-  return unless cfg[:type] == :spaceship
+    cfg = world[:boss]
+    return unless cfg[:type] == :spaceship
 
-  number = cfg[:ship_number] || 1
-  animations = SPACESHIP_ANIMATIONS[number]
-  return unless animations
+    number = cfg[:ship_number] || 1
 
-  turbo = boss_phase(b) == 3
+    frames = valid_frames(
+      self.class.ship_engine_frames(
+        number,
+        boss_phase(b) == 3
+      )
+    )
 
-  frames = valid_frames(
-    turbo ? animations[:turbo] : animations[:normal]
-  )
+    if frames.empty?
+      frames = valid_frames(
+        self.class.ship_engine_frames(number)
+      )
+    end
 
-  if frames.empty? && turbo
-    frames = valid_frames(animations[:normal])
+    return if frames.empty?
+
+    frame = (Kernel.tick_count / 4) % frames.length
+
+    outputs.sprites << {
+      x: b[:x] + b[:w] * 0.82,
+      y: b[:y] + b[:h] * 0.39,
+      w: b[:w] * 0.42,
+      h: b[:h] * 0.22,
+      path: frames[frame],
+      angle: -90,
+      a: 230
+    }
   end
 
-  return if frames.empty?
-
-  frame = (
-    Kernel.tick_count / SPACESHIP_ENGINE_SPEED
-  ) % frames.length
-
-  # Engine exhaust trails behind a left-facing boss.
-  exhaust_w = b[:w] * 0.42
-  exhaust_h = b[:h] * 0.22
-
-  exhaust_x = b[:x] + b[:w] * 0.82
-  exhaust_y = b[:y] + b[:h] / 2 - exhaust_h / 2
-
-  outputs.sprites << {
-    x: exhaust_x,
-    y: exhaust_y,
-    w: exhaust_w,
-    h: exhaust_h,
-    path: frames[frame],
-
-    # Rotate the exhaust to extend toward the right.
-    angle: 0,
-    a: 230
-  }
-end
-
-
-  # ============================================================
+  # ==========================================================
   # BOSS RENDERING
-  # ============================================================
+  # ==========================================================
 
   def render_boss
     b = state.boss
@@ -2642,16 +2444,11 @@ end
     cfg = world[:boss]
 
     if cfg[:type] == :spaceship && b[:dying]
-      frames = b[:explosion_frames] || []
+      frames = b[:explosion_frames]
 
-      if frames.any?
-        elapsed = Kernel.tick_count -
-          (b[:explosion_start] || Kernel.tick_count)
-
-        index = [
-          elapsed / SPACESHIP_EXPLOSION_SPEED,
-          frames.length - 1
-        ].min
+      unless frames.empty?
+        elapsed = Kernel.tick_count - b[:animation_start]
+        index = [elapsed / 5, frames.length - 1].min
 
         outputs.sprites << {
           x: b[:x],
@@ -2666,22 +2463,19 @@ end
     end
 
     if b[:path]
-outputs.sprites << {
-  x: b[:x],
-  y: b[:y],
-  w: b[:w],
-  h: b[:h],
-  path: b[:path],
-  r: b[:r],
-  g: b[:flash] > 0 ? 120 : b[:g],
-  b: b[:flash] > 0 ? 120 : b[:b],
-
-  # Enemy spaceships face LEFT toward the player.
-  # Planet monsters keep their own orientation.
-  flip_horizontally:
-    cfg[:type] == :spaceship ? true :
-    (cfg[:flip_horizontally] || false)
-}
+      outputs.sprites << {
+        x: b[:x],
+        y: b[:y],
+        w: b[:w],
+        h: b[:h],
+        path: b[:path],
+        r: 255,
+        g: b[:flash] > 0 ? 120 : 255,
+        b: b[:flash] > 0 ? 120 : 255,
+        flip_horizontally:
+          cfg[:type] == :spaceship ? true :
+          (cfg[:flip_horizontally] || false)
+      }
     else
       outputs.solids << {
         x: b[:x],
@@ -2703,21 +2497,18 @@ outputs.sprites << {
     end
   end
 
-  # ============================================================
-  # THIN PLASMA LASERS
-  # ============================================================
+  # ==========================================================
+  # SHOT RENDERING
+  # ==========================================================
 
   def render_shots
     state.shots.each do |s|
       next if s[:dead]
 
       if s[:type] == :normal
-        cx = s[:x] + s[:w] / 2
-        cy = s[:y] + s[:h] / 2
-
         outputs.sprites << {
-          x: cx - 5,
-          y: cy - 36,
+          x: s[:x],
+          y: s[:y],
           w: 10,
           h: 72,
           path: NORMAL_SHOT,
@@ -2752,7 +2543,7 @@ outputs.sprites << {
   def render_effects
     state.effects.each do |fx|
       elapsed = Kernel.tick_count - fx[:born]
-      index = elapsed / fx[:speed]
+      index = elapsed / 4
 
       next if index >= fx[:frames].length
 
@@ -2765,10 +2556,6 @@ outputs.sprites << {
       }
     end
   end
-
-  # ============================================================
-  # ORIGINAL POWER-UP SPRITES
-  # ============================================================
 
   def render_powerups
     return unless state.game_state == :playing
@@ -2800,9 +2587,9 @@ outputs.sprites << {
     end
   end
 
-  # ============================================================
-  # TRANSITION VISUALS
-  # ============================================================
+  # ==========================================================
+  # TRANSITION RENDERING
+  # ==========================================================
 
   def render_transition_planet
     tr = state.transition
@@ -2810,25 +2597,22 @@ outputs.sprites << {
     return unless tr[:type] == :descending
 
     slide = ease(tr[:t] / 80.0)
+    cx = lerp(grid.w + 370, grid.w - 440, slide)
 
-    start_cx = grid.w + 370
-    end_cx = grid.w - 440
-
-    cx = lerp(start_cx, end_cx, slide)
-
-    size = DESCENT_PLANET_SIZE * (
+    size = 640 * (
       1.0 + ease((tr[:t] - 60) / 130.0) * 0.45
     )
 
-    if gtk.stat_file(tr[:planet])
-      outputs.sprites << {
-        x: cx - size / 2,
-        y: grid.h / 2 - size / 2,
-        w: size,
-        h: size,
-        path: tr[:planet]
-      }
-    end
+    path = tr[:planet]
+    return unless path && gtk.stat_file(path)
+
+    outputs.sprites << {
+      x: cx - size / 2,
+      y: grid.h / 2 - size / 2,
+      w: size,
+      h: size,
+      path: path
+    }
   end
 
   def render_transition_fx
@@ -2855,230 +2639,174 @@ outputs.sprites << {
     }
   end
 
-  # ============================================================
+  # ==========================================================
   # HUD
-  # ============================================================
+  # ==========================================================
 
-  
+  def render_hud
+    return if [:descending, :ascending].include?(
+      state.game_state
+    )
 
-def render_hud
-  return if [:descending, :ascending].include?(
-    state.game_state
-  )
+    outputs.labels << {
+      x: 40, y: grid.h - 38,
+      text: "#{world[:name]} - Wave #{state.wave}/3",
+      size_px: 25,
+      r: 255, g: 255, b: 255
+    }
 
-  # ==================================================
-  # WORLD NAME AND SCORE
-  # ==================================================
+    outputs.labels << {
+      x: 40, y: grid.h - 72,
+      text: "Score: #{state.score}",
+      size_px: 22,
+      r: 255, g: 255, b: 255
+    }
 
-  outputs.labels << {
-    x: 40,
-    y: grid.h - 38,
-    text: "#{world[:name]} - Wave #{state.wave}/3",
-    size_px: 25,
-    r: 255, g: 255, b: 255
-  }
+    outputs.labels << {
+      x: 40, y: grid.h - 110,
+      text: "LIVES",
+      size_px: 20,
+      r: 255, g: 255, b: 255
+    }
 
-  outputs.labels << {
-    x: 40,
-    y: grid.h - 72,
-    text: "Score: #{state.score}",
-    size_px: 22,
-    r: 255, g: 255, b: 255
-  }
+    life_sprite = PLAYER_LIFE_SPRITES[selected_ship_color]
 
-  # ==================================================
-  # PLAYER LIVES - FIXED SPACING
-  # ==================================================
+    player_max_hp.times do |i|
+      x = 40 + i * 42
+      y = grid.h - 180
 
-  outputs.labels << {
-    x: 40,
-    y: grid.h - 110,
-    text: "LIVES",
-    size_px: 20,
-    r: 255, g: 255, b: 255
-  }
+      if gtk.stat_file(life_sprite)
+        outputs.sprites << {
+          x: x, y: y,
+          w: 34, h: 34,
+          path: life_sprite,
+          a: i < state.hp ? 255 : 55
+        }
+      else
+        outputs.solids << {
+          x: x, y: y,
+          w: 34, h: 34,
+          r: i < state.hp ? 70 : 50,
+          g: i < state.hp ? 190 : 50,
+          b: i < state.hp ? 255 : 50
+        }
+      end
+    end
 
-  life_sprite =
-    PLAYER_LIFE_SPRITES[selected_ship_color]
+    outputs.labels << {
+      x: 320, y: grid.h - 105,
+      text: "COMBO: #{state.combo}/10",
+      size_px: 20,
+      r: 255, g: 255, b: 255
+    }
 
-  PLAYER_MAX_HP.times do |i|
-    x = 40 + i * LIFE_ICON_SPACING
+    outputs.solids << {
+      x: 320, y: grid.h - 135,
+      w: 220, h: 18,
+      r: 45, g: 45, b: 55
+    }
 
-    # Move icons below the LIVES label.
-    y = grid.h - 180
+    outputs.solids << {
+      x: 320, y: grid.h - 135,
+      w: 220 * clamp(state.combo.to_f / 10, 0, 1),
+      h: 18,
+      r: 100, g: 170, b: 255
+    }
 
-    if gtk.stat_file(life_sprite)
-      outputs.sprites << {
-        x: x,
-        y: y,
-        w: LIFE_ICON_SIZE,
-        h: LIFE_ICON_SIZE,
-        path: life_sprite,
-        a: i < state.hp ? 255 : 55
+    b = state.boss
+
+    if b
+      ratio = clamp(
+        b[:hp].to_f / b[:max_hp],
+        0.0, 1.0
+      )
+
+      x = 670
+      y = grid.h - 112
+      w = 500
+      h = 46
+
+      if gtk.stat_file(BOSS_HEALTH_BG)
+        outputs.primitives << {
+          x: x, y: y,
+          w: w, h: h,
+          path: BOSS_HEALTH_BG
+        }.sprite!
+      end
+
+      outputs.primitives << {
+        x: x + 10,
+        y: y + 9,
+        w: w - 20,
+        h: h - 18,
+        r: 35, g: 20, b: 30
+      }.solid!
+
+      color =
+        if ratio > 0.6
+          [65, 220, 110]
+        elsif ratio > 0.3
+          [255, 190, 45]
+        else
+          [235, 55, 65]
+        end
+
+      outputs.primitives << {
+        x: x + 10,
+        y: y + 9,
+        w: (w - 20) * ratio,
+        h: h - 18,
+        r: color[0],
+        g: color[1],
+        b: color[2]
+      }.solid!
+
+      outputs.primitives << {
+        x: x + w / 2,
+        y: y + h / 2,
+        text: "#{(ratio * 100).ceil}%",
+        size_px: 19,
+        anchor_x: 0.5,
+        anchor_y: 0.5,
+        r: 255, g: 255, b: 255
+      }.label!
+
+      outputs.primitives << {
+        x: x + w / 2,
+        y: y + h + 15,
+        text: "#{world[:name].upcase} BOSS",
+        size_px: 23,
+        anchor_x: 0.5,
+        r: 255, g: 255, b: 255
+      }.label!
+    end
+
+    if state.shield_timer > 0
+      outputs.labels << {
+        x: 40, y: grid.h - 225,
+        text: "SHIELD: #{(state.shield_timer / 60.0).ceil}s",
+        size_px: 20,
+        r: 100, g: 210, b: 255
       }
-    else
-      outputs.solids << {
-        x: x,
-        y: y,
-        w: LIFE_ICON_SIZE,
-        h: LIFE_ICON_SIZE,
-        r: i < state.hp ? 70 : 50,
-        g: i < state.hp ? 190 : 50,
-        b: i < state.hp ? 255 : 50
+    end
+
+    if state.speed_timer > 0
+      outputs.labels << {
+        x: 40, y: grid.h - 255,
+        text: "SPEED: #{(state.speed_timer / 60.0).ceil}s",
+        size_px: 20,
+        r: 255, g: 220, b: 70
       }
     end
   end
 
-  # ==================================================
-  # COMBO METER
-  # ==================================================
-
-  outputs.labels << {
-    x: 320,
-    y: grid.h - 105,
-    text: "COMBO: #{state.combo}/10",
-    size_px: 20,
-    r: 255, g: 255, b: 255
-  }
-
-  outputs.solids << {
-    x: 320,
-    y: grid.h - 135,
-    w: 220,
-    h: 18,
-    r: 45, g: 45, b: 55
-  }
-
-  outputs.solids << {
-    x: 320,
-    y: grid.h - 135,
-    w: 220 * clamp01(state.combo.to_f / 10),
-    h: 18,
-    r: 100, g: 170, b: 255
-  }
-
-# ==================================================
-# BOSS HEALTH BAR - CORRECT LAYER ORDER
-# ==================================================
-
-b = state.boss
-
-if b
-  ratio = clamp01(b[:hp].to_f / b[:max_hp])
-
-  bar_x = 670
-  bar_y = grid.h - 112
-  bar_w = 500
-  bar_h = 46
-
-  inner_x = bar_x + 10
-  inner_y = bar_y + 9
-  inner_w = bar_w - 20
-  inner_h = bar_h - 18
-
-  color =
-    if ratio > 0.60
-      [65, 220, 110]
-    elsif ratio > 0.30
-      [255, 190, 45]
-    else
-      [235, 55, 65]
-    end
-
-  # Explicit draw order:
-  # 1. Frame sprite
-  # 2. Dark health track
-  # 3. Colored health fill
-  # 4. Text
-
-  if gtk.stat_file(BOSS_HEALTH_BG)
-    outputs.primitives << {
-      x: bar_x,
-      y: bar_y,
-      w: bar_w,
-      h: bar_h,
-      path: BOSS_HEALTH_BG
-    }.sprite!
-  else
-    outputs.primitives << {
-      x: bar_x,
-      y: bar_y,
-      w: bar_w,
-      h: bar_h,
-      r: 110, g: 30, b: 40
-    }.solid!
-  end
-
-  outputs.primitives << {
-    x: inner_x,
-    y: inner_y,
-    w: inner_w,
-    h: inner_h,
-    r: 35, g: 20, b: 30
-  }.solid!
-
-  outputs.primitives << {
-    x: inner_x,
-    y: inner_y,
-    w: inner_w * ratio,
-    h: inner_h,
-    r: color[0],
-    g: color[1],
-    b: color[2]
-  }.solid!
-
-  outputs.primitives << {
-    x: bar_x + bar_w / 2,
-    y: bar_y + bar_h / 2,
-    text: "#{(ratio * 100).ceil}%",
-    size_px: 19,
-    anchor_x: 0.5,
-    anchor_y: 0.5,
-    r: 255, g: 255, b: 255
-  }.label!
-
-  outputs.primitives << {
-    x: bar_x + bar_w / 2,
-    y: bar_y + bar_h + 15,
-    text: "#{world[:name].upcase} BOSS",
-    size_px: 23,
-    anchor_x: 0.5,
-    r: 255, g: 255, b: 255
-  }.label!
-end
-
-
-  # ==================================================
-  # ACTIVE POWER-UPS
-  # ==================================================
-
-  if state.shield_timer > 0
-    outputs.labels << {
-      x: 40,
-      y: grid.h - 225,
-      text: "SHIELD: #{(state.shield_timer / 60.0).ceil}s",
-      size_px: 20,
-      r: 100, g: 210, b: 255
-    }
-  end
-
-  if state.speed_timer > 0
-    outputs.labels << {
-      x: 40,
-      y: grid.h - 255,
-      text: "SPEED: #{(state.speed_timer / 60.0).ceil}s",
-      size_px: 20,
-      r: 255, g: 220, b: 70
-    }
-  end
-end
-
+  # ==========================================================
+  # WAVE BANNERS
+  # ==========================================================
 
   def render_banner
     return unless state.game_state == :playing
     return unless state.banner_timer > 0
-
-    alpha = clamp(state.banner_timer * 4, 0, 255)
 
     outputs.labels << {
       x: grid.w / 2,
@@ -3089,25 +2817,13 @@ end
       r: 255,
       g: state.wave == 3 ? 80 : 255,
       b: state.wave == 3 ? 80 : 255,
-      a: alpha
+      a: [state.banner_timer * 4, 255].min
     }
-
-    if state.banner_sub
-      outputs.labels << {
-        x: grid.w / 2,
-        y: grid.h / 2 + 80,
-        text: state.banner_sub,
-        size_px: 36,
-        anchor_x: 0.5,
-        r: 200, g: 220, b: 255,
-        a: alpha
-      }
-    end
   end
 
-  # ============================================================
+  # ==========================================================
   # END SCREENS
-  # ============================================================
+  # ==========================================================
 
   def render_overlay
     return if [
@@ -3167,27 +2883,23 @@ end
   end
 
   def render_touch_buttons
-    return unless state.touch_detected ||
-      SHOW_TOUCH_ON_DESKTOP
+    return unless state.touch_detected
 
     if state.game_state == :playing
       outputs.solids << {
-        x: TOUCH_JOYSTICK_X - 85,
-        y: TOUCH_JOYSTICK_Y - 85,
+        x: 50, y: 45,
         w: 170, h: 170,
         r: 70, g: 120, b: 220, a: 65
       }
 
       outputs.solids << {
-        x: TOUCH_FIRE_X - 75,
-        y: TOUCH_FIRE_Y - 75,
+        x: 1055, y: 55,
         w: 150, h: 150,
         r: 230, g: 60, b: 65, a: 130
       }
 
       outputs.labels << {
-        x: TOUCH_FIRE_X,
-        y: TOUCH_FIRE_Y,
+        x: 1130, y: 130,
         text: "FIRE",
         size_px: 32,
         anchor_x: 0.5,
@@ -3233,9 +2945,9 @@ end
   end
 end
 
-# ============================================================
+# ==========================================================
 # DRAGONRUBY ENTRY POINTS
-# ============================================================
+# ==========================================================
 
 def tick(args)
   $game ||= Game.new
