@@ -8,6 +8,23 @@ class Game
   # SPACE GALACTICA - ASSETS
   # ============================================================
 
+# ============================================================
+# HUD ASSETS
+# ============================================================
+
+BOSS_HEALTH_BG =
+  "sprites/space_assets/UI/buttonRed.png"
+
+PLAYER_LIFE_SPRITES = {
+  blue: "sprites/space_assets/UI/playerLife1_blue.png",
+  green: "sprites/space_assets/UI/playerLife1_green.png",
+  orange: "sprites/space_assets/UI/playerLife1_orange.png",
+  red: "sprites/space_assets/UI/playerLife1_red.png"
+}
+
+LIFE_ICON_SIZE = 34
+LIFE_ICON_SPACING = 42
+
   SPACE_BG = "sprites/space.png"
 
   PLANETS = (0..9).map do |i|
@@ -2501,7 +2518,7 @@ class Game
       Kernel.tick_count / POWERUP_ANIMATION_SPEED
     ) % frames.length
 
-    shield_w = p.w * 0.65
+    shield_w = p.w * 2.00
     shield_h = p.h * 1.35
 
     shield_x = p.x + p.w * 0.75
@@ -2842,108 +2859,220 @@ outputs.sprites << {
   # HUD
   # ============================================================
 
-  def render_hud
-    return if [:descending, :ascending].include?(
-      state.game_state
-    )
+  
 
-    outputs.labels << {
-      x: 40, y: grid.h - 38,
-      text: "#{world[:name]} - Wave #{state.wave}/3",
-      size_px: 25,
-      r: 255, g: 255, b: 255
-    }
+def render_hud
+  return if [:descending, :ascending].include?(
+    state.game_state
+  )
 
-    outputs.labels << {
-      x: 40, y: grid.h - 72,
-      text: "Score: #{state.score}",
-      size_px: 22,
-      r: 255, g: 255, b: 255
-    }
+  # ==================================================
+  # WORLD NAME AND SCORE
+  # ==================================================
 
-    outputs.labels << {
-      x: 40, y: grid.h - 106,
-      text: "PLAYER HP",
-      size_px: 19,
-      r: 255, g: 255, b: 255
-    }
+  outputs.labels << {
+    x: 40,
+    y: grid.h - 38,
+    text: "#{world[:name]} - Wave #{state.wave}/3",
+    size_px: 25,
+    r: 255, g: 255, b: 255
+  }
 
-    outputs.solids << {
-      x: 40, y: grid.h - 135,
-      w: 240, h: 18,
-      r: 45, g: 45, b: 55
-    }
+  outputs.labels << {
+    x: 40,
+    y: grid.h - 72,
+    text: "Score: #{state.score}",
+    size_px: 22,
+    r: 255, g: 255, b: 255
+  }
 
-    outputs.solids << {
-      x: 40, y: grid.h - 135,
-      w: 240 * clamp01(state.hp.to_f / PLAYER_MAX_HP),
-      h: 18,
-      r: 60, g: 220, b: 100
-    }
+  # ==================================================
+  # PLAYER LIVES - FIXED SPACING
+  # ==================================================
 
-    outputs.labels << {
-      x: 320, y: grid.h - 105,
-      text: "COMBO: #{state.combo}/10",
-      size_px: 20,
-      r: 255, g: 255, b: 255
-    }
+  outputs.labels << {
+    x: 40,
+    y: grid.h - 110,
+    text: "LIVES",
+    size_px: 20,
+    r: 255, g: 255, b: 255
+  }
 
-    outputs.solids << {
-      x: 320, y: grid.h - 135,
-      w: 220, h: 18,
-      r: 45, g: 45, b: 55
-    }
+  life_sprite =
+    PLAYER_LIFE_SPRITES[selected_ship_color]
 
-    outputs.solids << {
-      x: 320, y: grid.h - 135,
-      w: 220 * clamp01(state.combo.to_f / 10),
-      h: 18,
-      r: 100, g: 170, b: 255
-    }
+  PLAYER_MAX_HP.times do |i|
+    x = 40 + i * LIFE_ICON_SPACING
 
-    b = state.boss
+    # Move icons below the LIVES label.
+    y = grid.h - 180
 
-    if b
-      ratio = clamp01(b[:hp].to_f / b[:max_hp])
-
-      outputs.labels << {
-        x: 600, y: grid.h - 40,
-        text: "#{world[:name].upcase} BOSS",
-        size_px: 24,
-        r: 255, g: 255, b: 255
+    if gtk.stat_file(life_sprite)
+      outputs.sprites << {
+        x: x,
+        y: y,
+        w: LIFE_ICON_SIZE,
+        h: LIFE_ICON_SIZE,
+        path: life_sprite,
+        a: i < state.hp ? 255 : 55
       }
-
+    else
       outputs.solids << {
-        x: 600, y: grid.h - 75,
-        w: 600, h: 24,
-        r: 45, g: 45, b: 55
-      }
-
-      outputs.solids << {
-        x: 600, y: grid.h - 75,
-        w: 600 * ratio, h: 24,
-        r: 230, g: 55, b: 65
-      }
-    end
-
-    if state.shield_timer > 0
-      outputs.labels << {
-        x: 40, y: grid.h - 190,
-        text: "SHIELD: #{(state.shield_timer / 60.0).ceil}s",
-        size_px: 20,
-        r: 100, g: 210, b: 255
-      }
-    end
-
-    if state.speed_timer > 0
-      outputs.labels << {
-        x: 40, y: grid.h - 220,
-        text: "SPEED: #{(state.speed_timer / 60.0).ceil}s",
-        size_px: 20,
-        r: 255, g: 220, b: 70
+        x: x,
+        y: y,
+        w: LIFE_ICON_SIZE,
+        h: LIFE_ICON_SIZE,
+        r: i < state.hp ? 70 : 50,
+        g: i < state.hp ? 190 : 50,
+        b: i < state.hp ? 255 : 50
       }
     end
   end
+
+  # ==================================================
+  # COMBO METER
+  # ==================================================
+
+  outputs.labels << {
+    x: 320,
+    y: grid.h - 105,
+    text: "COMBO: #{state.combo}/10",
+    size_px: 20,
+    r: 255, g: 255, b: 255
+  }
+
+  outputs.solids << {
+    x: 320,
+    y: grid.h - 135,
+    w: 220,
+    h: 18,
+    r: 45, g: 45, b: 55
+  }
+
+  outputs.solids << {
+    x: 320,
+    y: grid.h - 135,
+    w: 220 * clamp01(state.combo.to_f / 10),
+    h: 18,
+    r: 100, g: 170, b: 255
+  }
+
+# ==================================================
+# BOSS HEALTH BAR - CORRECT LAYER ORDER
+# ==================================================
+
+b = state.boss
+
+if b
+  ratio = clamp01(b[:hp].to_f / b[:max_hp])
+
+  bar_x = 670
+  bar_y = grid.h - 112
+  bar_w = 500
+  bar_h = 46
+
+  inner_x = bar_x + 10
+  inner_y = bar_y + 9
+  inner_w = bar_w - 20
+  inner_h = bar_h - 18
+
+  color =
+    if ratio > 0.60
+      [65, 220, 110]
+    elsif ratio > 0.30
+      [255, 190, 45]
+    else
+      [235, 55, 65]
+    end
+
+  # Explicit draw order:
+  # 1. Frame sprite
+  # 2. Dark health track
+  # 3. Colored health fill
+  # 4. Text
+
+  if gtk.stat_file(BOSS_HEALTH_BG)
+    outputs.primitives << {
+      x: bar_x,
+      y: bar_y,
+      w: bar_w,
+      h: bar_h,
+      path: BOSS_HEALTH_BG
+    }.sprite!
+  else
+    outputs.primitives << {
+      x: bar_x,
+      y: bar_y,
+      w: bar_w,
+      h: bar_h,
+      r: 110, g: 30, b: 40
+    }.solid!
+  end
+
+  outputs.primitives << {
+    x: inner_x,
+    y: inner_y,
+    w: inner_w,
+    h: inner_h,
+    r: 35, g: 20, b: 30
+  }.solid!
+
+  outputs.primitives << {
+    x: inner_x,
+    y: inner_y,
+    w: inner_w * ratio,
+    h: inner_h,
+    r: color[0],
+    g: color[1],
+    b: color[2]
+  }.solid!
+
+  outputs.primitives << {
+    x: bar_x + bar_w / 2,
+    y: bar_y + bar_h / 2,
+    text: "#{(ratio * 100).ceil}%",
+    size_px: 19,
+    anchor_x: 0.5,
+    anchor_y: 0.5,
+    r: 255, g: 255, b: 255
+  }.label!
+
+  outputs.primitives << {
+    x: bar_x + bar_w / 2,
+    y: bar_y + bar_h + 15,
+    text: "#{world[:name].upcase} BOSS",
+    size_px: 23,
+    anchor_x: 0.5,
+    r: 255, g: 255, b: 255
+  }.label!
+end
+
+
+  # ==================================================
+  # ACTIVE POWER-UPS
+  # ==================================================
+
+  if state.shield_timer > 0
+    outputs.labels << {
+      x: 40,
+      y: grid.h - 225,
+      text: "SHIELD: #{(state.shield_timer / 60.0).ceil}s",
+      size_px: 20,
+      r: 100, g: 210, b: 255
+    }
+  end
+
+  if state.speed_timer > 0
+    outputs.labels << {
+      x: 40,
+      y: grid.h - 255,
+      text: "SPEED: #{(state.speed_timer / 60.0).ceil}s",
+      size_px: 20,
+      r: 255, g: 220, b: 70
+    }
+  end
+end
+
 
   def render_banner
     return unless state.game_state == :playing
