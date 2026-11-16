@@ -34,7 +34,7 @@ class Game
   SHIP_NAMES = [:blue, :green, :orange, :red]
 
   SHIP_ANGLE = -90
-  ORANGE_ANGLE = -90
+  ORANGE_ANGLE = 0
 
   ENGINE_FRAMES = (1..7).map do |i|
     "sprites/space_assets/Effects/fire#{i.to_s.rjust(2, '0')}.png"
@@ -2608,7 +2608,7 @@ def render_spaceship_boss_engine
     path: frames[frame],
 
     # Rotate the exhaust to extend toward the right.
-    angle: -90,
+    angle: 0,
     a: 230
   }
 end
@@ -2658,8 +2658,12 @@ outputs.sprites << {
   r: b[:r],
   g: b[:flash] > 0 ? 120 : b[:g],
   b: b[:flash] > 0 ? 120 : b[:b],
+
+  # Enemy spaceships face LEFT toward the player.
+  # Planet monsters keep their own orientation.
   flip_horizontally:
-    cfg[:flip_horizontally] || false
+    cfg[:type] == :spaceship ? true :
+    (cfg[:flip_horizontally] || false)
 }
     else
       outputs.solids << {
