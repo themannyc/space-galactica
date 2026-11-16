@@ -23,9 +23,24 @@ class Game
   # >>> BOSS SPRITE GOES HERE <<<
   # Put your image at this path (relative to the game folder) and it is picked up automatically.
   # Until the file exists, a red placeholder box is drawn instead.
-  BOSS_ASSET = 'sprites/boss.png'
+  BOSS_ASSET = 'sprites/PNG_Parts&Spriter_Animation/Ship6/Ship6.png'
   BOSS_W     = 400
   BOSS_H     = 400
+
+  # Boss lasers: cycles through shot2_1..shot2_6 as an animation.
+  # If they look rotated wrong in game, change BOSS_BULLET_ANGLE_OFFSET (try 90, -90 or 180).
+  BOSS_SHOT_DIR = 'sprites/PNG_Parts&Spriter_Animation/Shots/Shot2'
+  BOSS_BULLET_FRAMES = (1..6).map { |i| "#{BOSS_SHOT_DIR}/shot2_#{i}.png" }
+  BOSS_BULLET_W = 48
+  BOSS_BULLET_H = 48
+  BOSS_BULLET_HIT_R = 14          # half-size of the hitbox (smaller = more forgiving)
+  BOSS_BULLET_ANGLE_OFFSET = 0
+  BOSS_BULLET_ANIM_SPEED = 4      # ticks per animation frame
+
+  # Hit effect: plays shot2_exp1..5 where a boss laser hits you.
+  BOSS_HIT_FRAMES = (1..5).map { |i| "#{BOSS_SHOT_DIR}/shot2_exp#{i}.png" }
+  HIT_EFFECT_SIZE = 96
+  HIT_EFFECT_ANIM_SPEED = 4       # ticks per frame
 
   # ------------------------------------------------------------------
   # TUNING
@@ -84,6 +99,7 @@ class Game
     state.invuln_timer ||= 0
     state.plasma_balls ||= []
     state.enemy_bullets ||= []
+    state.effects ||= []
     state.planets ||= [
       { x: 0, y: Numeric.rand(-500..500), w: 1000, h: 1000, path: PLANET_ASSETS.sample, speed: 1 }
     ]
@@ -183,16 +199,33 @@ class Game
     state.meteors << spawn_meteor(cfg) while state.meteors.length < cfg[:meteors]
   end
 
-  def fire_enemy_bullet(cx, cy, deg, speed)
+  def fire_enemy_bullet(cx, cy, deg, speed, boss_shot = false)
     rad = deg * Math::PI / 180
-    state.enemy_bullets << {
-      x: cx - 10, y: cy - 28, w: 20, h: 56,
-      vx: Math.cos(rad) * speed,
-      vy: Math.sin(rad) * speed,
-      path: ENEMY_BULLET_ASSET,
-      angle: deg - 90,
-      dead: false
-    }
+    vx = Math.cos(rad) * speed
+    vy = Math.sin(rad) * speed
+
+    if boss_shot
+      state.enemy_bullets << {
+        x: cx - BOSS_BULLET_W / 2, y: cy - BOSS_BULLET_H / 2,
+        w: BOSS_BULLET_W, h: BOSS_BULLET_H,
+        vx: vx, vy: vy,
+        path: BOSS_BULLET_FRAMES[0],
+        animated: true,
+        angle: deg + BOSS_BULLET_ANGLE_OFFSET,
+        hit_r: BOSS_BULLET_HIT_R,
+        born: Kernel.tick_count,
+        dead: false
+      }
+    else
+      state.enemy_bullets << {
+        x: cx - 10, y: cy - 28, w: 20, h: 56,
+        vx: vx, vy: vy,
+        path: ENEMY_BULLET_ASSET,
+        angle: deg - 90,
+        hit_r: 10,
+        dead: false
+      }
+    end
   end
 
   # ------------------------------------------------------------------
@@ -247,6 +280,7 @@ class Game
   # UPDATE
   # ------------------------------------------------------------------
   def calc
+    update_effects   # keep explosions animating even after the final hit
     return unless state.game_state == :playing
 
     state.banner_timer -= 1 if state.banner_timer > 0
@@ -353,7 +387,7 @@ class Game
     if boss.fire_timer <= 0
       base = angle_to_player(cx, cy)
       BOSS_SPREAD[phase - 1].each do |off|
-        fire_enemy_bullet(cx, cy, base + off, BOSS_BULLET_SPEED[phase - 1])
+        fire_enemy_bullet(cx, cy, base + off, BOSS_BULLET_SPEED[phase - 1], true)
       end
       boss.fire_timer = BOSS_FIRE_RATE[phase - 1]
     end
@@ -365,7 +399,7 @@ class Game
         step = phase == 2 ? 20 : 12
         angle = 100
         while angle <= 260
-          fire_enemy_bullet(cx, cy, angle, 5)
+          fire_enemy_bullet(cx, cy, angle, 5, true)
           angle += step
         end
         boss.ring_timer = phase == 2 ? 200 : 140
@@ -384,10 +418,36 @@ class Game
     end
   end
 
+  def spawn_hit_effect(cx, cy)
+    state.effects << {
+      x: cx - HIT_EFFECT_SIZE / 2, y: cy - HIT_EFFECT_SIZE / 2,
+      w: HIT_EFFECT_SIZE, h: HIT_EFFECT_SIZE,
+      path: BOSS_HIT_FRAMES[0],
+      born: Kernel.tick_count,
+      dead: false
+    }
+  end
+
+  def update_effects
+    state.effects.each do |fx|
+      frame = (Kernel.tick_count - fx.born) / HIT_EFFECT_ANIM_SPEED
+      if frame >= BOSS_HIT_FRAMES.length
+        fx.dead = true
+      else
+        fx.path = BOSS_HIT_FRAMES[frame]
+      end
+    end
+    state.effects.reject! { |fx| fx.dead }
+  end
+
   def update_enemy_bullets
     state.enemy_bullets.each do |b|
       b.x += b.vx
       b.y += b.vy
+      if b.animated
+        frame = ((Kernel.tick_count - b.born) / BOSS_BULLET_ANIM_SPEED) % BOSS_BULLET_FRAMES.length
+        b.path = BOSS_BULLET_FRAMES[frame]
+      end
       b.dead = true if b.x < -100 || b.x > grid.w + 100 || b.y < -100 || b.y > grid.h + 100
     end
   end
@@ -445,6 +505,7 @@ class Game
       next if b.dead
       if hit?(hurt, bullet_hitbox(b))
         b.dead = true
+        spawn_hit_effect(b.x + b.w / 2, b.y + b.h / 2) if b.animated
         damage_player
       end
     end
@@ -499,7 +560,7 @@ class Game
   def bullet_hitbox(b)
     cx = b.x + b.w / 2
     cy = b.y + b.h / 2
-    { x: cx - 10, y: cy - 10, w: 20, h: 20 }
+    { x: cx - b.hit_r, y: cy - b.hit_r, w: b.hit_r * 2, h: b.hit_r * 2 }
   end
 
   def angle_to_player(cx, cy)
@@ -520,6 +581,7 @@ class Game
     render_boss
     outputs.sprites << state.plasma_balls
     outputs.sprites << state.enemy_bullets
+    outputs.sprites << state.effects
 
     blink = state.invuln_timer > 0 && Kernel.tick_count % 8 < 4
     outputs.sprites << state.player unless blink || state.game_state == :game_over
