@@ -1,7 +1,21 @@
-* EXCEPTION: can't convert Integer to Hash
+* EXCEPTION:
+* ERROR: :each method missing on ~GTK::OpenEntity~.
+
+#+begin_src ~GTK::OpenEntity#inspect~
+{:entity_id=>2, :entity_name=>:meteors, :entity_keys_by_ref=>{}, :__thrash_count__=>{}}
+#+end_src ~GTK::OpenEntity#inspect~
+
+** Did you mean?
+Here's a list of methods that kind of look like :each.
+*** :each_intersect_rect
+
+The method named
+  :each
+doesn't exist on [GTK::OpenEntity].
+
+(suggestions above)
 ** Backtrace:
-*** app/game.rb:184:in calc
-*** app/game.rb:179:in calc
-*** app/game.rb:160:in calc
-*** app/game.rb:13:in tick
-*** app/main.rb:6:in tick
+*** app/game.rb:499:in update_meteors
+*** app/game.rb:464:in calc
+*** app/game.rb:173:in tick
+*** app/game.rb:1073:in tick
