@@ -1,0 +1,794 @@
+{
+ "ion_panel_dark": {
+  "size": [
+   48,
+   48
+  ],
+  "slice": {
+   "l": 8,
+   "t": 8,
+   "r": 8,
+   "b": 8
+  }
+ },
+ "ion_panel_glass": {
+  "size": [
+   48,
+   48
+  ],
+  "slice": {
+   "l": 8,
+   "t": 8,
+   "r": 8,
+   "b": 8
+  }
+ },
+ "ion_panel_plate": {
+  "size": [
+   48,
+   48
+  ],
+  "slice": {
+   "l": 8,
+   "t": 8,
+   "r": 8,
+   "b": 8
+  }
+ },
+ "ion_panel_title": {
+  "size": [
+   96,
+   18
+  ],
+  "slice": {
+   "l": 8,
+   "t": 6,
+   "r": 8,
+   "b": 6
+  }
+ },
+ "ion_dialog": {
+  "size": [
+   128,
+   64
+  ],
+  "slice": {
+   "l": 8,
+   "t": 8,
+   "r": 8,
+   "b": 8
+  }
+ },
+ "ion_portrait_frame": {
+  "size": [
+   40,
+   40
+  ],
+  "slice": {
+   "l": 6,
+   "t": 6,
+   "r": 6,
+   "b": 6
+  }
+ },
+ "ion_tooltip": {
+  "size": [
+   32,
+   16
+  ],
+  "slice": {
+   "l": 4,
+   "t": 4,
+   "r": 4,
+   "b": 4
+  }
+ },
+ "ion_button_normal": {
+  "size": [
+   64,
+   20
+  ],
+  "slice": {
+   "l": 6,
+   "t": 6,
+   "r": 6,
+   "b": 6
+  }
+ },
+ "ion_button_hover": {
+  "size": [
+   64,
+   20
+  ],
+  "slice": {
+   "l": 6,
+   "t": 6,
+   "r": 6,
+   "b": 6
+  }
+ },
+ "ion_button_pressed": {
+  "size": [
+   64,
+   20
+  ],
+  "slice": {
+   "l": 6,
+   "t": 6,
+   "r": 6,
+   "b": 6
+  }
+ },
+ "ion_button_disabled": {
+  "size": [
+   64,
+   20
+  ],
+  "slice": {
+   "l": 6,
+   "t": 6,
+   "r": 6,
+   "b": 6
+  }
+ },
+ "ion_slider_track": {
+  "size": [
+   48,
+   8
+  ],
+  "slice": {
+   "l": 3,
+   "t": 3,
+   "r": 3,
+   "b": 3
+  }
+ },
+ "ion_tab_active": {
+  "size": [
+   40,
+   16
+  ],
+  "slice": {
+   "l": 6,
+   "t": 6,
+   "r": 6,
+   "b": 4
+  }
+ },
+ "ion_tab_inactive": {
+  "size": [
+   40,
+   16
+  ],
+  "slice": {
+   "l": 6,
+   "t": 6,
+   "r": 6,
+   "b": 4
+  }
+ },
+ "ion_input_field": {
+  "size": [
+   64,
+   14
+  ],
+  "slice": {
+   "l": 3,
+   "t": 3,
+   "r": 3,
+   "b": 3
+  }
+ },
+ "ion_scrollbar_track": {
+  "size": [
+   8,
+   32
+  ],
+  "slice": {
+   "l": 2,
+   "t": 2,
+   "r": 2,
+   "b": 2
+  }
+ },
+ "ion_hp_frame": {
+  "size": [
+   48,
+   10
+  ],
+  "slice": {
+   "l": 3,
+   "t": 3,
+   "r": 3,
+   "b": 3
+  }
+ },
+ "ion_shield_frame": {
+  "size": [
+   48,
+   8
+  ],
+  "slice": {
+   "l": 3,
+   "t": 3,
+   "r": 3,
+   "b": 3
+  }
+ },
+ "ion_boss_frame": {
+  "size": [
+   112,
+   14
+  ],
+  "slice": {
+   "l": 8,
+   "t": 5,
+   "r": 8,
+   "b": 5
+  }
+ },
+ "ion_score_plate": {
+  "size": [
+   72,
+   14
+  ],
+  "slice": {
+   "l": 6,
+   "t": 5,
+   "r": 6,
+   "b": 5
+  }
+ },
+ "ember_panel_dark": {
+  "size": [
+   48,
+   48
+  ],
+  "slice": {
+   "l": 8,
+   "t": 8,
+   "r": 8,
+   "b": 8
+  }
+ },
+ "ember_panel_glass": {
+  "size": [
+   48,
+   48
+  ],
+  "slice": {
+   "l": 8,
+   "t": 8,
+   "r": 8,
+   "b": 8
+  }
+ },
+ "ember_panel_plate": {
+  "size": [
+   48,
+   48
+  ],
+  "slice": {
+   "l": 8,
+   "t": 8,
+   "r": 8,
+   "b": 8
+  }
+ },
+ "ember_panel_title": {
+  "size": [
+   96,
+   18
+  ],
+  "slice": {
+   "l": 8,
+   "t": 6,
+   "r": 8,
+   "b": 6
+  }
+ },
+ "ember_dialog": {
+  "size": [
+   128,
+   64
+  ],
+  "slice": {
+   "l": 8,
+   "t": 8,
+   "r": 8,
+   "b": 8
+  }
+ },
+ "ember_portrait_frame": {
+  "size": [
+   40,
+   40
+  ],
+  "slice": {
+   "l": 6,
+   "t": 6,
+   "r": 6,
+   "b": 6
+  }
+ },
+ "ember_tooltip": {
+  "size": [
+   32,
+   16
+  ],
+  "slice": {
+   "l": 4,
+   "t": 4,
+   "r": 4,
+   "b": 4
+  }
+ },
+ "ember_button_normal": {
+  "size": [
+   64,
+   20
+  ],
+  "slice": {
+   "l": 6,
+   "t": 6,
+   "r": 6,
+   "b": 6
+  }
+ },
+ "ember_button_hover": {
+  "size": [
+   64,
+   20
+  ],
+  "slice": {
+   "l": 6,
+   "t": 6,
+   "r": 6,
+   "b": 6
+  }
+ },
+ "ember_button_pressed": {
+  "size": [
+   64,
+   20
+  ],
+  "slice": {
+   "l": 6,
+   "t": 6,
+   "r": 6,
+   "b": 6
+  }
+ },
+ "ember_button_disabled": {
+  "size": [
+   64,
+   20
+  ],
+  "slice": {
+   "l": 6,
+   "t": 6,
+   "r": 6,
+   "b": 6
+  }
+ },
+ "ember_slider_track": {
+  "size": [
+   48,
+   8
+  ],
+  "slice": {
+   "l": 3,
+   "t": 3,
+   "r": 3,
+   "b": 3
+  }
+ },
+ "ember_tab_active": {
+  "size": [
+   40,
+   16
+  ],
+  "slice": {
+   "l": 6,
+   "t": 6,
+   "r": 6,
+   "b": 4
+  }
+ },
+ "ember_tab_inactive": {
+  "size": [
+   40,
+   16
+  ],
+  "slice": {
+   "l": 6,
+   "t": 6,
+   "r": 6,
+   "b": 4
+  }
+ },
+ "ember_input_field": {
+  "size": [
+   64,
+   14
+  ],
+  "slice": {
+   "l": 3,
+   "t": 3,
+   "r": 3,
+   "b": 3
+  }
+ },
+ "ember_scrollbar_track": {
+  "size": [
+   8,
+   32
+  ],
+  "slice": {
+   "l": 2,
+   "t": 2,
+   "r": 2,
+   "b": 2
+  }
+ },
+ "ember_hp_frame": {
+  "size": [
+   48,
+   10
+  ],
+  "slice": {
+   "l": 3,
+   "t": 3,
+   "r": 3,
+   "b": 3
+  }
+ },
+ "ember_shield_frame": {
+  "size": [
+   48,
+   8
+  ],
+  "slice": {
+   "l": 3,
+   "t": 3,
+   "r": 3,
+   "b": 3
+  }
+ },
+ "ember_boss_frame": {
+  "size": [
+   112,
+   14
+  ],
+  "slice": {
+   "l": 8,
+   "t": 5,
+   "r": 8,
+   "b": 5
+  }
+ },
+ "ember_score_plate": {
+  "size": [
+   72,
+   14
+  ],
+  "slice": {
+   "l": 6,
+   "t": 5,
+   "r": 6,
+   "b": 5
+  }
+ },
+ "viridian_panel_dark": {
+  "size": [
+   48,
+   48
+  ],
+  "slice": {
+   "l": 8,
+   "t": 8,
+   "r": 8,
+   "b": 8
+  }
+ },
+ "viridian_panel_glass": {
+  "size": [
+   48,
+   48
+  ],
+  "slice": {
+   "l": 8,
+   "t": 8,
+   "r": 8,
+   "b": 8
+  }
+ },
+ "viridian_panel_plate": {
+  "size": [
+   48,
+   48
+  ],
+  "slice": {
+   "l": 8,
+   "t": 8,
+   "r": 8,
+   "b": 8
+  }
+ },
+ "viridian_panel_title": {
+  "size": [
+   96,
+   18
+  ],
+  "slice": {
+   "l": 8,
+   "t": 6,
+   "r": 8,
+   "b": 6
+  }
+ },
+ "viridian_dialog": {
+  "size": [
+   128,
+   64
+  ],
+  "slice": {
+   "l": 8,
+   "t": 8,
+   "r": 8,
+   "b": 8
+  }
+ },
+ "viridian_portrait_frame": {
+  "size": [
+   40,
+   40
+  ],
+  "slice": {
+   "l": 6,
+   "t": 6,
+   "r": 6,
+   "b": 6
+  }
+ },
+ "viridian_tooltip": {
+  "size": [
+   32,
+   16
+  ],
+  "slice": {
+   "l": 4,
+   "t": 4,
+   "r": 4,
+   "b": 4
+  }
+ },
+ "viridian_button_normal": {
+  "size": [
+   64,
+   20
+  ],
+  "slice": {
+   "l": 6,
+   "t": 6,
+   "r": 6,
+   "b": 6
+  }
+ },
+ "viridian_button_hover": {
+  "size": [
+   64,
+   20
+  ],
+  "slice": {
+   "l": 6,
+   "t": 6,
+   "r": 6,
+   "b": 6
+  }
+ },
+ "viridian_button_pressed": {
+  "size": [
+   64,
+   20
+  ],
+  "slice": {
+   "l": 6,
+   "t": 6,
+   "r": 6,
+   "b": 6
+  }
+ },
+ "viridian_button_disabled": {
+  "size": [
+   64,
+   20
+  ],
+  "slice": {
+   "l": 6,
+   "t": 6,
+   "r": 6,
+   "b": 6
+  }
+ },
+ "viridian_slider_track": {
+  "size": [
+   48,
+   8
+  ],
+  "slice": {
+   "l": 3,
+   "t": 3,
+   "r": 3,
+   "b": 3
+  }
+ },
+ "viridian_tab_active": {
+  "size": [
+   40,
+   16
+  ],
+  "slice": {
+   "l": 6,
+   "t": 6,
+   "r": 6,
+   "b": 4
+  }
+ },
+ "viridian_tab_inactive": {
+  "size": [
+   40,
+   16
+  ],
+  "slice": {
+   "l": 6,
+   "t": 6,
+   "r": 6,
+   "b": 4
+  }
+ },
+ "viridian_input_field": {
+  "size": [
+   64,
+   14
+  ],
+  "slice": {
+   "l": 3,
+   "t": 3,
+   "r": 3,
+   "b": 3
+  }
+ },
+ "viridian_scrollbar_track": {
+  "size": [
+   8,
+   32
+  ],
+  "slice": {
+   "l": 2,
+   "t": 2,
+   "r": 2,
+   "b": 2
+  }
+ },
+ "viridian_hp_frame": {
+  "size": [
+   48,
+   10
+  ],
+  "slice": {
+   "l": 3,
+   "t": 3,
+   "r": 3,
+   "b": 3
+  }
+ },
+ "viridian_shield_frame": {
+  "size": [
+   48,
+   8
+  ],
+  "slice": {
+   "l": 3,
+   "t": 3,
+   "r": 3,
+   "b": 3
+  }
+ },
+ "viridian_boss_frame": {
+  "size": [
+   112,
+   14
+  ],
+  "slice": {
+   "l": 8,
+   "t": 5,
+   "r": 8,
+   "b": 5
+  }
+ },
+ "viridian_score_plate": {
+  "size": [
+   72,
+   14
+  ],
+  "slice": {
+   "l": 6,
+   "t": 5,
+   "r": 6,
+   "b": 5
+  }
+ },
+ "hp_green": {
+  "size": [
+   44,
+   6
+  ],
+  "slice": {
+   "l": 0,
+   "t": 0,
+   "r": 0,
+   "b": 0
+  }
+ },
+ "hp_red": {
+  "size": [
+   44,
+   6
+  ],
+  "slice": {
+   "l": 0,
+   "t": 0,
+   "r": 0,
+   "b": 0
+  }
+ },
+ "shield_blue": {
+  "size": [
+   44,
+   6
+  ],
+  "slice": {
+   "l": 0,
+   "t": 0,
+   "r": 0,
+   "b": 0
+  }
+ },
+ "energy_gold": {
+  "size": [
+   44,
+   6
+  ],
+  "slice": {
+   "l": 0,
+   "t": 0,
+   "r": 0,
+   "b": 0
+  }
+ },
+ "boss_red": {
+  "size": [
+   44,
+   6
+  ],
+  "slice": {
+   "l": 0,
+   "t": 0,
+   "r": 0,
+   "b": 0
+  }
+ },
+ "xp_magenta": {
+  "size": [
+   44,
+   6
+  ],
+  "slice": {
+   "l": 0,
+   "t": 0,
+   "r": 0,
+   "b": 0
+  }
+ }
+}

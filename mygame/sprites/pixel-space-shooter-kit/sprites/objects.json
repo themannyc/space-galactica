@@ -1,0 +1,2466 @@
+{
+ "frames": {
+  "asteroid_rock_16_0": {
+   "frame": {
+    "x": 0,
+    "y": 0,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "asteroid_rock_16_1": {
+   "frame": {
+    "x": 17,
+    "y": 0,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "asteroid_rock_16_2": {
+   "frame": {
+    "x": 34,
+    "y": 0,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "asteroid_rock_16_3": {
+   "frame": {
+    "x": 51,
+    "y": 0,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "asteroid_rock_16_4": {
+   "frame": {
+    "x": 68,
+    "y": 0,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "asteroid_rock_16_5": {
+   "frame": {
+    "x": 85,
+    "y": 0,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "asteroid_rock_16_6": {
+   "frame": {
+    "x": 102,
+    "y": 0,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "asteroid_rock_16_7": {
+   "frame": {
+    "x": 119,
+    "y": 0,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "asteroid_rock_32_0": {
+   "frame": {
+    "x": 136,
+    "y": 0,
+    "w": 32,
+    "h": 32
+   },
+   "sourceSize": {
+    "w": 32,
+    "h": 32
+   }
+  },
+  "asteroid_rock_32_1": {
+   "frame": {
+    "x": 169,
+    "y": 0,
+    "w": 32,
+    "h": 32
+   },
+   "sourceSize": {
+    "w": 32,
+    "h": 32
+   }
+  },
+  "asteroid_rock_32_2": {
+   "frame": {
+    "x": 202,
+    "y": 0,
+    "w": 32,
+    "h": 32
+   },
+   "sourceSize": {
+    "w": 32,
+    "h": 32
+   }
+  },
+  "asteroid_rock_32_3": {
+   "frame": {
+    "x": 235,
+    "y": 0,
+    "w": 32,
+    "h": 32
+   },
+   "sourceSize": {
+    "w": 32,
+    "h": 32
+   }
+  },
+  "asteroid_rock_32_4": {
+   "frame": {
+    "x": 268,
+    "y": 0,
+    "w": 32,
+    "h": 32
+   },
+   "sourceSize": {
+    "w": 32,
+    "h": 32
+   }
+  },
+  "asteroid_rock_32_5": {
+   "frame": {
+    "x": 301,
+    "y": 0,
+    "w": 32,
+    "h": 32
+   },
+   "sourceSize": {
+    "w": 32,
+    "h": 32
+   }
+  },
+  "asteroid_rock_32_6": {
+   "frame": {
+    "x": 334,
+    "y": 0,
+    "w": 32,
+    "h": 32
+   },
+   "sourceSize": {
+    "w": 32,
+    "h": 32
+   }
+  },
+  "asteroid_rock_32_7": {
+   "frame": {
+    "x": 367,
+    "y": 0,
+    "w": 32,
+    "h": 32
+   },
+   "sourceSize": {
+    "w": 32,
+    "h": 32
+   }
+  },
+  "asteroid_rock_64_0": {
+   "frame": {
+    "x": 400,
+    "y": 0,
+    "w": 64,
+    "h": 64
+   },
+   "sourceSize": {
+    "w": 64,
+    "h": 64
+   }
+  },
+  "asteroid_rock_64_1": {
+   "frame": {
+    "x": 465,
+    "y": 0,
+    "w": 64,
+    "h": 64
+   },
+   "sourceSize": {
+    "w": 64,
+    "h": 64
+   }
+  },
+  "asteroid_rock_64_2": {
+   "frame": {
+    "x": 530,
+    "y": 0,
+    "w": 64,
+    "h": 64
+   },
+   "sourceSize": {
+    "w": 64,
+    "h": 64
+   }
+  },
+  "asteroid_rock_64_3": {
+   "frame": {
+    "x": 595,
+    "y": 0,
+    "w": 64,
+    "h": 64
+   },
+   "sourceSize": {
+    "w": 64,
+    "h": 64
+   }
+  },
+  "asteroid_rock_64_4": {
+   "frame": {
+    "x": 660,
+    "y": 0,
+    "w": 64,
+    "h": 64
+   },
+   "sourceSize": {
+    "w": 64,
+    "h": 64
+   }
+  },
+  "asteroid_rock_64_5": {
+   "frame": {
+    "x": 725,
+    "y": 0,
+    "w": 64,
+    "h": 64
+   },
+   "sourceSize": {
+    "w": 64,
+    "h": 64
+   }
+  },
+  "asteroid_rock_64_6": {
+   "frame": {
+    "x": 790,
+    "y": 0,
+    "w": 64,
+    "h": 64
+   },
+   "sourceSize": {
+    "w": 64,
+    "h": 64
+   }
+  },
+  "asteroid_rock_64_7": {
+   "frame": {
+    "x": 855,
+    "y": 0,
+    "w": 64,
+    "h": 64
+   },
+   "sourceSize": {
+    "w": 64,
+    "h": 64
+   }
+  },
+  "fragment_rock_0": {
+   "frame": {
+    "x": 920,
+    "y": 0,
+    "w": 8,
+    "h": 8
+   },
+   "sourceSize": {
+    "w": 8,
+    "h": 8
+   }
+  },
+  "fragment_rock_1": {
+   "frame": {
+    "x": 929,
+    "y": 0,
+    "w": 8,
+    "h": 8
+   },
+   "sourceSize": {
+    "w": 8,
+    "h": 8
+   }
+  },
+  "fragment_rock_2": {
+   "frame": {
+    "x": 938,
+    "y": 0,
+    "w": 8,
+    "h": 8
+   },
+   "sourceSize": {
+    "w": 8,
+    "h": 8
+   }
+  },
+  "asteroid_ice_16_0": {
+   "frame": {
+    "x": 947,
+    "y": 0,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "asteroid_ice_16_1": {
+   "frame": {
+    "x": 964,
+    "y": 0,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "asteroid_ice_16_2": {
+   "frame": {
+    "x": 981,
+    "y": 0,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "asteroid_ice_16_3": {
+   "frame": {
+    "x": 998,
+    "y": 0,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "asteroid_ice_16_4": {
+   "frame": {
+    "x": 1015,
+    "y": 0,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "asteroid_ice_16_5": {
+   "frame": {
+    "x": 1032,
+    "y": 0,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "asteroid_ice_16_6": {
+   "frame": {
+    "x": 0,
+    "y": 65,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "asteroid_ice_16_7": {
+   "frame": {
+    "x": 17,
+    "y": 65,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "asteroid_ice_32_0": {
+   "frame": {
+    "x": 34,
+    "y": 65,
+    "w": 32,
+    "h": 32
+   },
+   "sourceSize": {
+    "w": 32,
+    "h": 32
+   }
+  },
+  "asteroid_ice_32_1": {
+   "frame": {
+    "x": 67,
+    "y": 65,
+    "w": 32,
+    "h": 32
+   },
+   "sourceSize": {
+    "w": 32,
+    "h": 32
+   }
+  },
+  "asteroid_ice_32_2": {
+   "frame": {
+    "x": 100,
+    "y": 65,
+    "w": 32,
+    "h": 32
+   },
+   "sourceSize": {
+    "w": 32,
+    "h": 32
+   }
+  },
+  "asteroid_ice_32_3": {
+   "frame": {
+    "x": 133,
+    "y": 65,
+    "w": 32,
+    "h": 32
+   },
+   "sourceSize": {
+    "w": 32,
+    "h": 32
+   }
+  },
+  "asteroid_ice_32_4": {
+   "frame": {
+    "x": 166,
+    "y": 65,
+    "w": 32,
+    "h": 32
+   },
+   "sourceSize": {
+    "w": 32,
+    "h": 32
+   }
+  },
+  "asteroid_ice_32_5": {
+   "frame": {
+    "x": 199,
+    "y": 65,
+    "w": 32,
+    "h": 32
+   },
+   "sourceSize": {
+    "w": 32,
+    "h": 32
+   }
+  },
+  "asteroid_ice_32_6": {
+   "frame": {
+    "x": 232,
+    "y": 65,
+    "w": 32,
+    "h": 32
+   },
+   "sourceSize": {
+    "w": 32,
+    "h": 32
+   }
+  },
+  "asteroid_ice_32_7": {
+   "frame": {
+    "x": 265,
+    "y": 65,
+    "w": 32,
+    "h": 32
+   },
+   "sourceSize": {
+    "w": 32,
+    "h": 32
+   }
+  },
+  "asteroid_ice_64_0": {
+   "frame": {
+    "x": 298,
+    "y": 65,
+    "w": 64,
+    "h": 64
+   },
+   "sourceSize": {
+    "w": 64,
+    "h": 64
+   }
+  },
+  "asteroid_ice_64_1": {
+   "frame": {
+    "x": 363,
+    "y": 65,
+    "w": 64,
+    "h": 64
+   },
+   "sourceSize": {
+    "w": 64,
+    "h": 64
+   }
+  },
+  "asteroid_ice_64_2": {
+   "frame": {
+    "x": 428,
+    "y": 65,
+    "w": 64,
+    "h": 64
+   },
+   "sourceSize": {
+    "w": 64,
+    "h": 64
+   }
+  },
+  "asteroid_ice_64_3": {
+   "frame": {
+    "x": 493,
+    "y": 65,
+    "w": 64,
+    "h": 64
+   },
+   "sourceSize": {
+    "w": 64,
+    "h": 64
+   }
+  },
+  "asteroid_ice_64_4": {
+   "frame": {
+    "x": 558,
+    "y": 65,
+    "w": 64,
+    "h": 64
+   },
+   "sourceSize": {
+    "w": 64,
+    "h": 64
+   }
+  },
+  "asteroid_ice_64_5": {
+   "frame": {
+    "x": 623,
+    "y": 65,
+    "w": 64,
+    "h": 64
+   },
+   "sourceSize": {
+    "w": 64,
+    "h": 64
+   }
+  },
+  "asteroid_ice_64_6": {
+   "frame": {
+    "x": 688,
+    "y": 65,
+    "w": 64,
+    "h": 64
+   },
+   "sourceSize": {
+    "w": 64,
+    "h": 64
+   }
+  },
+  "asteroid_ice_64_7": {
+   "frame": {
+    "x": 753,
+    "y": 65,
+    "w": 64,
+    "h": 64
+   },
+   "sourceSize": {
+    "w": 64,
+    "h": 64
+   }
+  },
+  "fragment_ice_0": {
+   "frame": {
+    "x": 818,
+    "y": 65,
+    "w": 8,
+    "h": 8
+   },
+   "sourceSize": {
+    "w": 8,
+    "h": 8
+   }
+  },
+  "fragment_ice_1": {
+   "frame": {
+    "x": 827,
+    "y": 65,
+    "w": 8,
+    "h": 8
+   },
+   "sourceSize": {
+    "w": 8,
+    "h": 8
+   }
+  },
+  "fragment_ice_2": {
+   "frame": {
+    "x": 836,
+    "y": 65,
+    "w": 8,
+    "h": 8
+   },
+   "sourceSize": {
+    "w": 8,
+    "h": 8
+   }
+  },
+  "asteroid_metal_16_0": {
+   "frame": {
+    "x": 845,
+    "y": 65,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "asteroid_metal_16_1": {
+   "frame": {
+    "x": 862,
+    "y": 65,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "asteroid_metal_16_2": {
+   "frame": {
+    "x": 879,
+    "y": 65,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "asteroid_metal_16_3": {
+   "frame": {
+    "x": 896,
+    "y": 65,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "asteroid_metal_16_4": {
+   "frame": {
+    "x": 913,
+    "y": 65,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "asteroid_metal_16_5": {
+   "frame": {
+    "x": 930,
+    "y": 65,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "asteroid_metal_16_6": {
+   "frame": {
+    "x": 947,
+    "y": 65,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "asteroid_metal_16_7": {
+   "frame": {
+    "x": 964,
+    "y": 65,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "asteroid_metal_32_0": {
+   "frame": {
+    "x": 981,
+    "y": 65,
+    "w": 32,
+    "h": 32
+   },
+   "sourceSize": {
+    "w": 32,
+    "h": 32
+   }
+  },
+  "asteroid_metal_32_1": {
+   "frame": {
+    "x": 1014,
+    "y": 65,
+    "w": 32,
+    "h": 32
+   },
+   "sourceSize": {
+    "w": 32,
+    "h": 32
+   }
+  },
+  "asteroid_metal_32_2": {
+   "frame": {
+    "x": 0,
+    "y": 130,
+    "w": 32,
+    "h": 32
+   },
+   "sourceSize": {
+    "w": 32,
+    "h": 32
+   }
+  },
+  "asteroid_metal_32_3": {
+   "frame": {
+    "x": 33,
+    "y": 130,
+    "w": 32,
+    "h": 32
+   },
+   "sourceSize": {
+    "w": 32,
+    "h": 32
+   }
+  },
+  "asteroid_metal_32_4": {
+   "frame": {
+    "x": 66,
+    "y": 130,
+    "w": 32,
+    "h": 32
+   },
+   "sourceSize": {
+    "w": 32,
+    "h": 32
+   }
+  },
+  "asteroid_metal_32_5": {
+   "frame": {
+    "x": 99,
+    "y": 130,
+    "w": 32,
+    "h": 32
+   },
+   "sourceSize": {
+    "w": 32,
+    "h": 32
+   }
+  },
+  "asteroid_metal_32_6": {
+   "frame": {
+    "x": 132,
+    "y": 130,
+    "w": 32,
+    "h": 32
+   },
+   "sourceSize": {
+    "w": 32,
+    "h": 32
+   }
+  },
+  "asteroid_metal_32_7": {
+   "frame": {
+    "x": 165,
+    "y": 130,
+    "w": 32,
+    "h": 32
+   },
+   "sourceSize": {
+    "w": 32,
+    "h": 32
+   }
+  },
+  "asteroid_metal_64_0": {
+   "frame": {
+    "x": 198,
+    "y": 130,
+    "w": 64,
+    "h": 64
+   },
+   "sourceSize": {
+    "w": 64,
+    "h": 64
+   }
+  },
+  "asteroid_metal_64_1": {
+   "frame": {
+    "x": 263,
+    "y": 130,
+    "w": 64,
+    "h": 64
+   },
+   "sourceSize": {
+    "w": 64,
+    "h": 64
+   }
+  },
+  "asteroid_metal_64_2": {
+   "frame": {
+    "x": 328,
+    "y": 130,
+    "w": 64,
+    "h": 64
+   },
+   "sourceSize": {
+    "w": 64,
+    "h": 64
+   }
+  },
+  "asteroid_metal_64_3": {
+   "frame": {
+    "x": 393,
+    "y": 130,
+    "w": 64,
+    "h": 64
+   },
+   "sourceSize": {
+    "w": 64,
+    "h": 64
+   }
+  },
+  "asteroid_metal_64_4": {
+   "frame": {
+    "x": 458,
+    "y": 130,
+    "w": 64,
+    "h": 64
+   },
+   "sourceSize": {
+    "w": 64,
+    "h": 64
+   }
+  },
+  "asteroid_metal_64_5": {
+   "frame": {
+    "x": 523,
+    "y": 130,
+    "w": 64,
+    "h": 64
+   },
+   "sourceSize": {
+    "w": 64,
+    "h": 64
+   }
+  },
+  "asteroid_metal_64_6": {
+   "frame": {
+    "x": 588,
+    "y": 130,
+    "w": 64,
+    "h": 64
+   },
+   "sourceSize": {
+    "w": 64,
+    "h": 64
+   }
+  },
+  "asteroid_metal_64_7": {
+   "frame": {
+    "x": 653,
+    "y": 130,
+    "w": 64,
+    "h": 64
+   },
+   "sourceSize": {
+    "w": 64,
+    "h": 64
+   }
+  },
+  "fragment_metal_0": {
+   "frame": {
+    "x": 718,
+    "y": 130,
+    "w": 8,
+    "h": 8
+   },
+   "sourceSize": {
+    "w": 8,
+    "h": 8
+   }
+  },
+  "fragment_metal_1": {
+   "frame": {
+    "x": 727,
+    "y": 130,
+    "w": 8,
+    "h": 8
+   },
+   "sourceSize": {
+    "w": 8,
+    "h": 8
+   }
+  },
+  "fragment_metal_2": {
+   "frame": {
+    "x": 736,
+    "y": 130,
+    "w": 8,
+    "h": 8
+   },
+   "sourceSize": {
+    "w": 8,
+    "h": 8
+   }
+  },
+  "asteroid_lava_16_0": {
+   "frame": {
+    "x": 745,
+    "y": 130,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "asteroid_lava_16_1": {
+   "frame": {
+    "x": 762,
+    "y": 130,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "asteroid_lava_16_2": {
+   "frame": {
+    "x": 779,
+    "y": 130,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "asteroid_lava_16_3": {
+   "frame": {
+    "x": 796,
+    "y": 130,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "asteroid_lava_16_4": {
+   "frame": {
+    "x": 813,
+    "y": 130,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "asteroid_lava_16_5": {
+   "frame": {
+    "x": 830,
+    "y": 130,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "asteroid_lava_16_6": {
+   "frame": {
+    "x": 847,
+    "y": 130,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "asteroid_lava_16_7": {
+   "frame": {
+    "x": 864,
+    "y": 130,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "asteroid_lava_32_0": {
+   "frame": {
+    "x": 881,
+    "y": 130,
+    "w": 32,
+    "h": 32
+   },
+   "sourceSize": {
+    "w": 32,
+    "h": 32
+   }
+  },
+  "asteroid_lava_32_1": {
+   "frame": {
+    "x": 914,
+    "y": 130,
+    "w": 32,
+    "h": 32
+   },
+   "sourceSize": {
+    "w": 32,
+    "h": 32
+   }
+  },
+  "asteroid_lava_32_2": {
+   "frame": {
+    "x": 947,
+    "y": 130,
+    "w": 32,
+    "h": 32
+   },
+   "sourceSize": {
+    "w": 32,
+    "h": 32
+   }
+  },
+  "asteroid_lava_32_3": {
+   "frame": {
+    "x": 980,
+    "y": 130,
+    "w": 32,
+    "h": 32
+   },
+   "sourceSize": {
+    "w": 32,
+    "h": 32
+   }
+  },
+  "asteroid_lava_32_4": {
+   "frame": {
+    "x": 1013,
+    "y": 130,
+    "w": 32,
+    "h": 32
+   },
+   "sourceSize": {
+    "w": 32,
+    "h": 32
+   }
+  },
+  "asteroid_lava_32_5": {
+   "frame": {
+    "x": 0,
+    "y": 195,
+    "w": 32,
+    "h": 32
+   },
+   "sourceSize": {
+    "w": 32,
+    "h": 32
+   }
+  },
+  "asteroid_lava_32_6": {
+   "frame": {
+    "x": 33,
+    "y": 195,
+    "w": 32,
+    "h": 32
+   },
+   "sourceSize": {
+    "w": 32,
+    "h": 32
+   }
+  },
+  "asteroid_lava_32_7": {
+   "frame": {
+    "x": 66,
+    "y": 195,
+    "w": 32,
+    "h": 32
+   },
+   "sourceSize": {
+    "w": 32,
+    "h": 32
+   }
+  },
+  "asteroid_lava_64_0": {
+   "frame": {
+    "x": 99,
+    "y": 195,
+    "w": 64,
+    "h": 64
+   },
+   "sourceSize": {
+    "w": 64,
+    "h": 64
+   }
+  },
+  "asteroid_lava_64_1": {
+   "frame": {
+    "x": 164,
+    "y": 195,
+    "w": 64,
+    "h": 64
+   },
+   "sourceSize": {
+    "w": 64,
+    "h": 64
+   }
+  },
+  "asteroid_lava_64_2": {
+   "frame": {
+    "x": 229,
+    "y": 195,
+    "w": 64,
+    "h": 64
+   },
+   "sourceSize": {
+    "w": 64,
+    "h": 64
+   }
+  },
+  "asteroid_lava_64_3": {
+   "frame": {
+    "x": 294,
+    "y": 195,
+    "w": 64,
+    "h": 64
+   },
+   "sourceSize": {
+    "w": 64,
+    "h": 64
+   }
+  },
+  "asteroid_lava_64_4": {
+   "frame": {
+    "x": 359,
+    "y": 195,
+    "w": 64,
+    "h": 64
+   },
+   "sourceSize": {
+    "w": 64,
+    "h": 64
+   }
+  },
+  "asteroid_lava_64_5": {
+   "frame": {
+    "x": 424,
+    "y": 195,
+    "w": 64,
+    "h": 64
+   },
+   "sourceSize": {
+    "w": 64,
+    "h": 64
+   }
+  },
+  "asteroid_lava_64_6": {
+   "frame": {
+    "x": 489,
+    "y": 195,
+    "w": 64,
+    "h": 64
+   },
+   "sourceSize": {
+    "w": 64,
+    "h": 64
+   }
+  },
+  "asteroid_lava_64_7": {
+   "frame": {
+    "x": 554,
+    "y": 195,
+    "w": 64,
+    "h": 64
+   },
+   "sourceSize": {
+    "w": 64,
+    "h": 64
+   }
+  },
+  "fragment_lava_0": {
+   "frame": {
+    "x": 619,
+    "y": 195,
+    "w": 8,
+    "h": 8
+   },
+   "sourceSize": {
+    "w": 8,
+    "h": 8
+   }
+  },
+  "fragment_lava_1": {
+   "frame": {
+    "x": 628,
+    "y": 195,
+    "w": 8,
+    "h": 8
+   },
+   "sourceSize": {
+    "w": 8,
+    "h": 8
+   }
+  },
+  "fragment_lava_2": {
+   "frame": {
+    "x": 637,
+    "y": 195,
+    "w": 8,
+    "h": 8
+   },
+   "sourceSize": {
+    "w": 8,
+    "h": 8
+   }
+  },
+  "powerup_health_0": {
+   "frame": {
+    "x": 646,
+    "y": 195,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "powerup_health_1": {
+   "frame": {
+    "x": 663,
+    "y": 195,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "powerup_health_2": {
+   "frame": {
+    "x": 680,
+    "y": 195,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "powerup_health_3": {
+   "frame": {
+    "x": 697,
+    "y": 195,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "powerup_shield_0": {
+   "frame": {
+    "x": 714,
+    "y": 195,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "powerup_shield_1": {
+   "frame": {
+    "x": 731,
+    "y": 195,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "powerup_shield_2": {
+   "frame": {
+    "x": 748,
+    "y": 195,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "powerup_shield_3": {
+   "frame": {
+    "x": 765,
+    "y": 195,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "powerup_power_up_0": {
+   "frame": {
+    "x": 782,
+    "y": 195,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "powerup_power_up_1": {
+   "frame": {
+    "x": 799,
+    "y": 195,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "powerup_power_up_2": {
+   "frame": {
+    "x": 816,
+    "y": 195,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "powerup_power_up_3": {
+   "frame": {
+    "x": 833,
+    "y": 195,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "powerup_spread_0": {
+   "frame": {
+    "x": 850,
+    "y": 195,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "powerup_spread_1": {
+   "frame": {
+    "x": 867,
+    "y": 195,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "powerup_spread_2": {
+   "frame": {
+    "x": 884,
+    "y": 195,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "powerup_spread_3": {
+   "frame": {
+    "x": 901,
+    "y": 195,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "powerup_laser_0": {
+   "frame": {
+    "x": 918,
+    "y": 195,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "powerup_laser_1": {
+   "frame": {
+    "x": 935,
+    "y": 195,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "powerup_laser_2": {
+   "frame": {
+    "x": 952,
+    "y": 195,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "powerup_laser_3": {
+   "frame": {
+    "x": 969,
+    "y": 195,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "powerup_missile_0": {
+   "frame": {
+    "x": 986,
+    "y": 195,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "powerup_missile_1": {
+   "frame": {
+    "x": 1003,
+    "y": 195,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "powerup_missile_2": {
+   "frame": {
+    "x": 1020,
+    "y": 195,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "powerup_missile_3": {
+   "frame": {
+    "x": 1037,
+    "y": 195,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "powerup_bomb_0": {
+   "frame": {
+    "x": 0,
+    "y": 260,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "powerup_bomb_1": {
+   "frame": {
+    "x": 17,
+    "y": 260,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "powerup_bomb_2": {
+   "frame": {
+    "x": 34,
+    "y": 260,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "powerup_bomb_3": {
+   "frame": {
+    "x": 51,
+    "y": 260,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "powerup_speed_0": {
+   "frame": {
+    "x": 68,
+    "y": 260,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "powerup_speed_1": {
+   "frame": {
+    "x": 85,
+    "y": 260,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "powerup_speed_2": {
+   "frame": {
+    "x": 102,
+    "y": 260,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "powerup_speed_3": {
+   "frame": {
+    "x": 119,
+    "y": 260,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "powerup_magnet_0": {
+   "frame": {
+    "x": 136,
+    "y": 260,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "powerup_magnet_1": {
+   "frame": {
+    "x": 153,
+    "y": 260,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "powerup_magnet_2": {
+   "frame": {
+    "x": 170,
+    "y": 260,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "powerup_magnet_3": {
+   "frame": {
+    "x": 187,
+    "y": 260,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "powerup_star_0": {
+   "frame": {
+    "x": 204,
+    "y": 260,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "powerup_star_1": {
+   "frame": {
+    "x": 221,
+    "y": 260,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "powerup_star_2": {
+   "frame": {
+    "x": 238,
+    "y": 260,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "powerup_star_3": {
+   "frame": {
+    "x": 255,
+    "y": 260,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "powerup_extra_life_0": {
+   "frame": {
+    "x": 272,
+    "y": 260,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "powerup_extra_life_1": {
+   "frame": {
+    "x": 289,
+    "y": 260,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "powerup_extra_life_2": {
+   "frame": {
+    "x": 306,
+    "y": 260,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "powerup_extra_life_3": {
+   "frame": {
+    "x": 323,
+    "y": 260,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "powerup_rapid_fire_0": {
+   "frame": {
+    "x": 340,
+    "y": 260,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "powerup_rapid_fire_1": {
+   "frame": {
+    "x": 357,
+    "y": 260,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "powerup_rapid_fire_2": {
+   "frame": {
+    "x": 374,
+    "y": 260,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "powerup_rapid_fire_3": {
+   "frame": {
+    "x": 391,
+    "y": 260,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "powerup_drone_0": {
+   "frame": {
+    "x": 408,
+    "y": 260,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "powerup_drone_1": {
+   "frame": {
+    "x": 425,
+    "y": 260,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "powerup_drone_2": {
+   "frame": {
+    "x": 442,
+    "y": 260,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "powerup_drone_3": {
+   "frame": {
+    "x": 459,
+    "y": 260,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "powerup_repair_0": {
+   "frame": {
+    "x": 476,
+    "y": 260,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "powerup_repair_1": {
+   "frame": {
+    "x": 493,
+    "y": 260,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "powerup_repair_2": {
+   "frame": {
+    "x": 510,
+    "y": 260,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "powerup_repair_3": {
+   "frame": {
+    "x": 527,
+    "y": 260,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "drone_orb_0": {
+   "frame": {
+    "x": 544,
+    "y": 260,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "drone_orb_1": {
+   "frame": {
+    "x": 561,
+    "y": 260,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "drone_orb_2": {
+   "frame": {
+    "x": 578,
+    "y": 260,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "drone_orb_3": {
+   "frame": {
+    "x": 595,
+    "y": 260,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "drone_wing_0": {
+   "frame": {
+    "x": 612,
+    "y": 260,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "drone_wing_1": {
+   "frame": {
+    "x": 629,
+    "y": 260,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "drone_wing_2": {
+   "frame": {
+    "x": 646,
+    "y": 260,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "drone_wing_3": {
+   "frame": {
+    "x": 663,
+    "y": 260,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "drone_bit_0": {
+   "frame": {
+    "x": 680,
+    "y": 260,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "drone_bit_1": {
+   "frame": {
+    "x": 697,
+    "y": 260,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "drone_bit_2": {
+   "frame": {
+    "x": 714,
+    "y": 260,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  },
+  "drone_bit_3": {
+   "frame": {
+    "x": 731,
+    "y": 260,
+    "w": 16,
+    "h": 16
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 16
+   }
+  }
+ },
+ "animations": {
+  "asteroid_rock_16": {
+   "frames": [
+    "asteroid_rock_16_0",
+    "asteroid_rock_16_1",
+    "asteroid_rock_16_2",
+    "asteroid_rock_16_3",
+    "asteroid_rock_16_4",
+    "asteroid_rock_16_5",
+    "asteroid_rock_16_6",
+    "asteroid_rock_16_7"
+   ],
+   "fps": 8,
+   "loop": true
+  },
+  "asteroid_rock_32": {
+   "frames": [
+    "asteroid_rock_32_0",
+    "asteroid_rock_32_1",
+    "asteroid_rock_32_2",
+    "asteroid_rock_32_3",
+    "asteroid_rock_32_4",
+    "asteroid_rock_32_5",
+    "asteroid_rock_32_6",
+    "asteroid_rock_32_7"
+   ],
+   "fps": 8,
+   "loop": true
+  },
+  "asteroid_rock_64": {
+   "frames": [
+    "asteroid_rock_64_0",
+    "asteroid_rock_64_1",
+    "asteroid_rock_64_2",
+    "asteroid_rock_64_3",
+    "asteroid_rock_64_4",
+    "asteroid_rock_64_5",
+    "asteroid_rock_64_6",
+    "asteroid_rock_64_7"
+   ],
+   "fps": 8,
+   "loop": true
+  },
+  "asteroid_ice_16": {
+   "frames": [
+    "asteroid_ice_16_0",
+    "asteroid_ice_16_1",
+    "asteroid_ice_16_2",
+    "asteroid_ice_16_3",
+    "asteroid_ice_16_4",
+    "asteroid_ice_16_5",
+    "asteroid_ice_16_6",
+    "asteroid_ice_16_7"
+   ],
+   "fps": 8,
+   "loop": true
+  },
+  "asteroid_ice_32": {
+   "frames": [
+    "asteroid_ice_32_0",
+    "asteroid_ice_32_1",
+    "asteroid_ice_32_2",
+    "asteroid_ice_32_3",
+    "asteroid_ice_32_4",
+    "asteroid_ice_32_5",
+    "asteroid_ice_32_6",
+    "asteroid_ice_32_7"
+   ],
+   "fps": 8,
+   "loop": true
+  },
+  "asteroid_ice_64": {
+   "frames": [
+    "asteroid_ice_64_0",
+    "asteroid_ice_64_1",
+    "asteroid_ice_64_2",
+    "asteroid_ice_64_3",
+    "asteroid_ice_64_4",
+    "asteroid_ice_64_5",
+    "asteroid_ice_64_6",
+    "asteroid_ice_64_7"
+   ],
+   "fps": 8,
+   "loop": true
+  },
+  "asteroid_metal_16": {
+   "frames": [
+    "asteroid_metal_16_0",
+    "asteroid_metal_16_1",
+    "asteroid_metal_16_2",
+    "asteroid_metal_16_3",
+    "asteroid_metal_16_4",
+    "asteroid_metal_16_5",
+    "asteroid_metal_16_6",
+    "asteroid_metal_16_7"
+   ],
+   "fps": 8,
+   "loop": true
+  },
+  "asteroid_metal_32": {
+   "frames": [
+    "asteroid_metal_32_0",
+    "asteroid_metal_32_1",
+    "asteroid_metal_32_2",
+    "asteroid_metal_32_3",
+    "asteroid_metal_32_4",
+    "asteroid_metal_32_5",
+    "asteroid_metal_32_6",
+    "asteroid_metal_32_7"
+   ],
+   "fps": 8,
+   "loop": true
+  },
+  "asteroid_metal_64": {
+   "frames": [
+    "asteroid_metal_64_0",
+    "asteroid_metal_64_1",
+    "asteroid_metal_64_2",
+    "asteroid_metal_64_3",
+    "asteroid_metal_64_4",
+    "asteroid_metal_64_5",
+    "asteroid_metal_64_6",
+    "asteroid_metal_64_7"
+   ],
+   "fps": 8,
+   "loop": true
+  },
+  "asteroid_lava_16": {
+   "frames": [
+    "asteroid_lava_16_0",
+    "asteroid_lava_16_1",
+    "asteroid_lava_16_2",
+    "asteroid_lava_16_3",
+    "asteroid_lava_16_4",
+    "asteroid_lava_16_5",
+    "asteroid_lava_16_6",
+    "asteroid_lava_16_7"
+   ],
+   "fps": 8,
+   "loop": true
+  },
+  "asteroid_lava_32": {
+   "frames": [
+    "asteroid_lava_32_0",
+    "asteroid_lava_32_1",
+    "asteroid_lava_32_2",
+    "asteroid_lava_32_3",
+    "asteroid_lava_32_4",
+    "asteroid_lava_32_5",
+    "asteroid_lava_32_6",
+    "asteroid_lava_32_7"
+   ],
+   "fps": 8,
+   "loop": true
+  },
+  "asteroid_lava_64": {
+   "frames": [
+    "asteroid_lava_64_0",
+    "asteroid_lava_64_1",
+    "asteroid_lava_64_2",
+    "asteroid_lava_64_3",
+    "asteroid_lava_64_4",
+    "asteroid_lava_64_5",
+    "asteroid_lava_64_6",
+    "asteroid_lava_64_7"
+   ],
+   "fps": 8,
+   "loop": true
+  },
+  "powerup_health": {
+   "frames": [
+    "powerup_health_0",
+    "powerup_health_1",
+    "powerup_health_2",
+    "powerup_health_3"
+   ],
+   "fps": 6,
+   "loop": true
+  },
+  "powerup_shield": {
+   "frames": [
+    "powerup_shield_0",
+    "powerup_shield_1",
+    "powerup_shield_2",
+    "powerup_shield_3"
+   ],
+   "fps": 6,
+   "loop": true
+  },
+  "powerup_power_up": {
+   "frames": [
+    "powerup_power_up_0",
+    "powerup_power_up_1",
+    "powerup_power_up_2",
+    "powerup_power_up_3"
+   ],
+   "fps": 6,
+   "loop": true
+  },
+  "powerup_spread": {
+   "frames": [
+    "powerup_spread_0",
+    "powerup_spread_1",
+    "powerup_spread_2",
+    "powerup_spread_3"
+   ],
+   "fps": 6,
+   "loop": true
+  },
+  "powerup_laser": {
+   "frames": [
+    "powerup_laser_0",
+    "powerup_laser_1",
+    "powerup_laser_2",
+    "powerup_laser_3"
+   ],
+   "fps": 6,
+   "loop": true
+  },
+  "powerup_missile": {
+   "frames": [
+    "powerup_missile_0",
+    "powerup_missile_1",
+    "powerup_missile_2",
+    "powerup_missile_3"
+   ],
+   "fps": 6,
+   "loop": true
+  },
+  "powerup_bomb": {
+   "frames": [
+    "powerup_bomb_0",
+    "powerup_bomb_1",
+    "powerup_bomb_2",
+    "powerup_bomb_3"
+   ],
+   "fps": 6,
+   "loop": true
+  },
+  "powerup_speed": {
+   "frames": [
+    "powerup_speed_0",
+    "powerup_speed_1",
+    "powerup_speed_2",
+    "powerup_speed_3"
+   ],
+   "fps": 6,
+   "loop": true
+  },
+  "powerup_magnet": {
+   "frames": [
+    "powerup_magnet_0",
+    "powerup_magnet_1",
+    "powerup_magnet_2",
+    "powerup_magnet_3"
+   ],
+   "fps": 6,
+   "loop": true
+  },
+  "powerup_star": {
+   "frames": [
+    "powerup_star_0",
+    "powerup_star_1",
+    "powerup_star_2",
+    "powerup_star_3"
+   ],
+   "fps": 6,
+   "loop": true
+  },
+  "powerup_extra_life": {
+   "frames": [
+    "powerup_extra_life_0",
+    "powerup_extra_life_1",
+    "powerup_extra_life_2",
+    "powerup_extra_life_3"
+   ],
+   "fps": 6,
+   "loop": true
+  },
+  "powerup_rapid_fire": {
+   "frames": [
+    "powerup_rapid_fire_0",
+    "powerup_rapid_fire_1",
+    "powerup_rapid_fire_2",
+    "powerup_rapid_fire_3"
+   ],
+   "fps": 6,
+   "loop": true
+  },
+  "powerup_drone": {
+   "frames": [
+    "powerup_drone_0",
+    "powerup_drone_1",
+    "powerup_drone_2",
+    "powerup_drone_3"
+   ],
+   "fps": 6,
+   "loop": true
+  },
+  "powerup_repair": {
+   "frames": [
+    "powerup_repair_0",
+    "powerup_repair_1",
+    "powerup_repair_2",
+    "powerup_repair_3"
+   ],
+   "fps": 6,
+   "loop": true
+  },
+  "drone_orb": {
+   "frames": [
+    "drone_orb_0",
+    "drone_orb_1",
+    "drone_orb_2",
+    "drone_orb_3"
+   ],
+   "fps": 10,
+   "loop": true
+  },
+  "drone_wing": {
+   "frames": [
+    "drone_wing_0",
+    "drone_wing_1",
+    "drone_wing_2",
+    "drone_wing_3"
+   ],
+   "fps": 10,
+   "loop": true
+  },
+  "drone_bit": {
+   "frames": [
+    "drone_bit_0",
+    "drone_bit_1",
+    "drone_bit_2",
+    "drone_bit_3"
+   ],
+   "fps": 10,
+   "loop": true
+  }
+ },
+ "meta": {
+  "image": "objects.png",
+  "size": {
+   "w": 1056,
+   "h": 276
+  },
+  "format": "RGBA8888",
+  "scale": "1",
+  "generator": "pixel-space-shooter build_all.py"
+ }
+}

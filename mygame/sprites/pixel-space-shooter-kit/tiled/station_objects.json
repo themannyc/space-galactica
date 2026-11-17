@@ -1,0 +1,350 @@
+{
+ "frames": {
+  "station_gun_0": {
+   "frame": {
+    "x": 0,
+    "y": 0,
+    "w": 32,
+    "h": 32
+   },
+   "sourceSize": {
+    "w": 32,
+    "h": 32
+   }
+  },
+  "station_gun_1": {
+   "frame": {
+    "x": 33,
+    "y": 0,
+    "w": 32,
+    "h": 32
+   },
+   "sourceSize": {
+    "w": 32,
+    "h": 32
+   }
+  },
+  "station_gun_2": {
+   "frame": {
+    "x": 66,
+    "y": 0,
+    "w": 32,
+    "h": 32
+   },
+   "sourceSize": {
+    "w": 32,
+    "h": 32
+   }
+  },
+  "reactor_core_0": {
+   "frame": {
+    "x": 99,
+    "y": 0,
+    "w": 48,
+    "h": 48
+   },
+   "sourceSize": {
+    "w": 48,
+    "h": 48
+   }
+  },
+  "reactor_core_1": {
+   "frame": {
+    "x": 148,
+    "y": 0,
+    "w": 48,
+    "h": 48
+   },
+   "sourceSize": {
+    "w": 48,
+    "h": 48
+   }
+  },
+  "reactor_core_2": {
+   "frame": {
+    "x": 197,
+    "y": 0,
+    "w": 48,
+    "h": 48
+   },
+   "sourceSize": {
+    "w": 48,
+    "h": 48
+   }
+  },
+  "reactor_core_3": {
+   "frame": {
+    "x": 246,
+    "y": 0,
+    "w": 48,
+    "h": 48
+   },
+   "sourceSize": {
+    "w": 48,
+    "h": 48
+   }
+  },
+  "radar_dish_0": {
+   "frame": {
+    "x": 295,
+    "y": 0,
+    "w": 32,
+    "h": 32
+   },
+   "sourceSize": {
+    "w": 32,
+    "h": 32
+   }
+  },
+  "radar_dish_1": {
+   "frame": {
+    "x": 328,
+    "y": 0,
+    "w": 32,
+    "h": 32
+   },
+   "sourceSize": {
+    "w": 32,
+    "h": 32
+   }
+  },
+  "radar_dish_2": {
+   "frame": {
+    "x": 361,
+    "y": 0,
+    "w": 32,
+    "h": 32
+   },
+   "sourceSize": {
+    "w": 32,
+    "h": 32
+   }
+  },
+  "radar_dish_3": {
+   "frame": {
+    "x": 394,
+    "y": 0,
+    "w": 32,
+    "h": 32
+   },
+   "sourceSize": {
+    "w": 32,
+    "h": 32
+   }
+  },
+  "solar_array_0": {
+   "frame": {
+    "x": 427,
+    "y": 0,
+    "w": 64,
+    "h": 32
+   },
+   "sourceSize": {
+    "w": 64,
+    "h": 32
+   }
+  },
+  "fuel_tank_0": {
+   "frame": {
+    "x": 0,
+    "y": 49,
+    "w": 32,
+    "h": 48
+   },
+   "sourceSize": {
+    "w": 32,
+    "h": 48
+   }
+  },
+  "engine_nozzle_0": {
+   "frame": {
+    "x": 33,
+    "y": 49,
+    "w": 32,
+    "h": 48
+   },
+   "sourceSize": {
+    "w": 32,
+    "h": 48
+   }
+  },
+  "engine_nozzle_1": {
+   "frame": {
+    "x": 66,
+    "y": 49,
+    "w": 32,
+    "h": 48
+   },
+   "sourceSize": {
+    "w": 32,
+    "h": 48
+   }
+  },
+  "engine_nozzle_2": {
+   "frame": {
+    "x": 99,
+    "y": 49,
+    "w": 32,
+    "h": 48
+   },
+   "sourceSize": {
+    "w": 32,
+    "h": 48
+   }
+  },
+  "engine_nozzle_3": {
+   "frame": {
+    "x": 132,
+    "y": 49,
+    "w": 32,
+    "h": 48
+   },
+   "sourceSize": {
+    "w": 32,
+    "h": 48
+   }
+  },
+  "hangar_door_0": {
+   "frame": {
+    "x": 165,
+    "y": 49,
+    "w": 64,
+    "h": 32
+   },
+   "sourceSize": {
+    "w": 64,
+    "h": 32
+   }
+  },
+  "hangar_door_1": {
+   "frame": {
+    "x": 230,
+    "y": 49,
+    "w": 64,
+    "h": 32
+   },
+   "sourceSize": {
+    "w": 64,
+    "h": 32
+   }
+  },
+  "hangar_door_2": {
+   "frame": {
+    "x": 295,
+    "y": 49,
+    "w": 64,
+    "h": 32
+   },
+   "sourceSize": {
+    "w": 64,
+    "h": 32
+   }
+  },
+  "hangar_door_3": {
+   "frame": {
+    "x": 360,
+    "y": 49,
+    "w": 64,
+    "h": 32
+   },
+   "sourceSize": {
+    "w": 64,
+    "h": 32
+   }
+  },
+  "light_strip_0": {
+   "frame": {
+    "x": 425,
+    "y": 49,
+    "w": 16,
+    "h": 32
+   },
+   "sourceSize": {
+    "w": 16,
+    "h": 32
+   }
+  }
+ },
+ "animations": {
+  "station_gun": {
+   "frames": [
+    "station_gun_0",
+    "station_gun_1",
+    "station_gun_2"
+   ],
+   "fps": 8,
+   "loop": true
+  },
+  "reactor_core": {
+   "frames": [
+    "reactor_core_0",
+    "reactor_core_1",
+    "reactor_core_2",
+    "reactor_core_3"
+   ],
+   "fps": 8,
+   "loop": true
+  },
+  "radar_dish": {
+   "frames": [
+    "radar_dish_0",
+    "radar_dish_1",
+    "radar_dish_2",
+    "radar_dish_3"
+   ],
+   "fps": 8,
+   "loop": true
+  },
+  "solar_array": {
+   "frames": [
+    "solar_array_0"
+   ],
+   "fps": 8,
+   "loop": true
+  },
+  "fuel_tank": {
+   "frames": [
+    "fuel_tank_0"
+   ],
+   "fps": 8,
+   "loop": true
+  },
+  "engine_nozzle": {
+   "frames": [
+    "engine_nozzle_0",
+    "engine_nozzle_1",
+    "engine_nozzle_2",
+    "engine_nozzle_3"
+   ],
+   "fps": 8,
+   "loop": true
+  },
+  "hangar_door": {
+   "frames": [
+    "hangar_door_0",
+    "hangar_door_1",
+    "hangar_door_2",
+    "hangar_door_3"
+   ],
+   "fps": 8,
+   "loop": true
+  },
+  "light_strip": {
+   "frames": [
+    "light_strip_0"
+   ],
+   "fps": 8,
+   "loop": true
+  }
+ },
+ "meta": {
+  "image": "station_objects.png",
+  "size": {
+   "w": 512,
+   "h": 97
+  },
+  "format": "RGBA8888",
+  "scale": "1",
+  "generator": "pixel-space-shooter build_all.py"
+ }
+}

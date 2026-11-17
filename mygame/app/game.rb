@@ -1,4 +1,3 @@
-
 require "app/player"
 
 class Game
@@ -23,6 +22,9 @@ class Game
 
   SPACE_BOSS =
     "sprites/PNG_Parts&Spriter_Animation/Ship6/Ship6.png"
+
+  # Boss ships live in <dir>/ShipN/ShipN.png (Ship6 is the Deep Space boss)
+  SHIP_PARTS_DIR = "sprites/PNG_Parts&Spriter_Animation"
 
   SHIP_COLORS = {
     blue: "sprites/space_assets/playerShip1_blue.png",
@@ -50,6 +52,66 @@ class Game
     "sprites/space_assets/Lasers/laserRed01.png"
 
   SHOTS_DIR = "sprites/PNG_Animations/Shots"
+
+  # ==========================================================
+  # CUSTOM ANIMATED PROJECTILES / HAZARDS
+  #
+  # Each set points at a folder in sprites/ that follows the
+  # pattern:  sprites/<folder>/PNG/<folder>_Frame_01.png ...
+  # Frames that do not exist are skipped automatically, so a
+  # wrong frame count never crashes the game.
+  #
+  #   frames        - explicit list of frame paths (used instead of folder)
+  #   w, h          - size on screen
+  #   angle_offset  - the direction the art faces (180 = faces left)
+  #   rotate: false - never rotate (good for smoke/explosions)
+  # ==========================================================
+
+  CUSTOM_SHOTS = {
+    # The dragon's own flame: sprites/planet_bosses/dragon/Fire_Attack1-6.png
+    # If it flies backwards in game, change angle_offset to 180.
+    dragon_fire: {
+      frames: (1..6).map { |i| "sprites/planet_bosses/dragon/Fire_Attack#{i}.png" },
+      w: 180, h: 180, angle_offset: 0
+    },
+
+    fire_spell: {
+      folder: "Fire Spell", w: 80, h: 80, angle_offset: 0
+    },
+    fire_ball: {
+      folder: "Fire Ball", w: 120, h: 90, angle_offset: 0
+    },
+    fire_arrow: {
+      folder: "Fire Arrow", w: 110, h: 60, angle_offset: -180
+    },
+    water_spell: {
+      folder: "Water Spell", w: 80, h: 80, angle_offset: 0
+    },
+    water_ball: {
+      folder: "Water Ball", w: 120, h: 90, angle_offset: 0
+    },
+    water_arrow: {
+      folder: "Water Arrow", w: 110, h: 60, angle_offset: -180
+    },
+    poison_smoke: {
+      folder: "Poisonous Smoke", w: 90, h: 90, rotate: false
+    },
+    chemical_smoke: {
+      folder: "Chemical Smoke", w: 120, h: 120, rotate: false
+    },
+    smoke: {
+      folder: "Smoke", w: 90, h: 90, rotate: false
+    },
+    smoke_spell: {
+      folder: "Smoke Spell", w: 90, h: 90, rotate: false
+    },
+    smoke_blow: {
+      folder: "Smoke Blow", w: 120, h: 120, rotate: false
+    },
+    smoke_explosion: {
+      folder: "Smoke Explosion", w: 120, h: 120, rotate: false
+    }
+  }
 
   # ==========================================================
   # HUD ASSETS
@@ -107,16 +169,14 @@ class Game
   # ==========================================================
   # CUSTOM WORLD HAZARDS
   #
-  # ADD YOUR NEW SPRITE PATHS HERE.
-  #
-  # Empty sprites arrays use original meteors.
-  #
   # Each world can have its own:
-  #   sprites
+  #   set               - animated set from CUSTOM_SHOTS (replaces meteors)
+  #   sprites           - optional static sprite paths (used before set)
+  #   aspect            - width / height of the hazard (2.0 = twice as wide)
   #   speed_multiplier
   #   size_multiplier
   #
-  # These are static sprites for now.
+  # Worlds with no set and no sprites keep the original meteors.
   # ==========================================================
 
   WORLD_HAZARDS = {
@@ -127,10 +187,9 @@ class Game
     },
 
     "Ember Planet" => {
-      sprites: [
-        # "sprites/hazards/ember/fire_arrow.png",
-        # "sprites/hazards/ember/lava_rock.png"
-      ],
+      set: :fire_arrow,
+      aspect: 1.8,
+      sprites: [],
       speed_multiplier: 1.1,
       size_multiplier: 0.8
     },
@@ -142,9 +201,9 @@ class Game
     },
 
     "Frozen Planet" => {
-      sprites: [
-        # "sprites/hazards/frozen/ice_shard.png"
-      ],
+      set: :water_arrow,
+      aspect: 1.8,
+      sprites: [],
       speed_multiplier: 1.0,
       size_multiplier: 0.9
     },
@@ -156,9 +215,9 @@ class Game
     },
 
     "Shadow Planet" => {
-      sprites: [
-        # "sprites/hazards/shadow/cursed_orb.png"
-      ],
+      set: :smoke,
+      aspect: 1.0,
+      sprites: [],
       speed_multiplier: 1.2,
       size_multiplier: 0.85
     },
@@ -170,9 +229,9 @@ class Game
     },
 
     "Dragon Planet" => {
-      sprites: [
-        # "sprites/hazards/dragon/poison_orb.png"
-      ],
+      set: :smoke_explosion,
+      aspect: 1.0,
+      sprites: [],
       speed_multiplier: 1.3,
       size_multiplier: 0.9
     }
@@ -198,10 +257,10 @@ class Game
 
   DRAGON_ANIMATIONS = {
     idle: boss_frames("dragon", "Idle", 3),
-    move: boss_frames("dragon", "Walk", 6),
-    attack: boss_frames("dragon", "Attack", 5),
+    move: boss_frames("dragon", "Walk", 5),
+    attack: boss_frames("dragon", "Attack", 4),
     hurt: boss_frames("dragon", "Hurt", 2),
-    death: boss_frames("dragon", "Death", 6)
+    death: boss_frames("dragon", "Death", 5)
   }
 
   JINN_ANIMATIONS = {
@@ -312,6 +371,7 @@ class Game
 
   BOSS_FIRE_MULT = 1.5
   BOSS_BULLET_MULT = 0.65
+  BOSS_CAST_TICKS = 18 # wind-up before a creature's shot leaves its mouth
 
   TRANSITION_TICKS = 240
   FADE_TICKS = 70
@@ -369,6 +429,17 @@ class Game
 
   # ==========================================================
   # WORLDS
+  #
+  # Creature bosses use:
+  #   shot          - basic attack projectile (number or CUSTOM_SHOTS key)
+  #   special_shot  - special attack projectile
+  #   special_damage- damage dealt by each special projectile
+  #   special_anim  - animation played during the special attack
+  #
+  # Ground bosses (flying: false) also accept:
+  #   ground_offset - nudges the boss up (+) or down (-) to fit the ground
+  #   mouth         - { x:, y: } as a fraction of the sprite where shots spawn
+  #   roam_left / roam_right - how far (px) they patrol around their spot
   # ==========================================================
 
   WORLDS = [
@@ -386,7 +457,8 @@ class Game
         h: 400,
         speed: [3, 4.5, 6],
         fire_rate: [110, 95, 80],
-        bullet_speed: [6, 7, 8],
+        bullet_speed: [10, 12, 14],
+        special_speed: 13,
         shot: 2
       }
     },
@@ -402,15 +474,21 @@ class Game
         type: :creature,
         creature: :dragon,
         animations: DRAGON_ANIMATIONS,
-        flying: true,
+        flying: false, # walks on the ground: left / right only
         flip_horizontally: true,
+        ground_offset: -50, # more negative = feet lower, closer to the ground
+        mouth: { x: 0.23, y: 0.38 }, # where the fire leaves the dragon
         hp: 100,
-        w: 850,
-        h: 780,
+        w: 1200,
+        h: 1100,
         speed: [2.5, 3.5, 4.5],
         fire_rate: [120, 105, 90],
-        bullet_speed: [5, 6, 7],
-        shot: 3
+        bullet_speed: [15, 17, 19],
+        special_speed: 17,
+        projectile_hits_ground: true,
+        shot: :dragon_fire,
+        special_shot: :fire_ball,
+        special_damage: 2
       }
     },
 
@@ -422,13 +500,14 @@ class Game
       boss: {
         type: :spaceship,
         ship_number: 2,
-        sprite: SPACE_BOSS,
+        sprite: "#{SHIP_PARTS_DIR}/Ship2/Ship2.png",
         hp: 85,
         w: 420,
         h: 420,
         speed: [3, 4.5, 6],
         fire_rate: [105, 90, 75],
-        bullet_speed: [6, 7, 8],
+        bullet_speed: [11, 13, 15],
+        special_speed: 14,
         shot: 5
       }
     },
@@ -447,12 +526,16 @@ class Game
         flying: true,
         flip_horizontally: true,
         hp: 100,
-        w: 750,
-        h: 750,
+        w: 560, # smaller than before (was 750)
+        h: 560,
         speed: [2.5, 3.5, 4.5],
         fire_rate: [125, 105, 85],
-        bullet_speed: [5, 6, 7],
-        shot: 6
+        bullet_speed: [13, 15, 17],
+        special_speed: 16,
+        shot: :water_spell,
+        special_shot: :water_ball,
+        special_damage: 2,
+        special_anim: :magic
       }
     },
 
@@ -464,13 +547,14 @@ class Game
       boss: {
         type: :spaceship,
         ship_number: 3,
-        sprite: SPACE_BOSS,
+        sprite: "#{SHIP_PARTS_DIR}/Ship3/Ship3.png",
         hp: 100,
         w: 420,
         h: 420,
         speed: [3, 4.5, 6],
         fire_rate: [100, 85, 70],
-        bullet_speed: [6, 7, 8],
+        bullet_speed: [12, 14, 16],
+        special_speed: 15,
         shot: 5
       }
     },
@@ -493,8 +577,12 @@ class Game
         h: 850,
         speed: [2, 3, 4],
         fire_rate: [125, 105, 85],
-        bullet_speed: [5, 6, 7],
-        shot: 5
+        bullet_speed: [12, 14, 16],
+        special_speed: 15,
+        shot: :poison_smoke,
+        special_shot: :chemical_smoke,
+        special_damage: 2,
+        special_anim: :stone
       }
     },
 
@@ -506,13 +594,14 @@ class Game
       boss: {
         type: :spaceship,
         ship_number: 4,
-        sprite: SPACE_BOSS,
+        sprite: "#{SHIP_PARTS_DIR}/Ship4/Ship4.png",
         hp: 115,
         w: 420,
         h: 420,
         speed: [3, 4.5, 6],
         fire_rate: [100, 85, 70],
-        bullet_speed: [6, 7, 8],
+        bullet_speed: [13, 15, 17],
+        special_speed: 16,
         shot: 2
       }
     },
@@ -535,8 +624,11 @@ class Game
         h: 900,
         speed: [2, 3, 4],
         fire_rate: [135, 115, 95],
-        bullet_speed: [5, 6, 7],
-        shot: 4
+        bullet_speed: [14, 16, 18],
+        special_speed: 17,
+        shot: :smoke_spell,
+        special_shot: :smoke_blow,
+        special_damage: 2
       }
     }
   ]
@@ -600,6 +692,7 @@ class Game
     state.prompt_timer ||= 0
     state.fade ||= 0
     state.fire_cooldown ||= 0
+    state.pause_return_state ||= nil
 
     state.shots ||= []
     state.enemy_shots ||= []
@@ -663,7 +756,26 @@ class Game
     end
   end
 
+  # Frames for a CUSTOM_SHOTS set, e.g. :fire_ball
+  def custom_frames(key)
+    cfg = CUSTOM_SHOTS[key]
+    return [] unless cfg
+    return valid_frames(cfg[:frames]) if cfg[:frames]
+
+    folder = cfg[:folder]
+
+    paths = (1..20).map do |i|
+      "sprites/#{folder}/PNG/#{folder}_Frame_#{i.to_s.rjust(2, '0')}.png"
+    end
+
+    valid_frames(paths)
+  end
+
   def shot_frames(number, kind = :flying)
+    if number.is_a?(Symbol)
+      return kind == :explosion ? [] : custom_frames(number)
+    end
+
     folder = "#{SHOTS_DIR}/Shot#{number}"
     prefix = "shot#{number}"
 
@@ -693,11 +805,19 @@ class Game
   end
 
   def current_hazard_sprites
-    custom = current_hazard_config[:sprites].select do |path|
+    custom = (current_hazard_config[:sprites] || []).select do |path|
       gtk.stat_file(path)
     end
 
     custom.empty? ? METEORS : custom
+  end
+
+  # Animated hazard frames for the current world (empty = none)
+  def current_hazard_frames
+    set = current_hazard_config[:set]
+    return [] unless set
+
+    custom_frames(set)
   end
 
   # ==========================================================
@@ -778,7 +898,26 @@ class Game
 
     size = [size, 20].max
 
-    assets = current_hazard_sprites
+    # Pick what this hazard looks like:
+    #   1. custom static sprites  2. animated set  3. original meteors
+    static_sprites = (hazard[:sprites] || []).select do |path|
+      gtk.stat_file(path)
+    end
+
+    frames = static_sprites.empty? ? current_hazard_frames : []
+    animated = !frames.empty?
+
+    path =
+      if !static_sprites.empty?
+        static_sprites.sample
+      elsif animated
+        frames[0]
+      else
+        METEORS.sample
+      end
+
+    aspect = (animated || !static_sprites.empty?) ?
+      (hazard[:aspect] || 1.0) : 1.0
 
     {
       x: grid.w + Numeric.rand(
@@ -786,13 +925,15 @@ class Game
       ),
       y: Numeric.rand(0..(grid.h - size)),
       w: size,
-      h: size,
-      path: assets.sample,
+      h: [(size / aspect).to_i, 20].max,
+      path: path,
+      frames: frames,
+      born: Kernel.tick_count,
       speed: Numeric.rand(cfg[:speed]) *
         hazard[:speed_multiplier] *
         difficulty[:enemy_speed],
       vy: Numeric.rand(-2..2),
-      spin: Numeric.rand(-3..3),
+      spin: animated ? 0 : Numeric.rand(-3..3),
       angle: 0,
       dead: false
     }
@@ -930,7 +1071,7 @@ class Game
       if cfg[:type] == :creature
         boss_frames_for(cfg, :idle)[0]
       else
-        cfg[:sprite]
+        gtk.stat_file(cfg[:sprite]) ? cfg[:sprite] : SPACE_BOSS
       end
 
     hp = (cfg[:hp] * difficulty[:boss_hp]).ceil
@@ -940,7 +1081,7 @@ class Game
       x: grid.w + 50,
       y: flying ?
         (grid.h - cfg[:h]) / 2.0 :
-        -cfg[:h] * 0.12,
+        boss_ground_y(cfg),
       w: cfg[:w],
       h: cfg[:h],
       hp: hp,
@@ -949,13 +1090,17 @@ class Game
       dir: cfg[:type] == :spaceship ? 1 : -1,
       flying: flying,
       fire_timer: 100,
-      special_timer: 240,
+      special_timer: cfg[:creature] == :dragon ? 150 : 240,
+      entered: false,
+      queued: nil,
       animation: :idle,
       animation_start: Kernel.tick_count,
       flash: 0,
       dying: false,
       explosion_frames: [],
-      explosion_start: 0
+      explosion_start: 0,
+      flight_vx: -1.0,
+      flight_vy: 1.0
     }
   end
 
@@ -964,6 +1109,32 @@ class Game
     return 1 if ratio > 0.66
     return 2 if ratio > 0.33
     3
+  end
+
+  # Where a walking boss stands (feet on the ground)
+  def boss_ground_y(cfg)
+    -cfg[:h] * 0.12 + (cfg[:ground_offset] || 0)
+  end
+
+  # Walking bosses face the way they walk, and turn to face the
+  # player while attacking. Ships and flying bosses always face left.
+  def boss_facing_left?(b)
+    cfg = world[:boss]
+    return true unless cfg[:type] == :creature && !b[:flying]
+
+    # Ground monsters may walk backward, but they keep facing the player.
+    # This prevents the dragon/demon/medusa from doing a full 180 every
+    # time their patrol direction changes.
+    p = state.player
+    p.x + p.w / 2 < b[:x] + b[:w] / 2
+  end
+
+  # [x, y] where this boss's shots leave it
+  def boss_mouth(b, cfg)
+    m = cfg[:mouth] || { x: 0.25, y: 0.55 }
+    mx = boss_facing_left?(b) ? m[:x] : 1.0 - m[:x]
+
+    [b[:x] + b[:w] * mx, b[:y] + b[:h] * m[:y]]
   end
 
   # ==========================================================
@@ -1008,40 +1179,61 @@ class Game
       end
 
     elsif b[:flying]
-      target_x = grid.w - b[:w] * 0.72
+      # Flying creature bosses stay fully on-screen and roam in two dimensions.
+      # This is especially important for the large Jinn sprite.
+      right_limit = grid.w - b[:w] - 35
+      left_limit  = [grid.w * 0.48, right_limit - 260].min
+      left_limit  = [left_limit, 40].max
+      top_limit   = grid.h - b[:h] - 20
+      bottom_limit = 20
 
-      if b[:x] > target_x
-        b[:x] = [b[:x] - 3, target_x].max
+      unless b[:entered]
+        target_x = right_limit
+        b[:x] = [b[:x] - 5, target_x].max
+        b[:y] = clamp(b[:y], bottom_limit, top_limit)
+        if b[:x] <= target_x
+          b[:entered] = true
+          b[:flight_vx] = -1.0
+          b[:flight_vy] = 1.0
+        end
         return
       end
 
-      center_y = (grid.h - b[:h]) / 2.0
+      roam_speed = speed * 0.72
+      b[:x] += b[:flight_vx] * roam_speed
+      b[:y] += b[:flight_vy] * roam_speed * 0.72
 
-      b[:y] += b[:dir] * speed * 0.8
+      if b[:x] <= left_limit
+        b[:x] = left_limit
+        b[:flight_vx] = 1.0
+      elsif b[:x] >= right_limit
+        b[:x] = right_limit
+        b[:flight_vx] = -1.0
+      end
 
-      if b[:y] <= center_y - 85
-        b[:y] = center_y - 85
-        b[:dir] = 1
-      elsif b[:y] >= center_y + 85
-        b[:y] = center_y + 85
-        b[:dir] = -1
+      if b[:y] <= bottom_limit
+        b[:y] = bottom_limit
+        b[:flight_vy] = 1.0
+      elsif b[:y] >= top_limit
+        b[:y] = top_limit
+        b[:flight_vy] = -1.0
       end
 
     else
+      # Ground bosses (dragon, medusa, demon): walk left / right only.
+      # They slide in from the right, then patrol a lane around their
+      # entry spot (roam_left px to the left, roam_right to the right).
       target_x = grid.w - b[:w] * 0.72
+      b[:y] = boss_ground_y(cfg)
 
-      if b[:x] > target_x
+      unless b[:entered]
         b[:x] = [b[:x] - 3, target_x].max
+        b[:entered] = true if b[:x] <= target_x
         return
       end
 
-      b[:y] = -b[:h] * 0.12
-
-      left_limit = grid.w * 0.55
-      right_limit = grid.w - b[:w] * 0.60
-
-      left_limit, right_limit =
-        [left_limit, right_limit].minmax
+      left_limit = target_x - (cfg[:roam_left] || 260)
+      right_limit = target_x + (cfg[:roam_right] || 60)
 
       b[:x] += b[:dir] * speed * 0.8
 
@@ -1057,10 +1249,21 @@ class Game
     b[:fire_timer] -= 1
     b[:special_timer] -= 1
 
-    cx = b[:x] + b[:w] * 0.25
-    cy = b[:y] + b[:h] * 0.55
+    cx, cy = boss_mouth(b, cfg)
 
-    if b[:fire_timer] <= 0
+    # a queued creature attack fires once its wind-up animation is done
+    if b[:queued] && Kernel.tick_count >= b[:queued][:at]
+      kind = b[:queued][:kind]
+      b[:queued] = nil
+
+      if kind == :special
+        fire_boss_special(b, cfg, cx, cy)
+      else
+        fire_boss_basic(b, cfg, cx, cy, phase, i)
+      end
+    end
+
+    if b[:queued].nil? && b[:fire_timer] <= 0
       boss_attack(b, cfg, cx, cy, phase, i)
 
       b[:fire_timer] = [
@@ -1071,20 +1274,37 @@ class Game
       ].max
     end
 
-    if phase >= 2 && b[:special_timer] <= 0
+    special_ready = phase >= 2 || cfg[:creature] == :dragon
+
+    if b[:queued].nil? && special_ready && b[:special_timer] <= 0
       boss_special_attack(b, cfg, cx, cy)
-      b[:special_timer] = phase == 3 ? 210 : 300
+      b[:special_timer] = cfg[:creature] == :dragon ? 240 : (phase == 3 ? 210 : 300)
     end
   end
 
   # ==========================================================
   # BOSS ATTACKS
+  #
+  # Basic attack   -> cfg[:shot]          (1 damage)
+  # Special attack -> cfg[:special_shot]  (cfg[:special_damage])
   # ==========================================================
 
+  # Creatures play their attack animation first and the projectile
+  # leaves their mouth BOSS_CAST_TICKS later; ships fire instantly.
   def boss_attack(b, cfg, cx, cy, phase, i)
-    play_boss_animation(b, :attack) if
-      cfg[:type] == :creature
+    if cfg[:type] == :creature
+      play_boss_animation(b, :attack)
 
+      b[:queued] = {
+        at: Kernel.tick_count + BOSS_CAST_TICKS,
+        kind: :basic
+      }
+    else
+      fire_boss_basic(b, cfg, cx, cy, phase, i)
+    end
+  end
+
+  def fire_boss_basic(b, cfg, cx, cy, phase, i)
     base = angle_to_player(cx, cy)
 
     offsets =
@@ -1098,18 +1318,47 @@ class Game
       fire_enemy_shot(
         cx, cy, base + off,
         cfg[:bullet_speed][i] * BOSS_BULLET_MULT,
-        cfg[:shot]
+        cfg[:shot],
+        1
       )
     end
   end
 
   def boss_special_attack(b, cfg, cx, cy)
-    play_boss_animation(b, :attack) if
-      cfg[:type] == :creature
+    if cfg[:type] == :creature
+      anim = cfg[:special_anim]
+      anim = :attack unless anim && !boss_frames_for(cfg, anim).empty?
+      play_boss_animation(b, anim)
+
+      b[:queued] = {
+        at: Kernel.tick_count + BOSS_CAST_TICKS,
+        kind: :special
+      }
+    else
+      fire_boss_special(b, cfg, cx, cy)
+    end
+  end
+
+  def fire_boss_special(b, cfg, cx, cy)
+    aim = boss_facing_left?(b) ? 180 : 0
+
+    if cfg[:creature] == :dragon
+      # One large, fast Fire Ball makes the special visually unmistakable.
+      fire_enemy_shot(
+        cx, cy, angle_to_player(cx, cy), (cfg[:special_speed] || 17.0),
+        cfg[:special_shot] || :fire_ball,
+        cfg[:special_damage] || 2
+      )
+      return
+    end
+
+    special_speed = cfg[:special_speed] || 13.0
 
     [-30, -15, 0, 15, 30].each do |off|
       fire_enemy_shot(
-        cx, cy, 180 + off, 4.5, cfg[:shot]
+        cx, cy, aim + off, special_speed,
+        cfg[:special_shot] || cfg[:shot],
+        cfg[:special_damage] || 1
       )
     end
   end
@@ -1122,6 +1371,13 @@ class Game
 
   def update_boss_animation(b, cfg)
     return unless cfg[:type] == :creature
+
+    # Ground bosses play their walk cycle instead of standing idle
+    if !b[:dying] && !b[:flying] &&
+       b[:animation] == :idle &&
+       !boss_frames_for(cfg, :move).empty?
+      play_boss_animation(b, :move)
+    end
 
     action = b[:animation]
     frames = boss_frames_for(cfg, action)
@@ -1255,25 +1511,45 @@ class Game
     }
   end
 
-  def fire_enemy_shot(cx, cy, deg, speed, number = nil)
+  # number can be a shot folder number (2, 5...) or a CUSTOM_SHOTS
+  # key (:fire_ball, :water_spell...). If the art is missing, it falls
+  # back to the red laser so the game never breaks.
+  def fire_enemy_shot(cx, cy, deg, speed, number = nil, damage = 1)
     speed *= difficulty[:enemy_bullet_speed]
     rad = deg * Math::PI / 180
 
     frames = number ? shot_frames(number) : []
+    set = number.is_a?(Symbol) ? CUSTOM_SHOTS[number] : nil
+
+    w = (set && !frames.empty?) ? set[:w] : 44
+    h = (set && !frames.empty?) ? set[:h] : 44
+
+    angle =
+      if frames.empty?
+        deg - 90
+      elsif set
+        set[:rotate] == false ? 0 : deg + (set[:angle_offset] || 0)
+      else
+        deg
+      end
 
     state.enemy_shots << {
-      x: cx - 22,
-      y: cy - 22,
-      w: 44,
-      h: 44,
+      x: cx - w / 2,
+      y: cy - h / 2,
+      w: w,
+      h: h,
       vx: Math.cos(rad) * speed,
       vy: Math.sin(rad) * speed,
       path: frames.empty? ? ENEMY_SHOT : frames[0],
       frames: frames,
       born: Kernel.tick_count,
-      angle: frames.empty? ? deg - 90 : deg,
+      angle: angle,
       number: number,
-      damage: 1,
+      damage: damage,
+      boss_projectile: state.boss ? true : false,
+      ground_collision: state.boss && world[:boss][:projectile_hits_ground],
+      angle_offset: set ? (set[:angle_offset] || 0) : nil,
+      rotate_projectile: set ? (set[:rotate] != false) : false,
       dead: false
     }
   end
@@ -1296,10 +1572,24 @@ class Game
 
       s[:x] += s[:vx]
       s[:y] += s[:vy]
+
+      # Keep animated projectile art pointed exactly along its velocity.
+      if s[:rotate_projectile]
+        travel_angle = Math.atan2(s[:vy], s[:vx]) * 180 / Math::PI
+        s[:angle] = travel_angle + (s[:angle_offset] || 0)
+      end
+
       animate_shot(s)
 
-      if s[:x] < -100 || s[:x] > grid.w + 100 ||
-         s[:y] < -100 || s[:y] > grid.h + 100
+      # Ground-based boss projectiles disappear when they strike the floor.
+      # Planet maps use the bottom of the logical screen as the floor boundary.
+      if s[:ground_collision] && s[:vy] < 0 && s[:y] <= 8
+        s[:dead] = true
+        next
+      end
+
+      if s[:x] < -150 || s[:x] > grid.w + 150 ||
+         s[:y] < -150 || s[:y] > grid.h + 150
         s[:dead] = true
       end
     end
@@ -1581,7 +1871,15 @@ class Game
       apply_music
     end
 
+    if kb.key_down.escape || kb.key_down.p
+      toggle_pause
+      return
+    end
+
     case state.game_state
+    when :paused
+      pause_input
+
     when :ship_select
       selection_input
 
@@ -1605,6 +1903,40 @@ class Game
 
     when :playing
       player_input
+    end
+  end
+
+  def toggle_pause
+    if state.game_state == :paused
+      state.game_state = state.pause_return_state || :playing
+      state.pause_return_state = nil
+    elsif [:playing, :world_clear].include?(state.game_state)
+      state.pause_return_state = state.game_state
+      state.game_state = :paused
+    end
+  end
+
+  def pause_input
+    kb = inputs.keyboard
+
+    if kb.key_down.enter || kb.key_down.space
+      toggle_pause
+      return
+    end
+
+    if kb.key_down.r
+      gtk.reset_next_tick
+      return
+    end
+
+    touch_press_points.each do |p|
+      if inside?(p[:x], p[:y], 470, 315, 340, 70)
+        toggle_pause
+        return
+      elsif inside?(p[:x], p[:y], 470, 220, 340, 70)
+        gtk.reset_next_tick
+        return
+      end
     end
   end
 
@@ -1847,6 +2179,14 @@ class Game
       m[:x] -= m[:speed]
       m[:y] += m[:vy]
       m[:angle] += m[:spin]
+
+      # animated hazards (fire arrows, smoke, etc.)
+      frames = m[:frames]
+
+      if frames && !frames.empty?
+        m[:path] =
+          frames[((Kernel.tick_count - m[:born]) / 5) % frames.length]
+      end
 
       if m[:y] < 0 || m[:y] + m[:h] > grid.h
         m[:vy] *= -1
@@ -2116,6 +2456,7 @@ class Game
     render_hud
     render_banner
     render_overlay
+    render_pause_overlay if state.game_state == :paused
     render_fade
     render_touch_buttons
   end
@@ -2474,7 +2815,7 @@ class Game
         b: b[:flash] > 0 ? 120 : 255,
         flip_horizontally:
           cfg[:type] == :spaceship ? true :
-          (cfg[:flip_horizontally] || false)
+          (boss_facing_left?(b) == (cfg[:flip_horizontally] || false))
       }
     else
       outputs.solids << {
@@ -2827,7 +3168,7 @@ class Game
 
   def render_overlay
     return if [
-      :playing, :descending, :ascending
+      :playing, :descending, :ascending, :paused
     ].include?(state.game_state)
 
     outputs.solids << {
@@ -2869,6 +3210,47 @@ class Game
         r: 255, g: 255, b: 255
       }
     end
+  end
+
+  def render_pause_overlay
+    outputs.solids << {
+      x: 0, y: 0, w: grid.w, h: grid.h,
+      r: 0, g: 0, b: 0, a: 185
+    }
+
+    outputs.labels << {
+      x: grid.w / 2, y: 500,
+      text: "PAUSED", size_px: 72,
+      anchor_x: 0.5, anchor_y: 0.5,
+      r: 255, g: 255, b: 255
+    }
+
+    outputs.solids << {
+      x: 470, y: 315, w: 340, h: 70,
+      r: 40, g: 160, b: 110
+    }
+    outputs.labels << {
+      x: 640, y: 350, text: "RESUME", size_px: 30,
+      anchor_x: 0.5, anchor_y: 0.5,
+      r: 255, g: 255, b: 255
+    }
+
+    outputs.solids << {
+      x: 470, y: 220, w: 340, h: 70,
+      r: 160, g: 65, b: 65
+    }
+    outputs.labels << {
+      x: 640, y: 255, text: "RESTART", size_px: 30,
+      anchor_x: 0.5, anchor_y: 0.5,
+      r: 255, g: 255, b: 255
+    }
+
+    outputs.labels << {
+      x: 640, y: 155,
+      text: "ESC / P = RESUME     R = RESTART",
+      size_px: 22, anchor_x: 0.5,
+      r: 200, g: 220, b: 255
+    }
   end
 
   def render_fade
