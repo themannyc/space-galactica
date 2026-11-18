@@ -36,7 +36,6 @@ class Game
   SHIP_NAMES = [:blue, :green, :orange, :red]
 
   SHIP_ANGLE = -90
-  ORANGE_ANGLE = -90
 
   ENGINE_FRAMES = (1..7).map do |i|
     "sprites/space_assets/Effects/fire#{i.to_s.rjust(2, '0')}.png"
@@ -72,7 +71,7 @@ class Game
     # If it flies backwards in game, change angle_offset to 180.
     dragon_fire: {
       frames: (1..6).map { |i| "sprites/planet_bosses/dragon/Fire_Attack#{i}.png" },
-      w: 180, h: 180, angle_offset: 0
+      w: 180, h: 180, angle_offset: 50
     },
 
     fire_spell: {
@@ -85,10 +84,10 @@ class Game
       folder: "Fire Arrow", w: 110, h: 60, angle_offset: -180
     },
     water_spell: {
-      folder: "Water Spell", w: 80, h: 80, angle_offset: 0
+      folder: "Water Spell", w: 80, h: 80, angle_offset: -180
     },
     water_ball: {
-      folder: "Water Ball", w: 120, h: 90, angle_offset: 0
+      folder: "Water Ball", w: 120, h: 90, angle_offset: -180
     },
     water_arrow: {
       folder: "Water Arrow", w: 110, h: 60, angle_offset: -180
@@ -321,7 +320,7 @@ class Game
       hp: 5,
       enemy_speed: 0.8,
       enemy_bullet_speed: 0.75,
-      enemy_fire_rate: 1.3,
+      enemy_fire_rate: 0.8,
       boss_hp: 0.8,
       boss_speed: 0.8,
       powerup_frequency: 0.7
@@ -341,7 +340,7 @@ class Game
       hp: 2,
       enemy_speed: 1.25,
       enemy_bullet_speed: 1.25,
-      enemy_fire_rate: 0.8,
+      enemy_fire_rate: 1.3,
       boss_hp: 1.3,
       boss_speed: 1.2,
       powerup_frequency: 1.4
@@ -2541,7 +2540,7 @@ class Game
           w: 120,
           h: 120,
           path: path,
-          angle: -90
+          angle: color == :orange ? 90 : 0
         }
       end
 
@@ -2651,10 +2650,10 @@ class Game
     ) % frames.length
 
     outputs.sprites << {
-      x: p.x - p.w * 0.85,
-      y: p.y + p.h * 0.375,
-      w: p.w,
-      h: p.h * 0.25,
+      x: p.x - p.w * 0.30,
+      y: p.y + p.h * 0.15,
+      w: p.w * 0.100,
+      h: p.h * 0.70,
       path: frames[index],
       angle: ENGINE_ANGLE,
       a: 235
@@ -2764,12 +2763,12 @@ class Game
     frame = (Kernel.tick_count / 4) % frames.length
 
     outputs.sprites << {
-      x: b[:x] + b[:w] * 0.82,
+      x: b[:x] + b[:w] * 0.74,
       y: b[:y] + b[:h] * 0.39,
       w: b[:w] * 0.42,
       h: b[:h] * 0.22,
       path: frames[frame],
-      angle: -90,
+      angle: 0,
       a: 230
     }
   end

@@ -1,7 +1,0 @@
-Pixel Space Shooter Kit license
-
-You may use these files in commercial and non-commercial games, apps and videos, modified or not.
-You may NOT resell, redistribute or share the files themselves (original or modified), including in other asset packs.
-Provided as is, no warranty.
-
-AI disclosure: made with procedural code written with AI assistance (Python, Pillow, numpy); no image-generation models were used.

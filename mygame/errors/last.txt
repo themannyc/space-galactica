@@ -1,8 +1,14 @@
 * EXCEPTION:
-* ERROR: Exception while requiring app/main.rb.
-* ERROR: Exception while requiring app/game.
-codegen error
+** Failed to load/reload app/game.rb.
+line 2653:22: no .<digit> floating literal anymore; put 0 before dot
+line 2653:22: syntax error, unexpected '.'
+line 2654:26: syntax error, unexpected ',', expecting keyword_end
+line 2655:21: syntax error, unexpected ',', expecting keyword_end
+line 2656:20: syntax error, unexpected ',', expecting keyword_end
+line 2658:12: syntax error, unexpected label, expecting '='
+line 2659:8: syntax error, unexpected label, expecting '='
+line 3339:3: syntax error, unexpected end of file, expecting keyword_end
 
-** Backtrace:
-*** app/main.rb:1
+
+
 ** Backtrace:
